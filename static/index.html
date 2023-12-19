@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <title>André Augusto Bortoli</title>
+  </head>
+  <body class="bg-gradient-to-br from-indigo-2 via-slate-1 to-indigo-1">
+    <header class="p-5 background-blur-sm bg-indigo-a8">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="flex items-center">
+          <img src="/assets/logo.png" alt="Logo" class="h-10" />
+          <h1 class="text-white text-xl font-bold ml-2">
+            André Augusto Bortoli
+          </h1>
+        </a>
+        <nav>
+          <ul class="flex space-x-4">
+            <li><a href="#about" class="text-white">About Me</a></li>
+            <li><a href="#projects" class="text-white">Projects</a></li>
+            <li><a href="#blog" class="text-white">Blog</a></li>
+            <li><a href="#resume" class="text-white">Resume</a></li>
+            <li><a href="#contact" class="text-white">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="intro" class="py-12 relative">
+        <div
+          class="container mx-auto bg-slate-da9 py-4 rounded-2xl backdrop-blur-sm bg-slate-d1/30"
+        >
+          <div class="flex flex-wrap items-center">
+            <div class="w-full md:w-1/2">
+              <img
+                src="https://placehold.co/600x400"
+                alt="Profile"
+                class="rounded-full h-64 w-64 object-cover mx-auto"
+              />
+            </div>
+            <div class="w-full md:w-1/2">
+              <h2
+                class="text-slate-d12 text-2xl font-bold mb-4 bg-slate-d8 py-1 pl-2 pr-4"
+              >
+                In the syntax of the universe, every bit ressonates
+              </h2>
+              <p class="text-slate-d11 bg-slate-d8 pl-2 pr-4">
+                Greetings, I'm André, Software and Cybersecurity Engineer,
+                someone who harbors an enthusiasm for the intersection of
+                cutting-edge technology and academic research. In my toolbox
+                lies a diverse skill set that encompasses project management,
+                programming and DevOps. While I'm not coding, you can find me
+                philosophizing or playing chess.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          id="stars"
+          class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-d8"
+        >
+          <script defer type="module">
+            import init, {
+              randomStars,
+              plotStars,
+            } from "./star_background_map-pkg/star_background_map.js";
+
+            const parent = document.querySelector("#stars");
+
+            init().then(() => {
+              plotStars(randomStars(50), parent);
+            });
+          </script>
+        </div>
+      </section>
+
+      <section id="about" class="py-12">
+        <div class="container mx-auto">
+          <h2 class="text-2xl font-bold mb-4">About Me</h2>
+          <p class="text-gray-700">
+            Driven by a passion for technology and security, I've cultivated a
+            diverse skill set encompassing project management, programming, and
+            DevOps. Outside the office, I enjoy exploring the latest tech trends
+            and contributing to open-source projects. Discover more about my
+            journey and professional ethos.
+          </p>
+          <a
+            href="/about.html"
+            class="bg-indigo-9 hover:bg-indigo-10 text-white px-4 py-2 rounded mt-4 inline-block"
+            >Learn More</a
+          >
+        </div>
+      </section>
+
+      <section id="projects" class="py-12">
+        <div class="container mx-auto">
+          <h2 class="text-2xl font-bold mb-4">Highlighted Projects</h2>
+          <a
+            href="/projects.html"
+            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
+            >View All Projects</a
+          >
+        </div>
+      </section>
+
+      <section id="blog" class="py-12">
+        <div class="container mx-auto">
+          <h2 class="text-2xl font-bold mb-4">From My Blog</h2>
+          <a
+            href="/blog.html"
+            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
+            >Visit My Blog</a
+          >
+        </div>
+      </section>
+
+      <section id="resume" class="py-12">
+        <div class="container mx-auto">
+          <h2 class="text-2xl font-bold mb-4">Resume</h2>
+          <p class="text-gray-700">
+            Looking for a detailed overview of my professional journey? Download
+            my resume to explore my experiences, skills, and academic
+            background.
+          </p>
+          <a
+            href="/resume.pdf"
+            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
+            >Download Resume</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-slate-8">
+      <div class="container mx-auto flex justify-between items-center">
+        <div>
+          <p>
+            Connect with me on LinkedIn or GitHub. For collaborations or
+            inquiries, feel free to reach out.
+          </p>
+        </div>
+      </div>
+      <div class="text-center py-4">
+        <p>© 2023 André Augusto Bortoli. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
