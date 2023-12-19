@@ -17,12 +17,17 @@
     <header class="p-5 background-blur-sm bg-indigo-a8">
       <div class="container mx-auto flex justify-between items-center">
         <a href="/" class="flex items-center">
-          <img src="/assets/logo.png" alt="Logo" class="h-10" />
+          <img
+            src="/assets/logo.png"
+            alt="Logo"
+            class="h-10"
+            aria-hidden="true"
+          />
           <h1 class="text-slate-d12 text-xl font-bold ml-2">
             André Augusto Bortoli
           </h1>
         </a>
-        <nav>
+        <nav aria-label="primary">
           <ul class="flex space-x-4">
             <li><a href="#about" class="text-slate-d12">About Me</a></li>
             <li><a href="#projects" class="text-slate-d12">Projects</a></li>
@@ -69,6 +74,7 @@
         <div
           id="stars"
           class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-d8"
+          aria-hidden="true"
         >
           <script defer type="module">
             import init, {
