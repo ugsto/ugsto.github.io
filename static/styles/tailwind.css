@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.7 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -32,9 +32,11 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -44,12 +46,14 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -603,6 +607,16 @@ video {
   margin-right: auto;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -613,6 +627,10 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .inline-block {
@@ -641,6 +659,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
 }
 
 .flex-wrap {
@@ -677,9 +699,14 @@ video {
   border-radius: 9999px;
 }
 
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+.rounded-b-2xl {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.rounded-l-2xl {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .bg-indigo-9 {
@@ -691,26 +718,22 @@ video {
   background-color: #0034dc72;
 }
 
-.bg-slate-d8 {
+.bg-slate-8 {
   --tw-bg-opacity: 1;
-  background-color: rgb(90 97 105 / var(--tw-bg-opacity));
-}
-
-.bg-slate-d8\/30 {
-  background-color: rgb(90 97 105 / 0.3);
-}
-
-.bg-slate-da9 {
-  background-color: #dfebfd6d;
+  background-color: rgb(185 187 198 / var(--tw-bg-opacity));
 }
 
 .bg-slate-d1\/30 {
   background-color: rgb(17 17 19 / 0.3);
 }
 
-.bg-slate-8 {
+.bg-slate-d8 {
   --tw-bg-opacity: 1;
-  background-color: rgb(185 187 198 / var(--tw-bg-opacity));
+  background-color: rgb(90 97 105 / var(--tw-bg-opacity));
+}
+
+.bg-slate-da9 {
+  background-color: #dfebfd6d;
 }
 
 .bg-gradient-to-br {
@@ -812,6 +835,29 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-indigo-11 {
+  --tw-text-opacity: 1;
+  color: rgb(58 91 199 / var(--tw-text-opacity));
+}
+
+.text-slate-11 {
+  --tw-text-opacity: 1;
+  color: rgb(96 100 108 / var(--tw-text-opacity));
+}
+
+.text-slate-12 {
+  --tw-text-opacity: 1;
+  color: rgb(28 32 36 / var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration-line: underline;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
 .backdrop-blur-sm {
   --tw-backdrop-blur: blur(4px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -823,8 +869,23 @@ video {
   background-color: rgb(51 88 212 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 640px) {
+  .sm\:ml-4 {
+    margin-left: 1rem;
+  }
+}
+
 @media (min-width: 768px) {
+  .md\:ml-4 {
+    margin-left: 1rem;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
+  }
+
+  .md\:rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 }

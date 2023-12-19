@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tailwind.css" />
@@ -14,17 +18,17 @@
       <div class="container mx-auto flex justify-between items-center">
         <a href="/" class="flex items-center">
           <img src="/assets/logo.png" alt="Logo" class="h-10" />
-          <h1 class="text-white text-xl font-bold ml-2">
+          <h1 class="text-slate-d12 text-xl font-bold ml-2">
             André Augusto Bortoli
           </h1>
         </a>
         <nav>
           <ul class="flex space-x-4">
-            <li><a href="#about" class="text-white">About Me</a></li>
-            <li><a href="#projects" class="text-white">Projects</a></li>
-            <li><a href="#blog" class="text-white">Blog</a></li>
-            <li><a href="#resume" class="text-white">Resume</a></li>
-            <li><a href="#contact" class="text-white">Contact</a></li>
+            <li><a href="#about" class="text-slate-d12">About Me</a></li>
+            <li><a href="#projects" class="text-slate-d12">Projects</a></li>
+            <li><a href="#blog" class="text-slate-d12">Blog</a></li>
+            <li><a href="#resume" class="text-slate-d12">Resume</a></li>
+            <li><a href="#contact" class="text-slate-d12">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -40,16 +44,18 @@
               <img
                 src="https://placehold.co/600x400"
                 alt="Profile"
-                class="rounded-full h-64 w-64 object-cover mx-auto"
+                class="rounded-full h-64 w-64 object-cover mx-auto my-4"
               />
             </div>
             <div class="w-full md:w-1/2">
               <h2
-                class="text-slate-d12 text-2xl font-bold mb-4 bg-slate-d8 py-1 pl-2 pr-4"
+                class="md:rounded-l-2xl text-slate-d12 text-2xl font-bold mb-4 bg-slate-d8 py-1 pl-2 pr-4"
               >
                 In the syntax of the universe, every bit ressonates
               </h2>
-              <p class="text-slate-d11 bg-slate-d8 pl-2 pr-4">
+              <p
+                class="md:rounded-l-2xl text-slate-d11 bg-slate-d8 py-1 pl-2 pr-4"
+              >
                 Greetings, I'm André, Software and Cybersecurity Engineer,
                 someone who harbors an enthusiasm for the intersection of
                 cutting-edge technology and academic research. In my toolbox
@@ -68,7 +74,7 @@
             import init, {
               randomStars,
               plotStars,
-            } from "./star_background_map-pkg/star_background_map.js";
+            } from "./scripts/star_backgroun_map-pkg/star_background_map.js";
 
             const parent = document.querySelector("#stars");
 
@@ -83,16 +89,11 @@
         <div class="container mx-auto">
           <h2 class="text-2xl font-bold mb-4">About Me</h2>
           <p class="text-gray-700">
-            Driven by a passion for technology and security, I've cultivated a
-            diverse skill set encompassing project management, programming, and
-            DevOps. Outside the office, I enjoy exploring the latest tech trends
-            and contributing to open-source projects. Discover more about my
-            journey and professional ethos.
+            This section is coming soon! Stay tuned for updates.
           </p>
-          <a
-            href="/about.html"
-            class="bg-indigo-9 hover:bg-indigo-10 text-white px-4 py-2 rounded mt-4 inline-block"
-            >Learn More</a
+          <span
+            class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
+            >Learn More</span
           >
         </div>
       </section>
@@ -100,21 +101,23 @@
       <section id="projects" class="py-12">
         <div class="container mx-auto">
           <h2 class="text-2xl font-bold mb-4">Highlighted Projects</h2>
-          <a
-            href="/projects.html"
-            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
-            >View All Projects</a
+          <p class="text-gray-700">
+            Exciting projects are on the way. Check back soon!
+          </p>
+          <span
+            class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
+            >View All Projects</span
           >
         </div>
       </section>
 
       <section id="blog" class="py-12">
         <div class="container mx-auto">
-          <h2 class="text-2xl font-bold mb-4">From My Blog</h2>
-          <a
-            href="/blog.html"
-            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
-            >Visit My Blog</a
+          <h2 class="text-2xl font-bold mb-4">Blog</h2>
+          <p class="text-gray-700">Blog updates are coming soon. Stay tuned!</p>
+          <span
+            class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
+            >Visit My Blog</span
           >
         </div>
       </section>
@@ -123,25 +126,33 @@
         <div class="container mx-auto">
           <h2 class="text-2xl font-bold mb-4">Resume</h2>
           <p class="text-gray-700">
-            Looking for a detailed overview of my professional journey? Download
-            my resume to explore my experiences, skills, and academic
-            background.
+            My resume will be available shortly. Thanks for your patience!
           </p>
-          <a
-            href="/resume.pdf"
-            class="bg-indigo-9 text-white px-4 py-2 rounded mt-4 inline-block"
-            >Download Resume</a
+          <span
+            class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
+            >Download Resume</span
           >
         </div>
       </section>
     </main>
 
-    <footer class="bg-slate-8">
-      <div class="container mx-auto flex justify-between items-center">
+    <footer class="bg-slate-d8 text-slate-d12">
+      <div class="container mx-auto flex justify-between items-center py-4">
         <div>
           <p>
-            Connect with me on LinkedIn or GitHub. For collaborations or
-            inquiries, feel free to reach out.
+            Connect with me on
+            <a
+              href="https://www.linkedin.com/in/andre-augusto-bortoli"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin"></i>
+              <span class="underline">LinkedIn</span>
+            </a>
+            or
+            <a href="https://github.com/ugsto" target="_blank">
+              <i class="fab fa-github"></i>
+              <span class="underline">GitHub</span> </a
+            >. For collaborations or inquiries, feel free to reach out.
           </p>
         </div>
       </div>
