@@ -13,6 +13,6 @@ $(WASM_DIRS):
 
 tailwind_build:
 	@echo "Building Tailwind"
-	@(cd $(TAILWIND_DIR) && npm run build)
+	@(cd $(TAILWIND_DIR) && npm ci && npm run build)
 
 .PHONY: all wasm_build tailwind_build $(WASM_DIRS)
