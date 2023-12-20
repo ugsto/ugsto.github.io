@@ -1,5 +1,13 @@
-<script lang="ts">
+<script>
 	import './star.css';
+	import init, { randomStars, plotStars } from '../lib/starry_background-pkg/starry_background.js';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		init().then(() => {
+			plotStars(randomStars(50), document.querySelector('#stars'));
+		});
+	});
 </script>
 
 <svelte:head>
@@ -38,20 +46,7 @@
 		id="stars"
 		class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-d8"
 		aria-hidden="true"
-	>
-		<script defer type="module">
-			import init, {
-				randomStars,
-				plotStars
-			} from '/scripts/star_background_map-pkg/star_background_map.js';
-
-			const parent = document.querySelector('#stars');
-
-			init().then(() => {
-				plotStars(randomStars(50), parent);
-			});
-		</script>
-	</div>
+	></div>
 </section>
 
 <section id="about" class="py-12">
