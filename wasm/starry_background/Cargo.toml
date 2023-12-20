@@ -1,5 +1,5 @@
 [package]
-name = "star_background_map"
+name = "starry_background"
 version = "0.1.0"
 edition = "2021"
 authors = ["André Augusto Bortoli <andre@bortoli.phd>"]
