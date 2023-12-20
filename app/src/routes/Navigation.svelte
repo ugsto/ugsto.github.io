@@ -1,31 +1,20 @@
+<script>
+	import NavigationLink from '$lib/components/NavigationLink.svelte';
+</script>
+
 <nav aria-label="primary">
 	<ul class="flex space-x-4">
 		<li>
-			<a
-				href="#about"
-				class="inline-block bg-indigo-3 hover:bg-indigo-4 text-indigo-11 px-2 py-1 rounded"
-				>About Me</a
-			>
+			<NavigationLink href="/about">About Me</NavigationLink>
 		</li>
 		<li>
-			<a
-				href="#projects"
-				class="inline-block bg-indigo-3 hover:bg-indigo-4 text-indigo-11 px-2 py-1 rounded"
-				>Projects</a
-			>
+			<NavigationLink href="#projects">Projects</NavigationLink>
 		</li>
 		<li>
-			<a
-				href="#blog"
-				class="inline-block bg-indigo-3 hover:bg-indigo-4 text-indigo-11 px-2 py-1 rounded">Blog</a
-			>
+			<NavigationLink href="#blog">Blog</NavigationLink>
 		</li>
 		<li>
-			<a
-				href="#resume"
-				class="inline-block bg-indigo-3 hover:bg-indigo-4 text-indigo-11 px-2 py-1 rounded"
-				>Resume</a
-			>
+			<NavigationLink href="#resume">Resume</NavigationLink>
 		</li>
 	</ul>
 </nav>
