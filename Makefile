@@ -1,18 +1,14 @@
+SCRIPTS_DIR := "app/static/scripts"
 WASM_DIRS := $(wildcard wasm/*)
-TAILWIND_DIR := tailwind
 
-all: wasm_build tailwind_build
+all: wasm_build
 
 wasm_build: $(WASM_DIRS)
 
 $(WASM_DIRS):
 	@echo "Building $@"
 	@(cd $@/src && wasm-pack build --target web)
-	@rm -rf static/scripts/$(@F)-pkg
-	@mv $@/pkg static/scripts/$(@F)-pkg
+	@rm -rf $(SCRIPTS_DIR)/$(@F)-pkg
+	@mv $@/pkg $(SCRIPTS_DIR)/$(@F)-pkg
 
-tailwind_build:
-	@echo "Building Tailwind"
-	@(cd $(TAILWIND_DIR) && npm ci && npm run build)
-
-.PHONY: all wasm_build tailwind_build $(WASM_DIRS)
+.PHONY: all wasm_build $(WASM_DIRS)
