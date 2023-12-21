@@ -17,6 +17,6 @@ $(WASM_DIRS):
 
 static_build:
 	@echo "Building static"
-	@(cd $(PAGE_DIR) && npm run build)
+	@(cd $(PAGE_DIR) && npm ci && npm run build)
 
 .PHONY: all wasm_build $(WASM_DIRS) static_build
