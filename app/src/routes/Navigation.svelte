@@ -8,13 +8,13 @@
 			<NavigationLink href="/about">About Me</NavigationLink>
 		</li>
 		<li>
-			<NavigationLink href="#projects">Projects</NavigationLink>
+			<NavigationLink href="#">Projects</NavigationLink>
 		</li>
 		<li>
-			<NavigationLink href="#blog">Blog</NavigationLink>
+			<NavigationLink href="#">Blog</NavigationLink>
 		</li>
 		<li>
-			<NavigationLink href="#resume">Resume</NavigationLink>
+			<NavigationLink href="#">Resume</NavigationLink>
 		</li>
 	</ul>
 </nav>

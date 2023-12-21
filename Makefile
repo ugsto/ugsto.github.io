@@ -1,7 +1,8 @@
 SCRIPTS_DIR := "app/src/lib"
+PAGE_DIR := "app"
 WASM_DIRS := $(wildcard wasm/*)
 
-all: wasm_build
+all: wasm_build static_build
 
 wasm_build: $(WASM_DIRS)
 
@@ -14,4 +15,8 @@ $(WASM_DIRS):
 	@rm -rf $(SCRIPTS_DIR)/$(@F)-pkg
 	@mv $@/pkg $(SCRIPTS_DIR)/$(@F)-pkg
 
-.PHONY: all wasm_build $(WASM_DIRS)
+static_build:
+	@echo "Building static"
+	@(cd $(PAGE_DIR) && npm run build)
+
+.PHONY: all wasm_build $(WASM_DIRS) static_build
