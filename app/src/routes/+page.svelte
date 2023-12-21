@@ -47,8 +47,7 @@
 		<p class="text-slate-11">
 			Driven by a passion for technology and security, I've cultivated a diverse skill set
 			encompassing project management, programming, and DevOps. Outside the office, I enjoy
-			exploring the latest tech trends and contributing to open-source projects. Discover more about
-			me clicking on the button below.
+			exploring the latest tech trends. Discover more about me clicking on the button below.
 		</p>
 		<a href="/about" class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block"
 			>Learn More</a
