@@ -1,7 +1,8 @@
 <script>
 	import './star.css';
-	import init, { randomStars, plotStars } from '../lib/starry_background-pkg/starry_background.js';
+	import init, { randomStars, plotStars } from '$lib/starry_background-pkg/starry_background.js';
 	import { onMount } from 'svelte';
+	import ProfileAvatar from '$lib/components/ProfileAvatar.svelte';
 
 	onMount(() => {
 		init().then(() => {
@@ -14,19 +15,10 @@
 	<title>Andre Augusto Bortoli</title>
 </svelte:head>
 
-<section id="intro" class="py-12 relative">
-	<div class="container mx-auto bg-slate-da9 py-4 rounded-2xl backdrop-blur-sm bg-slate-d1/30">
+<section id="intro" class="py-12 relative px-8">
+	<div class="container mx-auto py-4 rounded-2xl backdrop-blur-sm bg-slate-da9/20">
 		<div class="flex flex-wrap items-center">
-			<div class="w-full md:w-1/2 relative">
-				<img
-					src="/assets/profile.jpg"
-					alt="Profile"
-					class="rounded-full h-64 w-64 object-cover mx-auto my-4"
-				/>
-				<div
-					class="absolute rounded-full h-64 w-64 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -inset-1 blur-md bg-gradient-to-br from-indigo-d8 via-indigo-8 to-indigo-d8 -z-10 overflow-hidden"
-				></div>
-			</div>
+			<ProfileAvatar />
 			<div class="w-full md:w-1/2">
 				<h2
 					class="md:rounded-l-2xl text-slate-d12 text-2xl font-bold mb-4 bg-slate-d8 py-1 pl-2 pr-4"
@@ -49,21 +41,25 @@
 	></div>
 </section>
 
-<section id="about" class="py-12">
+<section id="about" class="py-12 px-8">
 	<div class="container mx-auto">
 		<h2 class="text-2xl font-bold mb-4">About Me</h2>
-		<p class="text-gray-700">This section is coming soon! Stay tuned for updates.</p>
-		<span
-			class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
-			>Learn More</span
+		<p class="text-slate-11">
+			Driven by a passion for technology and security, I've cultivated a diverse skill set
+			encompassing project management, programming, and DevOps. Outside the office, I enjoy
+			exploring the latest tech trends and contributing to open-source projects. Discover more about
+			me clicking on the button below.
+		</p>
+		<a href="/about" class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block"
+			>Learn More</a
 		>
 	</div>
 </section>
 
-<section id="projects" class="py-12">
+<section id="projects" class="py-12 px-8">
 	<div class="container mx-auto">
 		<h2 class="text-2xl font-bold mb-4">Highlighted Projects</h2>
-		<p class="text-gray-700">Exciting projects are on the way. Check back soon!</p>
+		<p class="text-slate-11">Exciting projects are on the way. Check back soon!</p>
 		<span
 			class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
 			>View All Projects</span
@@ -71,10 +67,10 @@
 	</div>
 </section>
 
-<section id="blog" class="py-12">
+<section id="blog" class="py-12 px-8">
 	<div class="container mx-auto">
 		<h2 class="text-2xl font-bold mb-4">Blog</h2>
-		<p class="text-gray-700">Blog updates are coming soon. Stay tuned!</p>
+		<p class="text-slate-11">Blog updates are coming soon. Stay tuned!</p>
 		<span
 			class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
 			>Visit My Blog</span
@@ -82,10 +78,10 @@
 	</div>
 </section>
 
-<section id="resume" class="py-12">
+<section id="resume" class="py-12 px-8">
 	<div class="container mx-auto">
 		<h2 class="text-2xl font-bold mb-4">Resume</h2>
-		<p class="text-gray-700">My resume will be available shortly. Thanks for your patience!</p>
+		<p class="text-slate-11">My resume will be available shortly. Thanks for your patience!</p>
 		<span
 			class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
 			>Download Resume</span

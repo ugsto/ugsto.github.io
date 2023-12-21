@@ -3,7 +3,7 @@
 	import GitHubIcon from 'virtual:icons/mdi/github';
 </script>
 
-<footer class="bg-slate-d8 text-slate-d12">
+<footer class="bg-slate-d8 text-slate-d12 px-8">
 	<div class="container mx-auto flex justify-between items-center py-4">
 		<div>
 			<p>
