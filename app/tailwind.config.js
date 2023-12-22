@@ -8,6 +8,7 @@ import {
 	indigoDark,
 	indigoDarkA
 } from '@radix-ui/colors';
+import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -20,7 +21,7 @@ export default {
 			}
 		}
 	},
-	plugins: []
+	plugins: [typography]
 };
 
 function colorToArray(color) {
