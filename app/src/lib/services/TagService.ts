@@ -17,4 +17,8 @@ export class TagService {
   static filterInvalidTags(tags: string[]): string[] {
     return tags.filter((tag) => !this.tagExists(tag));
   }
+
+  static fetchTags(): Tag[] {
+    return Object.values(this.tagsFiles).map((tag) => tag.default);
+  }
 }

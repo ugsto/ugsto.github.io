@@ -2,7 +2,7 @@
 	import Markdown from '$lib/components/Markdown.svelte';
 	import type { BlogPostPageData } from './+page';
 	import Author from './Author.svelte';
-	import Tag from './Tag.svelte';
+	import Tag from '$lib/components/Tag.svelte';
 
 	export let data: BlogPostPageData;
 
