@@ -1,13 +1,8 @@
 {
 	"id": 1,
-	"title": "Introduction to Wasm and Rust",
-	"description": "This blog post will guide you through the essentials of using Wasm with Rust, offering a hands-on approach to mastering this cutting-edge technology.",
+	"title": "Introduction to WebAssembly and Rust",
+	"description": "This blog post will guide you through the essentials of using WebAssembly with Rust, offering a hands-on approach to mastering this cutting-edge technology.",
 	"date": "2023-12-21",
 	"authorId": 1,
-	"tags": [
-		"rust",
-		"wasm",
-		"programming",
-		"javascript"
-	]
+	"tags": ["rust", "wasm", "programming", "javascript"]
 }

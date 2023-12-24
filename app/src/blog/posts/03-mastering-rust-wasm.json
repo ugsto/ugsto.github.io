@@ -1,8 +1,0 @@
-{
-	"id": 3,
-	"title": "Mastering Rust for Wasm",
-	"description": "Explore advanced Rust concepts for WebAssembly development and build efficient and secure web applications.",
-	"date": "2023-12-23",
-	"authorId": 1,
-	"tags": ["rust", "wasm"]
-}

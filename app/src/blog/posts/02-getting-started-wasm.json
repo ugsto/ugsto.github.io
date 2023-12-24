@@ -1,8 +1,0 @@
-{
-	"id": 2,
-	"title": "Getting Started with Wasm",
-	"description": "Learn the basics of WebAssembly and how to use it with your favorite programming languages.",
-	"date": "2023-12-22",
-	"authorId": 1,
-	"tags": ["wasm", "programming"]
-}
