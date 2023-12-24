@@ -11,7 +11,7 @@
 			<NavigationLink href="#">Projects</NavigationLink>
 		</li>
 		<li>
-			<NavigationLink href="/blog">Blog</NavigationLink>
+			<NavigationLink href="/blog/1">Blog</NavigationLink>
 		</li>
 		<li>
 			<NavigationLink href="#">Resume</NavigationLink>

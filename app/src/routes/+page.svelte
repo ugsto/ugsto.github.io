@@ -69,11 +69,13 @@
 <section id="blog" class="py-12 px-8">
 	<div class="container mx-auto">
 		<h2 class="text-2xl font-bold mb-4">Blog</h2>
-		<p class="text-slate-11">Blog updates are coming soon. Stay tuned!</p>
-		<span
-			class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block opacity-50 cursor-not-allowed"
-			>Visit My Blog</span
-		>
+		<p class="text-slate-11">
+			Welcome to my blog! Here, I share insights and experiences cybersecurity. Whether you're a
+			tech enthusiast or a fellow developer, I hope you find something of interest.
+		</p>
+		<a href="/blog/1" class="bg-indigo-9 text-slate-d12 px-4 py-2 rounded mt-4 inline-block">
+			Visit My Blog
+		</a>
 	</div>
 </section>
 
