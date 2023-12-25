@@ -72,7 +72,7 @@
 			Welcome to my blog! Here, I share insights and experiences cybersecurity. Whether you're a
 			tech enthusiast or a fellow developer, I hope you find something of interest.
 		</Paragraph>
-		<LinkButton href="/blog">Visit My Blog</LinkButton>
+		<LinkButton href="/blog/1">Visit My Blog</LinkButton>
 	</div>
 </section>
 
