@@ -28,12 +28,12 @@
 					<Title extraClass="md:rounded-l-2xl text-slate-d12 bg-slate-d3 py-1 pl-2 pr-4">
 						In the syntax of the universe, every bit ressonates
 					</Title>
-					<p class="md:rounded-l-2xl text-slate-d11 bg-slate-d3 py-1 pl-2 pr-4">
+					<Paragraph extraClass="md:rounded-l-2xl text-slate-d11 bg-slate-d3 py-1 pl-2 pr-4">
 						Greetings, I'm André, Software and Cybersecurity Engineer, someone who harbors an
 						enthusiasm for the intersection of cutting-edge technology and academic research. In my
 						toolbox lies a diverse skill set that encompasses project management, programming and
 						DevOps. While I'm not coding, you can find me philosophizing or playing chess.
-					</p>
+					</Paragraph>
 				</div>
 			</div>
 		</div>
