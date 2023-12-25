@@ -10,8 +10,8 @@
 </script>
 
 <div class="flex flex-col flex-grow justify-between bg-slate-2 dark:bg-slate-d2">
-	<div class="flex flex-col sm:flex-row px-8 py-4">
-		<section id="posts" class="w-3/4 pr-16">
+	<div class="flex flex-col sm:flex-row mt-4 px-8 py-4 gap-16">
+		<section id="posts" class="w-full pr-0 sm:w-3/4">
 			<Title>Posts</Title>
 			<div class="flex flex-col gap-12">
 				{#each data.posts as post}
@@ -30,7 +30,7 @@
 				{/each}
 			</div>
 		</section>
-		<aside class="block ml-auto w-full sm:w-1/4 max-w-fit">
+		<aside class="block w-full sm:w-1/4 sm:ml-auto max-w-fit">
 			<Title>Tags</Title>
 			<div class="flex flex-wrap gap-2">
 				{#each data.tags as tag}
