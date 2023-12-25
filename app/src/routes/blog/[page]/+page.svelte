@@ -4,11 +4,12 @@
 	import Link from '$lib/components/Link.svelte';
 	import Subtitle from '$lib/components/Subtitle.svelte';
 	import type { PostPageData } from './+page';
+	import Paragraph from '$lib/components/Paragraph.svelte';
 
 	export let data: PostPageData;
 </script>
 
-<div class="flex flex-col flex-grow justify-between">
+<div class="flex flex-col flex-grow justify-between bg-slate-2 dark:bg-slate-d2">
 	<div class="flex flex-col sm:flex-row px-8 py-4">
 		<section id="posts" class="w-3/4 pr-16">
 			<Title>Posts</Title>
@@ -16,7 +17,7 @@
 				{#each data.posts as post}
 					<div>
 						<Subtitle><Link href={`/blog/posts/${post.id}`}>{post.title}</Link></Subtitle>
-						<p class="text-justify">{post.description}</p>
+						<Paragraph>{post.description}</Paragraph>
 						<div class="flex justify-between">
 							<div class="flex flex-wrap gap-2 mt-2">
 								{#each post.tags as tag}
@@ -33,7 +34,7 @@
 			<Title>Tags</Title>
 			<div class="flex flex-wrap gap-2">
 				{#each data.tags as tag}
-					<Tag {tag} title="We are currently in beta, so filter by tag is still not available" />
+					<Tag {tag} />
 				{/each}
 			</div>
 		</aside>
@@ -44,7 +45,9 @@
 			{#if data.pageNumber > 1}
 				<Link href={`/blog/${data.pageNumber - 1}`}>&lt; Prev</Link>
 			{/if}
-			<span class="mx-4">Page {data.pageNumber} of {data.maxPage}</span>
+			<span class="mx-4 text-slate-12 dark:text-slate-d12"
+				>Page {data.pageNumber} of {data.maxPage}</span
+			>
 			{#if data.pageNumber < data.maxPage}
 				<Link href={`/blog/${data.pageNumber + 1}`}>Next &gt;</Link>
 			{/if}

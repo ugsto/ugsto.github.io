@@ -4,7 +4,7 @@
 	import EmailIcon from 'virtual:icons/mdi/email';
 </script>
 
-<footer class="bg-slate-d8 text-slate-d12 px-8">
+<footer class="bg-slate-d9 dark:bg-slate-d3 text-slate-d12 dark:text-slate-d11 px-8">
 	<div class="container mx-auto flex justify-between items-center py-4">
 		<div>
 			<p>

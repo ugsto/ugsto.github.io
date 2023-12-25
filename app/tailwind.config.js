@@ -6,18 +6,24 @@ import {
 	indigo,
 	indigoA,
 	indigoDark,
-	indigoDarkA
+	indigoDarkA,
+	amber,
+	amberA,
+	amberDark,
+	amberDarkA
 } from '@radix-ui/colors';
 import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{js,ts,html,svelte}'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			colors: {
 				slate: generateScale(slate, slateA, slateDark, slateDarkA),
-				indigo: generateScale(indigo, indigoA, indigoDark, indigoDarkA)
+				indigo: generateScale(indigo, indigoA, indigoDark, indigoDarkA),
+				amber: generateScale(amber, amberA, amberDark, amberDarkA)
 			}
 		}
 	},

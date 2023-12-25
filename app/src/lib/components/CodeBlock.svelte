@@ -26,7 +26,7 @@
 
 <div class="relative group">
 	<div
-		class=" hidden group-hover:flex gap-2 absolute top-1 right-1 pointer-events-none"
+		class=" hidden group-hover:flex gap-2 absolute top-1 right-1 pointer-events-none text-slate-11"
 		aria-hidden="true"
 	>
 		{#if $copied !== undefined}

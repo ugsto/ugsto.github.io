@@ -2,11 +2,11 @@
 	export let extraClass = '';
 	export let reactToDarkMode = true;
 
-	const darkModeClasses = 'dark:text-slate-d12';
+	const darkModeClasses = 'dark:text-slate-d11';
 
-	const classes = `text-xl font-bold mb-2 text-slate-12 ${
+	const classes = `text-justify text-slate-11 ${
 		reactToDarkMode ? darkModeClasses : ''
 	} ${extraClass}`;
 </script>
 
-<h3 {...$$restProps} class={classes}><slot /></h3>
+<p {...$$restProps} class={classes}><slot /></p>
