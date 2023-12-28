@@ -26,7 +26,7 @@
 				<ProfileAvatar />
 				<div class="w-full md:w-1/2">
 					<Title extraClass="md:rounded-l-2xl text-slate-d12 bg-slate-d3 py-1 pl-2 pr-4">
-						In the syntax of the universe, every bit ressonates
+						In the syntax of the universe, every bit resonates
 					</Title>
 					<Paragraph extraClass="md:rounded-l-2xl text-slate-d11 bg-slate-d3 py-1 pl-2 pr-4">
 						Greetings, I'm André, Software and Cybersecurity Engineer, someone who harbors an
