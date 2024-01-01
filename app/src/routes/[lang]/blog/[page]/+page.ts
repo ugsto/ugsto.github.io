@@ -1,5 +1,6 @@
 import type { PostMetadata } from '$lib/schemas/PostMetadataSchema';
 import { PostService } from '$lib/services/PostService';
+import { supportedLocales } from '$lib/translations';
 import { error } from '@sveltejs/kit';
 
 const POSTS_PER_PAGE = 10;
@@ -40,5 +41,7 @@ export function load({ params: { page } }: { params: { page: string } }): PostPa
 export function entries() {
 	return Array.from({ length: maxPage }, (_, i) => i + 1)
 		.map(String)
-		.map((page) => ({ page }));
+		.map((page) => ({ page }))
+		.map((entry) => supportedLocales.map((lang) => ({ ...entry, lang })))
+		.flat();
 }

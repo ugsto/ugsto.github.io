@@ -2,6 +2,7 @@ import type { Author } from '$lib/schemas/AuthorSchema';
 import type { PostMetadata } from '$lib/schemas/PostMetadataSchema';
 import { AuthorService } from '$lib/services/AuthorService';
 import { PostService } from '$lib/services/PostService';
+import { supportedLocales } from '$lib/translations';
 import { calculateReadingTime } from '$lib/utils/calculateReadingTime';
 import { error } from '@sveltejs/kit';
 
@@ -44,5 +45,7 @@ export function entries() {
 		.filter((metadata): metadata is PostMetadata => !(metadata instanceof Error))
 		.map(({ id }) => ({
 			id: id.toString()
-		}));
+		}))
+		.map((entry) => supportedLocales.map((lang) => ({ ...entry, lang })))
+		.flat();
 }

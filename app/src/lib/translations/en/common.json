@@ -1,0 +1,11 @@
+{
+  "navigation": {
+    "about": "About Me",
+    "projects": "Projects",
+    "blog": "Blog",
+    "resume": "Resume"
+  },
+  "footer": {
+    "contact": "Contact Me:"
+  }
+}

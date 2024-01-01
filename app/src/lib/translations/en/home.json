@@ -1,0 +1,26 @@
+{
+	"header": {
+		"title": "In the syntax of the universe, every bit resonates",
+		"greetings": "Greetings, I'm André, Software and Cybersecurity Engineer, someone who harbors an enthusiasm for the intersection of cutting-edge technology and academic research. In my toolbox lies a diverse skill set that encompasses project management, programming and DevOps. While I'm not coding, you can find me philosophizing or playing chess."
+	},
+	"about": {
+		"title": "About Me",
+		"description": "Driven by a passion for technology and security, I've cultivated a diverse skill set encompassing project management, programming, and DevOps. Outside the office, I enjoy exploring the latest tech trends. Discover more about me clicking on the button below.",
+		"callToAction": "Learn More"
+	},
+	"projects": {
+		"title": "Highlighted Projects",
+		"description": "Exciting projects are on the way. Check back soon!",
+		"callToAction": "View All Projects"
+	},
+	"blog": {
+		"title": "Blog",
+		"description": "Welcome to my blog! Here, I share insights and experiences cybersecurity. Whether you're a tech enthusiast or a fellow developer, I hope you find something of interest.",
+		"callToAction": "View My Blog"
+	},
+	"resume": {
+		"title": "Resume",
+		"description": "My resume will be available shortly. Thanks for your patience!",
+		"callToAction": "Download Resume"
+	}
+}

@@ -1,7 +1,7 @@
 <script>
 	import Logo from '$lib/components/Logo.svelte';
-	import Navigation from '$lib/components/layout/Navigation.svelte';
-	import ActionButtons from '$lib/components/layout/ActionButtons.svelte';
+	import Navigation from '$lib/components/layout/navigation.svelte';
+	import ActionButtons from '$lib/components/layout/action-buttons.svelte';
 </script>
 
 <header class="p-5 bg-indigo-a8 dark:bg-indigo-d8">
