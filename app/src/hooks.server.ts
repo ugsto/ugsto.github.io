@@ -45,6 +45,13 @@ export const handle: Handle = async ({ event, resolve }) => {
         request.headers.get('accept-language') ?? undefined
       ) ?? defaultLocale;
 
+    if (pathname === '/') {
+      return new Response(undefined, {
+        headers: { location: `/${locale}.html` },
+        status: 301
+      });
+    }
+
     return new Response(undefined, {
       headers: { location: `/${locale}${pathname}` },
       status: 301
