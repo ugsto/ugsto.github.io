@@ -31,6 +31,6 @@
 		</div>
 	</div>
 	<div class="text-center py-4">
-		<p>© 2023 André Augusto Bortoli. All rights reserved.</p>
+		<p>© 2024 André Augusto Bortoli. All rights reserved.</p>
 	</div>
 </footer>
