@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import Logo from '$lib/components/logo.svelte';
 	import NavButton from '$lib/components/nav-button.svelte';
 
 	let activeSection = '';
@@ -37,8 +36,8 @@
 	class="container sticky flex flex-col sm:flex-row justify-between items-center top-0 gap-4 mx-auto p-2"
 >
 	<a class="flex items-center gap-4 w-fit" href="/">
-		<Logo class="h-16 w-16" /><span class="font-mono font-bold text-2xl select-none"
-			>André Bortoli</span
+		<img src="/favicon.svg" alt="logo" class="h-16 w-16" /><span
+			class="font-mono font-bold text-2xl select-none">André Bortoli</span
 		>
 	</a>
 
