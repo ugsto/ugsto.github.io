@@ -49,15 +49,13 @@ function getColorScale(colors, colorName) {
 /**
  * @type {Record<string, string>}
  */
-const colors = getColorNames(radixColors)
-	.filter((c) => c == 'slate')
-	.reduce(
-		(acc, colorName) => ({
-			...acc,
-			[colorName]: getColorScale(radixColors, colorName)
-		}),
-		{}
-	);
+const colors = getColorNames(radixColors).reduce(
+	(acc, colorName) => ({
+		...acc,
+		[colorName]: getColorScale(radixColors, colorName)
+	}),
+	{}
+);
 
 /** @type {import('tailwindcss').Config} */
 export default {
