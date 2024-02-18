@@ -1,4 +1,5 @@
 import * as radixColors from '@radix-ui/colors';
+import plugin from 'tailwindcss';
 
 /**
  * @param {Record<string, Record<string, string>>} colors

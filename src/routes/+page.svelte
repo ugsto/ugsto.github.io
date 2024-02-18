@@ -1,6 +1,6 @@
 <script>
+	import { t } from '$lib/translations';
 	import { onMount } from 'svelte';
-	import NavButton from '$lib/components/nav-button.svelte';
 
 	let activeSection = '';
 
@@ -33,7 +33,7 @@
 </script>
 
 <header
-	class="container sticky flex flex-col sm:flex-row justify-between items-center top-0 gap-4 mx-auto p-2"
+	class="container sm:sticky flex flex-col sm:flex-row justify-between items-center top-0 gap-4 mx-auto p-2 bg-slate-2 rounded-b-xl"
 >
 	<a class="flex items-center gap-4 w-fit" href="/">
 		<img src="/favicon.svg" alt="logo" class="h-16 w-16" /><span
@@ -41,15 +41,35 @@
 		>
 	</a>
 
-	<nav>
+	<nav aria-label="Main navigation">
 		<ul class="flex gap-4">
-			<li><NavButton isActive={activeSection === 'about'} href="#about">Sobre</NavButton></li>
 			<li>
-				<NavButton isActive={activeSection === 'projects'} href="#projects">Projetos</NavButton>
+				<a
+					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
+					aria-current={activeSection === 'about' ? 'page' : undefined}
+					href="#about">{$t('navigation.about')}</a
+				>
 			</li>
-			<li><NavButton isActive={activeSection === 'blog'} href="#blog">Blog</NavButton></li>
 			<li>
-				<NavButton isActive={activeSection === 'contact'} href="#contact">Contato</NavButton>
+				<a
+					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
+					aria-current={activeSection === 'projects' ? 'page' : undefined}
+					href="#projects">Projetos</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
+					aria-current={activeSection === 'blog' ? 'page' : undefined}
+					href="#blog">Blog</a
+				>
+			</li>
+			<li>
+				<a
+					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
+					aria-current={activeSection === 'contact' ? 'page' : undefined}
+					href="#contact">Contato</a
+				>
 			</li>
 		</ul>
 	</nav>

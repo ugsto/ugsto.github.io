@@ -1,11 +1,15 @@
 <script lang="ts">
 	export let href: string;
 	export let isActive: boolean;
-
-	const nonActiveClass = 'inline-block bg-slate-3 hover:bg-slate-4 text-slate-12 px-3 py-2 rounded';
-	const activeClass = 'inline-block bg-slate-12 hover:bg-slate-12 text-slate-1 px-3 py-2 rounded';
-
-	$: classes = isActive ? activeClass : nonActiveClass;
 </script>
 
-<a {href} {...$$props} class={classes}><slot /> </a>
+<a
+	{href}
+	{...$$props}
+	aria-current={isActive ? 'page' : undefined}
+	class="inline-block px-3 py-2 rounded hover:bg-slate-4 {isActive
+		? 'bg-slate-d3 text-slate-1'
+		: 'bg-slate-3 text-slate-d3'}"
+>
+	<slot />
+</a>
