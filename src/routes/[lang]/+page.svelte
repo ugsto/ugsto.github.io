@@ -47,28 +47,28 @@
 				<a
 					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
 					aria-current={activeSection === 'about' ? 'page' : undefined}
-					href="#about">{$t('navigation.about')}</a
+					href="#about">{$t('home.navigation.about')}</a
 				>
 			</li>
 			<li>
 				<a
 					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
 					aria-current={activeSection === 'projects' ? 'page' : undefined}
-					href="#projects">Projetos</a
+					href="#projects">{$t('home.navigation.projects')}</a
 				>
 			</li>
 			<li>
 				<a
 					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
 					aria-current={activeSection === 'blog' ? 'page' : undefined}
-					href="#blog">Blog</a
+					href="#blog">{$t('home.navigation.blog')}</a
 				>
 			</li>
 			<li>
 				<a
 					class="inline-block px-3 py-2 rounded hover:bg-slate-4 bg-slate-3 text-slate-12"
 					aria-current={activeSection === 'contact' ? 'page' : undefined}
-					href="#contact">Contato</a
+					href="#contact">{$t('home.navigation.contact')}</a
 				>
 			</li>
 		</ul>
