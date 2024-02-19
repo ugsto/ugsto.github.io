@@ -1,7 +1,8 @@
 <script>
-	import Icon from '@iconify/svelte';
+	import IconWeatherSunny from 'virtual:icons/mdi/weather-sunny';
+	import IconWeatherNight from 'virtual:icons/mdi/weather-night';
 
-	export let theme = 'light';
+	let theme = 'light';
 
 	function toggleTheme() {
 		if (theme === 'light') {
@@ -15,17 +16,15 @@
 </script>
 
 <button
-	on:click={toggleTheme}
 	aria-label="Toggle theme"
 	class="rounded p-1 bg-slate-6 hover:bg-slate-7 dark:bg-slate-d6 dark:hover:bg-slate-d7"
+	on:click={toggleTheme}
 >
-	<Icon
-		icon="mdi:weather-sunny"
+	<IconWeatherSunny
 		aria-current={theme === 'light' ? 'page' : undefined}
 		class="block dark:hidden text-xl text-amber-11"
 	/>
-	<Icon
-		icon="mdi:weather-night"
+	<IconWeatherNight
 		aria-current={theme === 'dark' ? 'page' : undefined}
 		class="hidden dark:block text-xl text-sage-d11"
 	/>
