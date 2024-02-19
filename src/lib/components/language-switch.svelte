@@ -16,9 +16,9 @@
 	updateFlag($locale);
 </script>
 
-<div class="relative inline-block">
+<div class="relative inline-block group">
 	<button
-		class="relative inline-flex justify-center rounded hover:rounded-b-none bg-slate-a4 hover:bg-slate-a5 dark:bg-slate-da4 dark:hover:bg-slate-da5 pl-4 pr-3 py-1 text-slate-12 dark:text-slate-d12 peer select-none"
+		class="relative inline-flex justify-center rounded group-hover:rounded-b-none focus:rounded-b-none bg-slate-a4 group-hover:bg-slate-a5 focus:bg-slate-a5 dark:bg-slate-da4 dark:group-hover:bg-slate-da5 dark:focus:bg-slate-da5 pl-4 pr-3 py-1 text-slate-12 dark:text-slate-d12 peer select-none"
 		aria-label="Language switch hover trigger"
 		aria-haspopup="true"
 		tabindex="0"
@@ -32,9 +32,13 @@
 		/>
 	</button>
 
+	<!--
+		TODO: Find a way to the user to be able to select another language using only keyboard without the need of any JS
+	-->
+
 	<ul
 		role="menu"
-		class="absolute right-0 pt-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg focus:outline-none text-slate-12 dark:text-slate-d12 text-sm hidden peer-hover:block peer-focus:block hover:block focus:block"
+		class="absolute right-0 pt-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg text-slate-12 dark:text-slate-d12 text-sm hidden peer-hover:block peer-focus:block hover:block focus-within:block"
 		aria-orientation="vertical"
 		aria-labelledby="menu-button"
 	>
