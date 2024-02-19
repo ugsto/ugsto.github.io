@@ -55,7 +55,9 @@
 	</div>
 </header>
 
-<section id="about" class="bg-slate-8 w-screen h-screen"></section>
-<section id="projects" class="bg-slate-12 w-screen h-screen"></section>
-<section id="blog" class="bg-slate-8 w-screen h-screen"></section>
-<section id="contact" class="bg-slate-12 w-screen h-screen"></section>
+<section id="about" class="bg-slate-2 w-screen h-screen"></section>
+<!--
+	<section id="projects" class="bg-slate-12 w-screen h-screen"></section>
+	<section id="blog" class="bg-slate-8 w-screen h-screen"></section>
+	<section id="contact" class="bg-slate-12 w-screen h-screen"></section>
+-->
