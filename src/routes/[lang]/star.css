@@ -1,8 +1,10 @@
 .dark .star,
 .star {
+  border-radius: 50%;
   background-color: #fff;
+  filter: none;
 }
 
 .star {
-  border-radius: 50%;
+  filter: invert(0.25);
 }

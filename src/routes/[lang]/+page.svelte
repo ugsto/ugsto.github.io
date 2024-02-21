@@ -14,7 +14,7 @@
 	});
 </script>
 
-<header class="bg-slate-2 dark:bg-slate-d2">
+<header class="bg-slate-2 dark:bg-slate-d2 shadow dark:shadow-slate-d3">
 	<div
 		class="container flex flex-col lg:flex-row gap-4 justify-between items-center mx-auto py-4 md:py-1"
 	>
@@ -69,7 +69,7 @@
 	class="relative flex flex-col items-center justify-center gap-16 w-screen min-h-screen py-4"
 >
 	<div
-		class="container flex flex-col md:flex-row items-center justify-around py-4 rounded-2xl backdrop-blur-sm bg-slate-8/20 dark:bg-slate-d8/20 mx-4"
+		class="container flex flex-col md:flex-row items-center justify-around py-4 rounded-2xl backdrop-blur-sm bg-slate-3/20 dark:bg-slate-d8/20 mx-4 overflow-hidden"
 	>
 		<div class="relative min-h-64 min-w-64 mx-8">
 			<img
@@ -83,18 +83,20 @@
 		</div>
 		<div>
 			<h2
-				class="text-2xl font-bold mb-4 text-slate-d12 md:rounded-l-2xl bg-slate-d3 py-1 pl-2 pr-4"
+				class="text-2xl font-bold mb-4 text-slate-12 dark:text-slate-d12 md:rounded-l-2xl bg-slate-3 dark:bg-slate-d3 py-1 pl-2 pr-4 shadow dark:shadow-slate-d3"
 			>
 				{$t('home.hero.title')}
 			</h2>
-			<p class="text-justify text-slate-d11 md:rounded-l-2xl bg-slate-d3 py-1 pl-2 pr-4">
+			<p
+				class="text-justify text-slate-11 dark:text-slate-d11 md:rounded-l-2xl bg-slate-3 dark:bg-slate-d3 py-1 pl-2 pr-4 shadow dark:shadow-slate-d3"
+			>
 				{$t('home.hero.subtitle')}
 			</p>
 		</div>
 	</div>
 	<div
 		id="stars"
-		class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-d3"
+		class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-10 dark:bg-slate-d2"
 		aria-hidden="true"
 	></div>
 </section>
