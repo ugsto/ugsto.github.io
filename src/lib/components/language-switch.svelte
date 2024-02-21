@@ -33,7 +33,7 @@
 	</summary>
 
 	<ul
-		class="absolute right-0 pt-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg text-slate-12 dark:text-slate-d12 text-sm"
+		class="absolute right-0 pt-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg text-slate-12 dark:text-slate-d12 text-sm z-10"
 		role="menu"
 		aria-orientation="vertical"
 	>
@@ -42,6 +42,7 @@
 				href="/en"
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
+				data-sveltekit-preload-data="off"
 				on:click={() => updateFlagAndCloseDetails('en')}>English</a
 			>
 		</li>
@@ -50,6 +51,7 @@
 				href="/br"
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
+				data-sveltekit-preload-data="off"
 				on:click={() => updateFlagAndCloseDetails('br')}>Português (Brasil)</a
 			>
 		</li>

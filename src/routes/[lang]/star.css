@@ -1,0 +1,8 @@
+.dark .star,
+.star {
+  background-color: #fff;
+}
+
+.star {
+  border-radius: 50%;
+}
