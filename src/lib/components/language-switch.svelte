@@ -20,7 +20,7 @@
 
 <details class="relative inline-block group" bind:open={detailsIsOpen}>
 	<summary
-		class="relative inline-flex justify-center rounded group-open:rounded-b-none bg-slate-a4 dark:bg-slate-da4 pl-4 pr-3 py-1 text-slate-12 dark:text-slate-d12 peer select-none cursor-pointer"
+		class="relative inline-flex justify-center rounded group-open:rounded-b-none bg-slate-4 hover:bg-slate-5 dark:bg-slate-d4 dark:hover:bg-slate-d5 pl-4 pr-3 py-1 text-slate-12 dark:text-slate-d12 peer select-none cursor-pointer"
 		aria-haspopup="true"
 	>
 		{currentFlag} - {$locale}
@@ -33,7 +33,7 @@
 	</summary>
 
 	<ul
-		class="absolute right-0 pt-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg text-slate-12 dark:text-slate-d12 text-sm z-10"
+		class="absolute right-0 py-2 w-56 bg-slate-4 dark:bg-slate-d4 rounded-b rounded-l shadow-lg text-slate-12 dark:text-slate-d12 text-sm z-10"
 		role="menu"
 		aria-orientation="vertical"
 	>

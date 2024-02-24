@@ -8,5 +8,34 @@
 	"hero": {
 		"title": "Na sintaxe do universo, cada bit ressoa",
 		"subtitle": "Olá! Eu sou André, um Engenheiro de Software e Segurança Cibernética. Nutro um entusiasmo por tecnologias de ponta e pela pesquisa acadêmica. Possuo um conjunto diverso de habilidades que abrangem gerenciamento de projetos, programação e DevOps. Quando não estou programando, você pode me encontrar filosofando ou jogando xadrez."
+	},
+	"projects": {
+		"title": "Projetos"
+	},
+	"contact": {
+		"title": "Contato",
+		"phone": "Telefone",
+		"email_forms": {
+			"title": "Envie-me um e-mail",
+			"fields": {
+				"name": {
+					"label": "Nome",
+					"placeholder": "Seu nome"
+				},
+				"email": {
+					"label": "E-mail",
+					"placeholder": "Seu e-mail"
+				},
+				"subject": {
+					"label": "Assunto",
+					"placeholder": "Assunto"
+				},
+				"message": {
+					"label": "Mensagem",
+					"placeholder": "Mensagem"
+				}
+			},
+			"submit": "Enviar"
+		}
 	}
 }

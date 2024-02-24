@@ -22,7 +22,7 @@
 
 <button
 	aria-label="Toggle theme"
-	class="rounded p-1 bg-slate-6 hover:bg-slate-7 dark:bg-slate-d6 dark:hover:bg-slate-d7"
+	class="rounded p-1 bg-slate-4 hover:bg-slate-5 dark:bg-slate-d4 dark:hover:bg-slate-d5"
 	on:click={toggleTheme}
 >
 	<IconWeatherSunny
