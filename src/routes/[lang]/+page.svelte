@@ -133,6 +133,7 @@
 </section>
 
 <!--
+	UNDER MAINTENANCE
 	<section id="blog" class="bg-iris-8 w-screen h-screen"></section>
 -->
 
