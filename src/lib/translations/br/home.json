@@ -10,7 +10,14 @@
 		"subtitle": "Olá! Eu sou André, um Engenheiro de Software e Segurança Cibernética. Nutro um entusiasmo por tecnologias de ponta e pela pesquisa acadêmica. Possuo um conjunto diverso de habilidades que abrangem gerenciamento de projetos, programação e DevOps. Quando não estou programando, você pode me encontrar filosofando ou jogando xadrez."
 	},
 	"projects": {
-		"title": "Projetos"
+		"title": "Projetos",
+		"entries": [
+			{
+				"title": "Griffin",
+				"image": "/projects/griffin.png",
+				"link": "https://github.com/ugsto/griffin"
+			}
+		]
 	},
 	"contact": {
 		"title": "Contato",

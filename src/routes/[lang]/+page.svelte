@@ -101,7 +101,10 @@
 	/>
 </section>
 
-<section id="projects" class="w-screen h-screen bg-sky-1 dark:bg-sky-d1 py-4">
+<section
+	id="projects"
+	class="flex flex-col justify-between w-screen h-screen bg-sky-1 dark:bg-sky-d1 py-4"
+>
 	<div class="flex flex-col items-center justify-center bg-iris-5 dark:bg-iris-d3 py-1">
 		<h2 class="container text-2xl font-bold text-iris-12 dark:text-iris-d12">
 			{$t('home.projects.title')}
@@ -111,25 +114,23 @@
 		id="projects-carousel"
 		items={[
 			{
-				href: 'https://example.com',
-				src: 'https://picsum.photos/200/300',
-				alt: 'example',
-				description: 'example'
+				title: 'Griffin',
+				href: 'https://github.com/ugsto/griffin',
+				src: '/griffin-logo.svg',
+				alt: 'Griffin project',
+				description:
+					'A Rust-based domain fuzzing tool for uncovering potential domain spoofing threats. Designed for security researchers and enthusiasts'
 			},
 			{
-				href: 'https://example.com',
-				src: 'https://picsum.photos/200/301',
-				alt: 'example',
-				description: 'example'
-			},
-			{
-				href: 'https://example.com',
-				src: 'https://picsum.photos/200/302',
-				alt: 'example',
-				description: 'example'
+				title: 'Iemanja',
+				href: 'https://github.com/ugsto/iemanjad',
+				src: '/iemanja-logo.svg',
+				alt: 'Iemanja project',
+				description: 'A Rust-powered post management of posts and tags within the Iemanja ecosystem'
 			}
 		]}
 	/>
+	<div />
 </section>
 
 <!--
