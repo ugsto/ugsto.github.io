@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	export let id: string;
 	export let items: Array<{
 		title: string;
@@ -7,6 +9,30 @@
 		alt: string;
 		description?: string;
 	}> = [];
+
+	onMount(() => {
+		const anchors = document.querySelectorAll(`#${id} nav a[href^="#"]`);
+		anchors.forEach((anchor) => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+
+				const targetId = anchor.getAttribute('href')!;
+				const targetElement = document.querySelector(targetId);
+
+				if (!targetElement) {
+					return;
+				}
+
+				const scrollContainer = document.querySelector(`#${id} .scroll-smooth`);
+				const scrollX = (targetElement as unknown as { offsetLeft: number }).offsetLeft;
+
+				scrollContainer!.scrollTo({
+					left: scrollX,
+					behavior: 'smooth'
+				});
+			});
+		});
+	});
 </script>
 
 <div {id}>
