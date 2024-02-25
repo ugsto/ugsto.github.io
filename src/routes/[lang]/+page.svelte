@@ -9,7 +9,6 @@
 	import Carousel from '$lib/components/carousel.svelte';
 	import LinkedinIcon from 'virtual:icons/mdi/linkedin';
 	import GithubIcon from 'virtual:icons/mdi/github';
-	import MailIcon from 'virtual:icons/mdi/mail';
 	import PhoneIcon from 'virtual:icons/mdi/phone';
 
 	onMount(() => {
@@ -148,7 +147,7 @@
 	</div>
 	<form
 		class="container flex flex-col gap-4 mx-auto bg-iris-9/30 p-4 rounded-2xl"
-		action="#"
+		action="https://mail-api.bortoli.phd/submit_form"
 		method="POST"
 	>
 		<h3 class="text-xl font-bold text-iris-12 dark:text-iris-d12">
@@ -188,6 +187,7 @@
 				type="text"
 				id="subject"
 				name="subject"
+				required
 				class="px-3 py-2 rounded bg-iris-3 text-slate-12"
 				placeholder={$t('home.contact.email_forms.fields.subject.placeholder')}
 			/>
@@ -208,6 +208,7 @@
 		<button
 			type="submit"
 			class="px-4 py-2 mt-4 w-40 rounded bg-iris-9 hover:bg-iris-10 text-iris-d12"
+			formtarget="_blank"
 		>
 			{$t('home.contact.email_forms.submit')}
 		</button>
