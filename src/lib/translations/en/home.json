@@ -4,5 +4,40 @@
 		"projects": "Projects",
 		"blog": "Blog",
 		"contact": "Contact"
+	},
+	"hero": {
+		"title": "In the syntax of the universe, every bit resonates",
+		"subtitle": "Hello! I'm André.<br /><br />If you're here, it's probably because you want to know a bit more about me, so here goes: My passion for computing started very early, but I can say that my real start in the field was when I began in robotics through the 'Building the Future Today' (BFT) project.<br /><br />It was with this opportunity that I fell in love with low-level programming and robotics. In fact, it was during this time that I achieved one of my proudest accomplishments: A workshop at Campus Party Brasilia 2019 on the topic of Wearables.<br /><br />In 2021, I completed my integrated high school at IFPR, a course integrated with a technical course in computing. In this course, we had a TCC (Course Conclusion Work) discipline, and from there comes the second achievement I'm most proud of: A co-authored publication on the Traveling Salesman Problem through Latinoware.<br /><br />Near the end of my course, I entered the tech market as a developer at PROOFSEC, and since then, I have been refining my technical skills as a programmer and related areas.<br /><br />Apart from that, I am an enthusiast for open-source projects, a proponent of skeptical thinking, and a philosophy enthusiast. Want to exchange ideas? Get in touch!"
+	},
+	"projects": {
+		"title": "Projects",
+		"griffin": "A Rust-based domain fuzzing tool developed to identify potential domain spoofing threats. Designed for security researchers and enthusiasts.",
+		"iemanja": "A content management system created to assist in managing posts on generic platforms. Primarily developed for terminal use."
+	},
+	"contact": {
+		"title": "Contact",
+		"phone": "Phone",
+		"email_forms": {
+			"title": "Send me an email",
+			"fields": {
+				"name": {
+					"label": "Name",
+					"placeholder": "Your name"
+				},
+				"email": {
+					"label": "Email",
+					"placeholder": "Your email"
+				},
+				"subject": {
+					"label": "Subject",
+					"placeholder": "Subject"
+				},
+				"message": {
+					"label": "Message",
+					"placeholder": "Message"
+				}
+			},
+			"submit": "Send"
+		}
 	}
 }

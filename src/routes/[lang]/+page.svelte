@@ -46,12 +46,12 @@
 						href="#projects">{$t('home.navigation.projects')}</a
 					>
 				</li>
-				<li>
+				<!--<li>
 					<a
 						class="inline-block px-3 py-2 rounded bg-iris-4 hover:bg-iris-5 dark:bg-iris-d9 dark:hover:bg-iris-d10 text-iris-12 dark:text-slate-d12"
 						href="#blog">{$t('home.navigation.blog')}</a
 					>
-				</li>
+				</li>-->
 				<li>
 					<a
 						class="inline-block px-3 py-2 rounded bg-iris-4 hover:bg-iris-5 dark:bg-iris-d9 dark:hover:bg-iris-d10 text-iris-12 dark:text-slate-d12"
@@ -89,7 +89,7 @@
 			<p
 				class="text-justify text-iris-12 dark:text-iris-d11 md:rounded-l-md bg-slate-4 dark:bg-sky-d2 py-1 pl-2 pr-4 shadow dark:shadow-iris-d3"
 			>
-				{$t('home.hero.subtitle')}
+				{@html $t('home.hero.subtitle')}
 			</p>
 		</div>
 	</div>
@@ -117,15 +117,14 @@
 				href: 'https://github.com/ugsto/griffin',
 				src: '/griffin-logo.svg',
 				alt: 'Griffin project',
-				description:
-					'A Rust-based domain fuzzing tool for uncovering potential domain spoofing threats. Designed for security researchers and enthusiasts'
+				description: $t('home.projects.griffin')
 			},
 			{
 				title: 'Iemanja',
 				href: 'https://github.com/ugsto/iemanjad',
 				src: '/iemanja-logo.svg',
 				alt: 'Iemanja project',
-				description: 'A Rust-powered post management of posts and tags within the Iemanja ecosystem'
+				description: $t('home.projects.iemanja')
 			}
 		]}
 	/>

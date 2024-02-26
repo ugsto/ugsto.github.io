@@ -7,17 +7,12 @@
 	},
 	"hero": {
 		"title": "Na sintaxe do universo, cada bit ressoa",
-		"subtitle": "Olá! Eu sou André, um Engenheiro de Software e Segurança Cibernética. Nutro um entusiasmo por tecnologias de ponta e pela pesquisa acadêmica. Possuo um conjunto diverso de habilidades que abrangem gerenciamento de projetos, programação e DevOps. Quando não estou programando, você pode me encontrar filosofando ou jogando xadrez."
+		"subtitle": "Olá! Eu sou André.<br /><br />Se você está aqui provavelmente é porque quer saber um pouco mais sobre mim, então aqui vai: Minha paixão com a informática começou muito cedo, mas posso dizer que meu início real na área foi quando iniciei na robótica pelo projeto Construindo o Futuro Hoje (CFH).<br /><br />Foi com essa oportunidade que me encantei pela programação de baixo nível e pela área de robótica. Inclusive, foi nessa época que tive uma das conquistas de que mais me orgulho: Uma oficina na Campus Party Brasilia de 2019 com o tema de Wearables.<br /><br />Em 2021, concluí meu ensino médio integrado no IFPR, um curso integrato a um curso técnico em informática. Neste curso, tivemos uma disciplina de TCC e daí vem a segunda conquista de que mais me orgulho: Uma publicação coescrita sobre o Problema do Caixeiro Viajante por meio da Latinoware.<br /><br />Perto do final do meu curso, entrei no mercado de tecnologia como desenvolvedor na empresa PROOFSEC e desde então tenho refinado minhas habilidades técnicas como programador e áreas tangentes.<br /><br />Aparte disso, sou um entusiasta por projetos de código aberto, adepto do pensamento cético e entusiasta da filosofia. Quer trocar uma ideia? Entre em contato comigo!"
 	},
 	"projects": {
 		"title": "Projetos",
-		"entries": [
-			{
-				"title": "Griffin",
-				"image": "/projects/griffin.png",
-				"link": "https://github.com/ugsto/griffin"
-			}
-		]
+		"griffin": "Uma ferramenta de fuzzing de domínio baseada em Rust, desenvolvida para identificar ameaças potenciais de falsificação de domínios. Projetada para pesquisadores de segurança e entusiastas da área.",
+		"iemanja": "Um sistema de gerenciamento de conteúdo criado para auxiliar na administração de publicações em plataformas genéricas. Desenvolvido principalmente para uso em terminais."
 	},
 	"contact": {
 		"title": "Contato",
