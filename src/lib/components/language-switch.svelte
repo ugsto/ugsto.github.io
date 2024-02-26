@@ -39,7 +39,7 @@
 	>
 		<li>
 			<a
-				href="/en"
+				href="/en.html"
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
 				data-sveltekit-preload-data="off"
@@ -48,7 +48,7 @@
 		</li>
 		<li>
 			<a
-				href="/br"
+				href="/br.html"
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
 				data-sveltekit-preload-data="off"

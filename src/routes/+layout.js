@@ -6,7 +6,6 @@ export const load = async ({ url }) => {
 	const { pathname } = url;
 
 	const { lang, route } = parsePathname(pathname);
-
 	await loadTranslations(lang, pathname);
 
 	return { route, lang };

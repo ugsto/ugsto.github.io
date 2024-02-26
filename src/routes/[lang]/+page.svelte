@@ -24,7 +24,7 @@
 	>
 		<a
 			class="flex items-center rounded gap-2 w-fit pl-2 pr-4 bg-iris-4 dark:bg-iris-d9"
-			href={`/${$locale}`}
+			href={`/${$locale}.html`}
 		>
 			<img src="/favicon.svg" alt="logo" class="py-0.5 h-16 w-16" style="font-size: 0" />
 			<span class="font-mono font-bold text-2xl text-iris-12 dark:text-iris-d12 select-none">
