@@ -1,38 +1,37 @@
-# create-svelte
+# André Bortoli
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+[![Deploy static content to Pages](https://github.com/ugsto/ugsto.github.io/actions/workflows/static.yml/badge.svg)](https://github.com/ugsto/ugsto.github.io/actions/workflows/static.yml)
 
-## Creating a project
+Welcome to my portfolio! This site is my personal web page. Visit the portfolio at: ![www.bortoli.phd](https://www.bortoli.phd)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Run this site
+
+To run this site locally, it is as simple as running a svelte application:
+
+### Development mode
+
+First you install the npm dependencies:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Then run the development server:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+### Production mode
 
-To create a production version of your app:
+As this application relies on wasm modules, it has a simplified Makefile to facilitate the deployment.
 
 ```bash
-npm run build
+make
 ```
 
-You can preview the production build with `npm run preview`.
+After runnin this command, the static website will be available in the directory `dist`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Contact
+
+If you have any questions, please feel free to contact me at: [bortoli@ugsto](mailto:bortoli@ugsto)
