@@ -2,7 +2,7 @@
 
 [![Deploy static content to Pages](https://github.com/ugsto/ugsto.github.io/actions/workflows/static.yml/badge.svg)](https://github.com/ugsto/ugsto.github.io/actions/workflows/static.yml)
 
-Welcome to my portfolio! This site is my personal web page. Visit the portfolio at: ![www.bortoli.phd](https://www.bortoli.phd)
+Welcome to my portfolio! This site is my personal web page. Visit the portfolio at: [www.bortoli.phd](https://www.bortoli.phd)
 
 ## Run this site
 
