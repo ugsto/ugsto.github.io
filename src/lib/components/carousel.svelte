@@ -36,15 +36,15 @@
 </script>
 
 <div {id}>
-	<div class="scroll-smooth flex overflow-x-auto scrollbar-hide snap-x snap-mandatory touch-pan-x">
+	<div
+		class="scroll-smooth flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+	>
 		{#each items as { title, href, src, alt, description }, index}
 			<div
-				class="snap-start flex-shrink-0 w-full h-full flex items-center justify-center"
+				class="snap-start flex flex-shrink-0 items-stretch w-full h-full"
 				id={`${id}-item-${index}`}
 			>
-				<div
-					class="container rounded-2xl flex flex-col justify-center items-center gap-4 dark:bg-iris-d9/30 px-4 py-2"
-				>
+				<div class="rounded-2xl flex flex-col justify-center items-center gap-4 px-4 py-2 w-screen">
 					<h3 class="text-2xl font-bold text-iris-12 dark:text-iris-d12">
 						<a {href} target="_blank" class="hover:underline">
 							{title}
