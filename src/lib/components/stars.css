@@ -1,0 +1,10 @@
+.star {
+  display: none;
+  border-radius: 50%;
+  background-color: #fff;
+  filter: none;
+}
+
+.dark .star {
+  display: block;
+}
