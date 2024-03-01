@@ -1,29 +1,33 @@
-<script lang="ts">
+<script>
 	import { locale } from '$lib/translations';
-	import { flag } from '$lib/translations/flag';
+	import UsFlag from 'virtual:icons/circle-flags/us';
+	import BrFlag from 'virtual:icons/circle-flags/br';
 
-	let currentFlag = '';
 	let detailsIsOpen = false;
+	/**
+	 * @type {Record<string, any>}
+	 */
+	const flagByLanguage = {
+		en: UsFlag,
+		br: BrFlag
+	};
 
-	function updateFlagAndCloseDetails(lang: string) {
-		const langKey = lang as keyof typeof flag;
-		if (!flag[langKey]) {
-			return;
-		}
-
-		currentFlag = flag[langKey];
+	function closeDetails() {
 		detailsIsOpen = false;
 	}
 
-	updateFlagAndCloseDetails($locale);
+	closeDetails();
 </script>
 
 <details class="relative inline-block group" bind:open={detailsIsOpen}>
 	<summary
-		class="relative inline-flex justify-center rounded group-open:rounded-b-none bg-slate-4 hover:bg-slate-5 dark:bg-slate-d4 dark:hover:bg-slate-d5 pl-4 pr-3 py-1 text-slate-12 dark:text-slate-d12 peer select-none cursor-pointer"
+		class="relative inline-flex items-center justify-center rounded group-open:rounded-b-none bg-slate-4 hover:bg-slate-5 dark:bg-slate-d4 dark:hover:bg-slate-d5 px-2 py-1 text-slate-12 dark:text-slate-d12 peer select-none cursor-pointer"
 		aria-haspopup="true"
 	>
-		{currentFlag} - {$locale}
+		<div class="flex gap-2 items-center">
+			<svelte:component this={flagByLanguage[$locale]} />
+			{$locale}
+		</div>
 		<img
 			src="/arrow-down.svg"
 			alt="Arrow pointing down"
@@ -43,7 +47,7 @@
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
 				data-sveltekit-preload-data="off"
-				on:click={() => updateFlagAndCloseDetails('en')}>English</a
+				on:click={closeDetails}>English</a
 			>
 		</li>
 		<li>
@@ -52,7 +56,7 @@
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
 				data-sveltekit-preload-data="off"
-				on:click={() => updateFlagAndCloseDetails('br')}>Português (Brasil)</a
+				on:click={closeDetails}>Português (Brasil)</a
 			>
 		</li>
 	</ul>
