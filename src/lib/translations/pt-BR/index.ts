@@ -1,3 +1,3 @@
 import home from './home.json';
 
-export const br = { home };
+export const ptBr = { home };

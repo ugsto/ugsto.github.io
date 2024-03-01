@@ -1,12 +1,12 @@
 import i18n, { type Config } from 'sveltekit-i18n';
-import { br } from './br';
+import { ptBr } from './pt-BR';
 import { en } from './en';
 import { lang } from './lang';
 
 const config: Config = {
 	translations: {
-		br: {
-			...br,
+		'pt-BR': {
+			...ptBr,
 			lang
 		},
 		en: {

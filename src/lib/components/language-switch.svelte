@@ -9,7 +9,7 @@
 	 */
 	const flagByLanguage = {
 		en: UsFlag,
-		br: BrFlag
+		'pt-BR': BrFlag
 	};
 
 	function closeDetails() {
@@ -26,7 +26,7 @@
 	>
 		<div class="flex gap-2 items-center">
 			<svelte:component this={flagByLanguage[$locale]} />
-			{$locale}
+			{$locale.split('-').pop()?.toLowerCase()}
 		</div>
 		<img
 			src="/arrow-down.svg"
@@ -52,7 +52,7 @@
 		</li>
 		<li>
 			<a
-				href="/br.html"
+				href="/pt-br.html"
 				class="block px-4 py-2 hover:bg-slate-a5 dark:hover:bg-slate-da5"
 				role="menuitem"
 				data-sveltekit-preload-data="off"
