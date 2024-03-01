@@ -123,7 +123,7 @@
 		</h2>
 	</div>
 	<form
-		class="container flex flex-col gap-4 mx-auto bg-iris-9/30 p-4 rounded-2xl"
+		class="container flex flex-col gap-4 mx-auto bg-iris-9/30 p-4 rounded-2xl my-4"
 		action="https://mail-api.bortoli.phd/submit_form"
 		method="POST"
 	>
