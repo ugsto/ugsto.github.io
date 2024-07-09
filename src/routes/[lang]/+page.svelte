@@ -122,74 +122,7 @@
 			{$t('home.contact.title')}
 		</h2>
 	</div>
-	<form
-		class="container flex flex-col gap-4 mx-auto bg-iris-9/30 p-4 rounded-2xl my-4"
-		action="https://mail-api.bortoli.phd/submit_form"
-		method="POST"
-	>
-		<h3 class="text-xl font-bold text-iris-12 dark:text-iris-d12">
-			{$t('home.contact.email_forms.title')}
-		</h3>
-		<div class="flex flex-col gap-2">
-			<label for="name" class="text-iris-12 dark:text-iris-d12"
-				>{$t('home.contact.email_forms.fields.name.label')}</label
-			>
-			<input
-				type="text"
-				id="name"
-				name="name"
-				required
-				class="px-3 py-2 rounded bg-iris-3 text-slate-12"
-				placeholder={$t('home.contact.email_forms.fields.name.placeholder')}
-			/>
-		</div>
-		<div class="flex flex-col gap-2">
-			<label for="email" class="text-iris-12 dark:text-iris-d12"
-				>{$t('home.contact.email_forms.fields.email.label')}</label
-			>
-			<input
-				type="email"
-				id="email"
-				name="email"
-				required
-				class="px-3 py-2 rounded bg-iris-3 text-slate-12"
-				placeholder={$t('home.contact.email_forms.fields.email.placeholder')}
-			/>
-		</div>
-		<div class="flex flex-col gap-2">
-			<label for="subject" class="text-iris-12 dark:text-iris-d12"
-				>{$t('home.contact.email_forms.fields.subject.label')}</label
-			>
-			<input
-				type="text"
-				id="subject"
-				name="subject"
-				required
-				class="px-3 py-2 rounded bg-iris-3 text-slate-12"
-				placeholder={$t('home.contact.email_forms.fields.subject.placeholder')}
-			/>
-		</div>
-		<div class="flex flex-col gap-2">
-			<label for="message" class="text-iris-12 dark:text-iris-d12"
-				>{$t('home.contact.email_forms.fields.message.label')}</label
-			>
-			<textarea
-				id="message"
-				name="message"
-				required
-				rows="4"
-				class="px-3 py-2 rounded bg-iris-3 text-slate-12"
-				placeholder={$t('home.contact.email_forms.fields.message.placeholder')}
-			></textarea>
-		</div>
-		<button
-			type="submit"
-			class="px-4 py-2 mt-4 w-40 rounded bg-iris-9 hover:bg-iris-10 text-iris-d12"
-			formtarget="_blank"
-		>
-			{$t('home.contact.email_forms.submit')}
-		</button>
-	</form>
+  <p class="text-iris-12 dark:text-iris-d11 text-sm mx-auto">{$t('home.contact.whyremoveform')}</p>
 	<ul class="flex items-center justify-center gap-4">
 		<li>
 			<a
