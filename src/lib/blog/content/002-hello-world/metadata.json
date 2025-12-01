@@ -1,0 +1,26 @@
+{
+  "date": "2025-01-02T12:00:00Z",
+  "readTimeSeconds": 300,
+  "thumbnail": "https://placehold.co/600x400/EEE/31343C",
+  "isFeatured": false,
+  "locales": {
+    "en": {
+      "title": "Hello World",
+      "excerpt": "Hello World is very important because it is the first program you write when learning a new programming language.",
+      "categories": [
+        "Python",
+        "JavaScript",
+        "Rust"
+      ]
+    },
+    "pt-br": {
+      "title": "Olá Mundo",
+      "excerpt": "Olá Mundo é muito importante porque é o primeiro programa que você escreve ao aprender uma nova linguagem de programação.",
+      "categories": [
+        "Python",
+        "JavaScript",
+        "Rust"
+      ]
+    }
+  }
+}

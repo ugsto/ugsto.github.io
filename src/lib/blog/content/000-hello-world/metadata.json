@@ -1,0 +1,26 @@
+{
+  "date": "2025-01-02T12:00:00Z",
+  "readTimeSeconds": 300,
+  "thumbnail": "https://placehold.co/600x400/EEE/31343C",
+  "isFeatured": true,
+  "locales": {
+    "en": {
+      "title": "Coming soon...",
+      "excerpt": "Soon blog posts will be available. I appreciate your patience <3",
+      "categories": [
+        "Python",
+        "JavaScript",
+        "Rust"
+      ]
+    },
+    "pt-br": {
+      "title": "Em breve...",
+      "excerpt": "Em breve, o blog será populado com conteúdo. Obrigado pela paciência :)",
+      "categories": [
+        "Python",
+        "JavaScript",
+        "Rust"
+      ]
+    }
+  }
+}
