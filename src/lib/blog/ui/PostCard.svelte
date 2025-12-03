@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { BlogPostSummary } from "$lib/blog/domain/models";
-  import { localizeUrl } from "$lib/paraglide/runtime";
+  import { localizeHref } from "$lib/paraglide/runtime";
 
   export let post: BlogPostSummary;
 </script>
@@ -40,8 +40,9 @@
   </div>
 
   <a
-    href={localizeUrl(`/blog/${post.slug}`).toString()}
+    href={localizeHref(`/blog/${post.slug}`)}
     class="absolute inset-0 z-20"
     aria-label="Read {post.title}"
+    data-sveltekit-reload
   ></a>
 </div>

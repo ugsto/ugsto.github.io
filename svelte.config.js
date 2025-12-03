@@ -7,10 +7,12 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: '404.html'
+			fallback: '404.html',
 		}),
 		prerender: {
-			origin: "https://bortoli.phd"
+			crawl: true,
+			origin: "https://bortoli.phd",
+			entries: ["*"]
 		}
 	}
 };

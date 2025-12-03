@@ -3,7 +3,7 @@ import { ReadTime, type BlogPost, type BlogPostSummary, type PostMetadata } from
 import { marked } from 'marked';
 
 const extractSlugFromMetaPath = (path: string): string | undefined =>
-  path.match(/\/content\/([^/]+)\/metadata\.json$/)?.[1];
+  path.match(/\/content\/(?<slug>[^/]+)\/metadata\.json$/)?.groups?.slug;
 
 const extractKeyFromContentPath = (path: string): { slug: string, locale: string } | undefined => {
   const match = path.match(/\/content\/(?<slug>[^\/]+)\/content\.(?<locale>[^\.]+)\.md$/);

@@ -29,6 +29,7 @@
         ? 'text-cyan-400'
         : 'text-slate-500 hover:text-slate-300'}"
       aria-label="Switch to {lang}"
+      data-sveltekit-reload
     >
       {labels[lang] || lang.toUpperCase()}
     </a>
