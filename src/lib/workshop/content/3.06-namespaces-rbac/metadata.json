@@ -1,0 +1,10 @@
+{
+  "part": 3,
+  "section": 6,
+  "title": "Namespaces e RBAC: isolamento e controle de acesso",
+  "readTimeMinutes": 6,
+  "handsOnMinutes": 10,
+  "commands": [],
+  "nextSlug": "3.07-ingress",
+  "prevSlug": "3.05-volumes"
+}

@@ -1,0 +1,10 @@
+{
+  "part": 3,
+  "section": 4,
+  "title": "Resource Limits: quanto de CPU e memória cada Pod pode usar",
+  "readTimeMinutes": 6,
+  "handsOnMinutes": 10,
+  "commands": [],
+  "nextSlug": "3.05-volumes",
+  "prevSlug": "3.03-health-checks"
+}

@@ -1,0 +1,10 @@
+{
+  "part": 2,
+  "section": 3,
+  "title": "A porta de entrada",
+  "readTimeMinutes": 6,
+  "handsOnMinutes": 10,
+  "commands": [],
+  "nextSlug": "2.04-scheduler",
+  "prevSlug": "2.02-etcd"
+}

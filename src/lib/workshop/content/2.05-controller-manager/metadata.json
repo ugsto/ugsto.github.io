@@ -1,0 +1,10 @@
+{
+  "part": 2,
+  "section": 5,
+  "title": "O coração do Kubernetes",
+  "readTimeMinutes": 7,
+  "handsOnMinutes": 10,
+  "commands": [],
+  "nextSlug": "2.06-kubelet-cri",
+  "prevSlug": "2.04-scheduler"
+}

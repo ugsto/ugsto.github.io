@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 4,
+  "title": "Union Filesystems: como o overlay empilha camadas",
+  "readTimeMinutes": 7,
+  "handsOnMinutes": 10,
+  "commands": [],
+  "nextSlug": "1.05-container-manual",
+  "prevSlug": "1.03-cgroups"
+}

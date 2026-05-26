@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 2,
+  "title": "Linux Namespaces: o isolamento que faz containers funcionarem",
+  "readTimeMinutes": 8,
+  "handsOnMinutes": 15,
+  "commands": [],
+  "nextSlug": "1.03-cgroups",
+  "prevSlug": "1.01-vm-vs-container"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Prometheus & Grafana: observabilidade no cluster",
+  "slug": "4.1-prometheus-grafana",
+  "part": 4,
+  "section": 1,
+  "readingTime": 7,
+  "handsOnTime": 15,
+  "prerequisites": [
+    "Helm instalado",
+    "cluster executando"
+  ],
+  "tags": [
+    "prometheus",
+    "grafana",
+    "observabilidade",
+    "monitoring",
+    "métricas"
+  ],
+  "nextChapter": "4.2-argocd",
+  "prevChapter": "4.0-helm"
+}

@@ -32,6 +32,15 @@
     </li>
     <li>
       <a
+        href={localizeHref("/workshops")}
+        class="hover:text-cyan-400 transition-colors"
+        data-sveltekit-reload
+      >
+        {m.nav_workshops()}
+      </a>
+    </li>
+    <li>
+      <a
         href={localizeHref("/blog")}
         class="hover:text-cyan-400 transition-colors"
         data-sveltekit-reload

@@ -1,0 +1,10 @@
+{
+  "part": 3,
+  "section": 5,
+  "title": "Volumes: compartilhando dados entre containers e persistindo além do Pod",
+  "readTimeMinutes": 7,
+  "handsOnMinutes": 12,
+  "commands": [],
+  "nextSlug": "3.06-namespaces-rbac",
+  "prevSlug": "3.04-resource-limits"
+}

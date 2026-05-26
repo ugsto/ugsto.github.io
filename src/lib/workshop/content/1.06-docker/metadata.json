@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 6,
+  "title": "Docker: a camada de conveniência",
+  "readTimeMinutes": 6,
+  "handsOnMinutes": 8,
+  "commands": [],
+  "nextSlug": "1.07-dockerfile",
+  "prevSlug": "1.05-container-manual"
+}

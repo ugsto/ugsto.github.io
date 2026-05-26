@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 5,
+  "title": "Container manual: namespaces + cgroups + overlay",
+  "readTimeMinutes": 8,
+  "handsOnMinutes": 15,
+  "commands": [],
+  "nextSlug": "1.06-docker",
+  "prevSlug": "1.04-union-filesystems"
+}

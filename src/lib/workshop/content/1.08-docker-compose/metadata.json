@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 8,
+  "title": "Docker Compose: múltiplos containers",
+  "readTimeMinutes": 5,
+  "handsOnMinutes": 8,
+  "commands": [],
+  "nextSlug": "2.00-problema-escala",
+  "prevSlug": "1.07-dockerfile"
+}

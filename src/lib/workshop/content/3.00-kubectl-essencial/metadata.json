@@ -1,0 +1,10 @@
+{
+  "part": 3,
+  "section": 0,
+  "title": "kubectl essencial: o canivete suíço do Kubernetes",
+  "readTimeMinutes": 8,
+  "handsOnMinutes": 15,
+  "commands": [],
+  "nextSlug": "3.01-debugging",
+  "prevSlug": "2.10-kubeadm"
+}

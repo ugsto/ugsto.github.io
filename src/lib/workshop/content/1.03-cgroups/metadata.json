@@ -1,0 +1,10 @@
+{
+  "part": 1,
+  "section": 3,
+  "title": "cgroups: limitando recursos no kernel",
+  "readTimeMinutes": 8,
+  "handsOnMinutes": 12,
+  "commands": [],
+  "nextSlug": "1.04-union-filesystems",
+  "prevSlug": "1.02-linux-namespaces"
+}

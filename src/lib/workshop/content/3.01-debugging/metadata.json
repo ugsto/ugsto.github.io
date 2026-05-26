@@ -1,0 +1,10 @@
+{
+  "part": 3,
+  "section": 1,
+  "title": "Debugging no Kubernetes: o que fazer quando algo quebra",
+  "readTimeMinutes": 8,
+  "handsOnMinutes": 12,
+  "commands": [],
+  "nextSlug": "3.02-configmaps-secrets",
+  "prevSlug": "3.00-kubectl-essencial"
+}
