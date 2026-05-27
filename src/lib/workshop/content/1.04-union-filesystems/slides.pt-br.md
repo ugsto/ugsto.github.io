@@ -104,14 +104,6 @@ overlay on /var/lib/docker/overlay2/<id>/merged type overlay
 
 Imagem = múltiplas camadas readonly. Container = upperdir writable no topo. Removeu container → upperdir some, layers da imagem intactas.
 
-```cheatsheet
-sudo mount -t overlay overlay -o lowerdir=L,upperdir=U,workdir=W /mnt | Montar overlay
-ls /mnt | Ver união
-sudo umount /mnt | Desmontar
-mount | grep overlay | Ver overlays ativos
-docker inspect <id> | jq '.[0].GraphDriver.Data' | Ver camadas overlay de container
-```
-
 ---
 
 Próximo: juntar namespaces + cgroups + overlay = container artesanal, sem Docker.

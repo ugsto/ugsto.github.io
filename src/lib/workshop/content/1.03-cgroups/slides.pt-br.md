@@ -25,16 +25,18 @@ systemd-run --user --scope -p CPUQuota="50%" --unit=workshop-cpu \
 ### Limitar memória
 
 ```bash
-systemd-run --user --scope -p MemoryMax="50M" --unit=workshop-mem \
-  stress --vm 1 --vm-bytes 100M --timeout 15 & \
-  watch -n 0.2 "echo \$(< \"/sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/app.slice/workshop-mem.scope/memory.current\")"
+sudo systemd-run --scope -p MemoryMax="50M" -p MemorySwapMax="0" stress --vm 15 --vm-bytes 100M --vm-keep
 ```
 
 ```
-52428800
+Running as unit: run-p109310-i109610.scope; invocation ID: 194c53091ed04393b07d9f1ab1fd4273
+stress: info: [109310] dispatching hogs: 0 cpu, 0 io, 15 vm, 0 hdd
+stress: FAIL: [109310] (425) <-- worker 109326 got signal 9
+stress: WARN: [109310] (427) now reaping child worker processes
+stress: FAIL: [109310] (461) failed run completed in 0s
 ```
 
-Stress toppando no limite de 50M. Uma aplicação sem tratamento de OOM morreria aqui.
+Como o processo tentou solicitar mais memória do que lhe era permitido, ele sofre um assassinato diretamente do kernel (OOM)
 
 ### Docker usa o mesmo mecanismo
 
@@ -49,13 +51,6 @@ echo $(< /sys/fs/cgroup/system.slice/docker-${CID}.scope/memory.max)
 ```
 
 128 × 1024 × 1024. Docker só escreve no arquivo por você.
-
-```cheatsheet
-systemd-run --user --scope -p CPUQuota="50%" stress --cpu 1 | CPU 50%
-systemd-run --user --scope -p MemoryMax="50M" stress --vm 1 --vm-bytes 100M | RAM 50 MB
-echo $(< /sys/fs/cgroup/.../memory.current) | Memória atual do cgroup
-echo $(< /sys/fs/cgroup/.../memory.events) | Eventos OOM
-```
 
 ---
 

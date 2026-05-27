@@ -175,15 +175,6 @@ overlay on /tmp/overlay/merged type overlay (rw,relatime,lowerdir=/tmp/overlay/l
 
 Toda modificação que o container faz (logs, arquivos temporários, `apt install`) vai pro `upperdir`. Quando você remove o container, o `upperdir` é deletado. As layers da imagem permanecem intactas pra reuso.
 
-```cheatsheet
-mkdir -p /tmp/ov/{lower,upper,work,merged} | Criar estrutura overlay
-sudo mount -t overlay overlay -o lowerdir=/tmp/ov/lower,upperdir=/tmp/ov/upper,workdir=/tmp/ov/work /tmp/ov/merged | Montar overlay
-ls /tmp/ov/merged | Ver união das camadas
-sudo umount /tmp/ov/merged | Desmontar
-mount | grep overlay | Ver overlays ativos no sistema
-docker inspect <id> | jq '.[0].GraphDriver.Data' | Ver camadas overlay de um container
-```
-
 ---
 
 No próximo capítulo: Container manual. Juntar namespaces + cgroups + overlay e criar um container artesanal. Sem Docker, sem containerd, só syscalls.

@@ -42,7 +42,7 @@ Hierarquia: **kubelet → containerd → containerd-shim-runc-v2 → runc → pr
 ## crictl: debug direto no runtime
 
 ```bash
-sudo crictl ps           # containers executando
+sudo crictl ps            # containers executando
 sudo crictl pods          # pods (sandboxes)
 sudo crictl stats         # CPU, memória, disco por container
 sudo crictl images        # imagens em cache no nó
@@ -59,23 +59,3 @@ Não passa pelo Kubernetes. Mostra o que o containerd realmente vê.
 4. `CreateContainer` → specs do container
 5. `StartContainer` → containerd-shim + runc criam processo Linux
 6. kubelet reporta status de volta pro API Server
-
-```cheatsheet
-Ver processo do kubelet
-ps aux | grep kubelet | grep -v grep
-
-Listar containers direto no runtime (worker)
-sudo crictl ps
-sudo crictl pods
-sudo crictl stats
-sudo crictl images
-
-Socket do containerd
-sudo ls -la /run/containerd/containerd.sock
-
-Config do kubelet
-echo $(< /var/lib/kubelet/config.yaml)
-
-Static pod manifests (control plane)
-ls /etc/kubernetes/manifests/
-```

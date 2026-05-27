@@ -1,6 +1,6 @@
 ## O problema
 
-Você passou os últimos 4 capítulos montando container na mão: `unshare`, `cgexec`, `mount overlay`, `chroot`. Funciona, mas ninguém quer digitar isso pra subir um WordPress.
+Você passou os últimos 4 capítulos montando componentes de um container na mão: `unshare`, `cgroups`, `mount overlay`, `chroot`. Funciona, mas ninguém quer digitar isso pra subir um WordPress.
 
 O Docker apareceu em 2013 pra resolver exatamente isso. Ele não inventou namespaces, cgroups nem overlay. Só empacotou tudo com uma API limpa. Em vez de 5 comandos com sudo, você digita `docker run nginx`.
 
@@ -68,15 +68,14 @@ docker run -d --name limited --memory 128m --cpus 0.5 alpine:3.23 sleep infinity
 O Docker converteu `--memory 128m` em cgroup. Confere:
 
 ```bash
-CID=$(docker inspect limited --format '{{.Id}}')
-echo $(< /sys/fs/cgroup/system.slice/docker-${CID}.scope/memory.max)
+echo $(< /sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{{.Id}}').scope/memory.max)
 ```
 
 ```text
 134217728
 ```
 
-128 × 1024 × 1024 = 134217728 bytes. O Docker escreveu isso no cgroup, igual a gente fez com `echo "50M" > memory.max`.
+128 × 1024 × 1024 = 134217728 bytes. O Docker escreveu isso no cgroup, o mesmo princípio de quando usamos o systemd para essa limitação.
 
 ### Camadas da imagem
 
@@ -102,16 +101,6 @@ docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{
 ```
 
 O Docker criou um par veth: uma ponta no container, outra no host. O container tem IP na rede bridge `docker0`.
-
-```cheatsheet
-sudo docker run -d --name demo alpine:3.23 sleep infinity | Subir container Alpine
-sudo docker inspect demo --format '{{.State.Pid}}' | Ver PID real
-sudo lsns -p $(sudo docker inspect demo --format '{{.State.Pid}}') | Ver namespaces
-sudo docker run -d --memory 128m --cpus 0.5 alpine:3.23 sleep infinity | Container com limites
-sudo docker image inspect alpine:3.23 --format '{{.RootFS.Layers}}' | Ver camadas da imagem
-sudo docker inspect demo --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' | Ver IP do container
-mount | grep overlay | grep docker | Ver overlays ativos
-```
 
 ---
 

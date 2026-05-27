@@ -38,8 +38,8 @@ GET https://172.31.45.35:6443/api/v1/namespaces/default/pods?limit=500 200 OK in
 Testa permissões sem fazer a operação:
 
 ```
-kubectl auth can-i get pods -n kube-system          → yes
-kubectl auth can-i delete pods -n default            → yes
+kubectl auth can-i get pods -n kube-system             → yes
+kubectl auth can-i delete pods -n default              → yes
 kubectl auth can-i create pods --as sa:default:default → no
 ```
 
@@ -62,25 +62,4 @@ A resposta volta antes da ação acontecer. O kubelet recebe o watch event e age
 --etcd-servers=https://127.0.0.1:2379
 --secure-port=6443
 --service-cluster-ip-range=10.96.0.0/12
-```
-
-Node autoriza kubelets. RBAC autoriza usuários. Porta 6443, TLS obrigatório.
-
-```cheatsheet
-Ver chamadas REST que o kubectl faz
-kubectl get pods -v=6 2>&1 | grep GET
-
-Ver chamadas com mais detalhes
-kubectl get pods -v=8 2>&1 | head -30
-
-Testar permissões
-kubectl auth can-i <verb> <resource> -n <namespace>
-kubectl auth can-i create pods --as system:serviceaccount:default:default
-
-Listar roles e bindings
-kubectl get roles,rolebindings --all-namespaces
-kubectl get clusterroles,clusterrolebindings
-
-Listar API resources disponíveis
-kubectl api-resources
 ```

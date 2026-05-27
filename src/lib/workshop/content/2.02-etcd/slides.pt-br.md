@@ -54,37 +54,7 @@ Preço: sensível a latência de disco. Toda escrita faz `fsync`. Exige SSD.
 
 ## Segurança
 
-- TLS mútuo: API Server autentica com certificado de cliente
+- TLS mútul (mTLS): API Server autentica com certificado de cliente
 - Escuta só em `127.0.0.1:2379` (localhost)
 - Ninguém além do API Server acessa diretamente
 - Expor etcd = expor o cluster inteiro (secrets em plain text)
-
-```cheatsheet
-Ver membros etcd
-kubectl exec -n kube-system etcd-ip-172-31-45-35 -- etcdctl \
-  --cacert /etc/kubernetes/pki/etcd/ca.crt \
-  --cert /etc/kubernetes/pki/etcd/server.crt \
-  --key /etc/kubernetes/pki/etcd/server.key \
-  --endpoints https://127.0.0.1:2379 \
-  member list --write-out=table
-
-Ver status (DB size, Raft term, leader)
-kubectl exec -n kube-system etcd-ip-172-31-45-35 -- etcdctl \
-  --cacert /etc/kubernetes/pki/etcd/ca.crt \
-  --cert /etc/kubernetes/pki/etcd/server.crt \
-  --key /etc/kubernetes/pki/etcd/server.key \
-  --endpoints https://127.0.0.1:2379 \
-  endpoint status --write-out=table
-
-Listar chaves (prefix scan)
-kubectl exec -n kube-system etcd-ip-172-31-45-35 -- etcdctl \
-  --cacert /etc/kubernetes/pki/etcd/ca.crt \
-  --cert /etc/kubernetes/pki/etcd/server.crt \
-  --key /etc/kubernetes/pki/etcd/server.key \
-  --endpoints https://127.0.0.1:2379 \
-  get / --prefix --keys-only | head -50
-
-Portas
-2379: clientes (API Server)
-2380: peers (Raft entre nós etcd)
-```

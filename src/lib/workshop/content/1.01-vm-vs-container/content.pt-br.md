@@ -33,22 +33,33 @@ qemu-img create -f qcow2 alpine-test.qcow2 5G
 Agora a VM:
 
 ```bash
-time qemu-system-x86_64 -enable-kvm -m 512 -smp 1 \
+time expect << EOF
+set timeout 10
+
+spawn qemu-system-x86_64 -enable-kvm -m 512 -smp 1 \
     -cdrom alpine-virt-3.23.4-x86_64.iso \
     -drive file=alpine-test.qcow2,if=virtio \
     -nographic -net none
 
-SeaBIOS (version 1.16.3-debian-1.16.3-2)
-Booting from DVD/CD...
-ISOLINUX 6.04 ...
-Welcome to Alpine Linux 3.23
-Kernel 6.12.13-0-virt on an x86_64 (/dev/ttyS0)
+expect "localhost login:"
 
-localhost login:
-real    0m17.0s
+send \x01x
+expect eof
+EOF
 ```
 
-17 segundos até o prompt de login. E isso no modo live CD, ou seja, sem systemd, rede, nem nada mais. Uma VM com SO instalado tem uma latência ainda maior.
+```text
+Welcome to Alpine Linux 3.23
+Kernel 6.18.22-0-virt on x86_64 (/dev/ttyS0)
+
+localhost login: QEMU: Terminated
+
+real	0m5,625s
+user	0m0,014s
+sys	0m0,018s
+```
+
+5 segundos até o prompt de login. E isso no modo live CD, ou seja, sem systemd, rede, nem nada mais. Uma VM com SO instalado tem uma latência ainda maior.
 
 ### Boot de container (Docker, Alpine Linux 3.23)
 
@@ -59,7 +70,7 @@ time docker run --rm alpine:3.23 echo ok
 ```text
 ok
 
-real    0m0.899s
+real    0m0.319s
 user    0m0.017s
 sys     0m0.016s
 ```
@@ -71,12 +82,12 @@ time docker run -d --name test alpine:3.23 sleep infinity
 ```text
 51cc6a282c41d3d4ba2e3fe3d9a5876e912b488336802914038c45197cecdbc9
 
-real    0m0.367s
+real    0m0.201s
 user    0m0.008s
 sys     0m0.017s
 ```
 
-0.4 segundos. O container não tem BIOS, não tem kernel pra iniciar, não tem hardware pra detectar, não tem init system. É um processo executando em um namespace isolado e só.
+0.2 segundos. O container não tem BIOS, não tem kernel pra iniciar, não tem hardware pra detectar, não tem init system. É um processo executando em um namespace isolado e só.
 
 ### RAM consumida
 
@@ -86,7 +97,7 @@ ps -o pid,rss,comm -p $(pgrep qemu-system)
 
 ```text
   PID   RSS COMMAND
- 9295 201364 qemu-system-x86
+95116 211792 .qemu-system-x8
 ```
 
 ```bash
@@ -95,10 +106,10 @@ ps -o pid,rss,comm -p $(docker inspect test | jq -r '.[0].State.Pid')
 
 ```text
   PID   RSS COMMAND
-59811   768 sleep
+94349   848 sleep
 ```
 
-A VM reserva 512 MB (o QEMU reporta ~197 MB porque a VM ainda não tocou em toda RAM alocada). O container ocupa 768 KB. Apesar da "conta de padaria", a diferença é de ~262x em RAM e ~46x em tempo de boot.
+A VM reserva 512 MB (o QEMU reporta \~197 MB porque a VM ainda não tocou em toda RAM alocada). O container ocupa 768 KB. Apesar da "conta de padaria", a diferença é de \~262x em RAM e \~46x em tempo de boot.
 
 ## O que acontece no kernel quando você sobe um container
 
@@ -185,16 +196,6 @@ lsns -p $PID
 ```
 
 Repare: o container aparece como um processo normal na tabela de processos do host. Como não tem kernel separado, ele é só mais um processo dentre tantos, mas que ocorre de estar sendo "mentido" para, já que o kernel controla todas as informações que vão para cada pedaço do sistema.
-
-```cheatsheet
-curl -LO https://dl-cdn.alpinelinux.org/alpine/v3.23/releases/x86_64/alpine-virt-3.23.4-x86_64.iso | Baixar Alpine (63 MB)
-qemu-img create -f qcow2 alpine-test.qcow2 2G | Criar disco da VM
-time qemu-system-x86_64 -enable-kvm -m 512 -smp 1 -cdrom alpine-virt-3.23.4-x86_64.iso -drive file=alpine-test.qcow2,if=virtio -nographic -net none | Subir VM com KVM e medir boot
-time docker run -d --name workshop-container alpine:3.23 sleep infinity | Subir container Alpine
-docker inspect workshop-container | jq '.[0].State.Pid' | Ver PID real do container
-ps -o pid,rss,comm -p $PID | Medir RAM do container
-lsns -t pid | grep $PID | Listar namespaces do container
-```
 
 ## O que isso significa na prática
 

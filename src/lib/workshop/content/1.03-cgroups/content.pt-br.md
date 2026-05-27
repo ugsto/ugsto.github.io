@@ -49,7 +49,9 @@ nix-shell -p stress
 Utilizando o `systemd-run`, criamos um escopo temporário e aplicamos o limite de CPU diretamente. Vamos limitar o processo a usar no máximo 50% de um core (CPUQuota=50%):
 
 ```bash
-sudo systemd-run --scope -p CPUQuota="50%" stress --cpu 1 --timeout 5
+systemd-run --user --scope -p CPUQuota="50%" --unit=workshop-cpu \
+  stress --cpu 1 --timeout 10 & \
+  sleep 1; top -d 0.5 -c -p $(pgrep -d ',' -f stress)
 ```
 
 ```text
@@ -58,9 +60,9 @@ stress: info: [60681] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
 stress: info: [60681] successful run completed in 5s
 ```
 
-O stress executou por 5 segundos, mas o kernel limitou ele a 50% de um core. Se você executar `top` em outro terminal enquanto o stress roda, vai ver o processo cravado em ~50% de CPU, nunca 100%.
+O stress executou por 5 segundos, mas o kernel limitou ele a 50% de um core. Se você executar `top` em outro terminal enquanto o stress roda, vai ver o processo cravado em \~50% de CPU, nunca 100%.
 
-Se estiver em uma sessão SSH, o `--user` do systemd-run não funciona (sem user bus). Use `sudo systemd-run` sem `--user` como nos exemplos acima.
+> Note: Se estiver em uma sessão SSH, o `--user` do systemd-run não funciona (sem user bus). Use `sudo systemd-run` sem `--user` como nos exemplos acima.
 
 ### Limitar memória
 
@@ -69,13 +71,15 @@ Agora o teste mais dramático: limite de 50 MB, mas o stress tenta alocar 100 MB
 Define o limite de memória:
 
 ```bash
-sudo systemd-run --scope -p MemoryMax="50M" stress --vm 1 --vm-bytes 100M --timeout 5
+sudo systemd-run --scope -p MemoryMax="50M" -p MemorySwapMax="0" stress --vm 1 --vm-bytes 100M --vm-keep
 ```
 
 ```text
-Running as unit: run-r48b11e373a5e4150b182e170605d456e.scope; invocation ID: 6a32903294074e94be53a9cd5da8c4b6
-stress: info: [60693] dispatching hogs: 0 cpu, 0 io, 1 vm, 0 hdd
-stress: info: [60693] successful run completed in 5s
+Running as unit: run-p109310-i109610.scope; invocation ID: 194c53091ed04393b07d9f1ab1fd4273
+stress: info: [109310] dispatching hogs: 0 cpu, 0 io, 15 vm, 0 hdd
+stress: FAIL: [109310] (425) <-- worker 109326 got signal 9
+stress: WARN: [109310] (427) now reaping child worker processes
+stress: FAIL: [109310] (461) failed run completed in 0s
 ```
 
 O `stress` tentou alocar 100 MB, mas o kernel aplicou o teto de 50 MB. Você pode verificar o consumo real lendo `memory.current` dentro do cgroup (`/sys/fs/cgroup/system.slice/run-*.scope/memory.current`). Se a alocação exceder o limite e o kernel não conseguir liberar páginas, o processo recebe OOM kill.
@@ -94,16 +98,6 @@ echo $(</sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{{
 ```
 
 Mesmo mecanismo. O Docker só escreve no arquivo por você.
-
-```cheatsheet
-sudo cgcreate -g cpu,memory:/meu-cgroup | Criar cgroup
-echo "50000 100000" | sudo tee /sys/fs/cgroup/meu-cgroup/cpu.max | Limitar CPU a 50%
-echo "50M" | sudo tee /sys/fs/cgroup/meu-cgroup/memory.max | Limitar memória a 50 MB
-sudo cgexec -g cpu,memory:/meu-cgroup stress --cpu 1 --timeout 5 | Executar comando dentro do cgroup
-echo $(< /sys/fs/cgroup/meu-cgroup/cpu.stat) | Ver estatísticas de CPU
-echo $(< /sys/fs/cgroup/meu-cgroup/memory.events) | Ver eventos OOM
-sudo cgdelete -g cpu,memory:/meu-cgroup | Deletar cgroup
-```
 
 ---
 

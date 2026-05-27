@@ -121,19 +121,9 @@ Se você der `lsns` sem filtrar por PID, vai ver centenas de namespaces. Um pra 
 
 ## Por que isso importa
 
-Cada namespace é uma mentira. Mentira pequena: "você é o único que vê essa interface de rede". Mentira média: "você é o processo 1". Mentira grande: "você está sozinho no sistema".
+Cada namespace é uma mentira! Mentira pequena: "você é o único que vê essa interface de rede". Mentira média: "você é o processo 1". Mentira grande: "você está sozinho no sistema".
 
 Junta 5 ou 6 mentiras e você convenceu um processo de que ele é a única coisa executando numa máquina que não existe. Isso é container.
-
-```cheatsheet
-sudo unshare --pid --fork --mount-proc /bin/sh -c 'echo $$; ps; :' | PID namespace: ver PID 1
-sudo unshare --net /bin/sh -c "ip link show" | Network: só loopback
-sudo unshare --uts /bin/sh -c "hostname X; hostname" | UTS: hostname isolado
-sudo unshare --pid --fork --mount-proc --uts --net --mount --ipc /bin/sh | Todos juntos = container primitivo
-docker run -d --name demo alpine:3.23 sleep infinity | Container de teste
-sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}') | Namespaces do container
-ls -la /proc/self/ns/ | Namespaces do processo atual
-```
 
 ---
 

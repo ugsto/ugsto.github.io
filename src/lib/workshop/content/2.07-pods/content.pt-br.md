@@ -123,8 +123,6 @@ Events:
   Normal  Started    29s   kubelet            Started container busybox
 ```
 
-Os Events contam a história completa: agendamento, pull de imagem, criação e start do container. Se algo der errado, é nos Events que você olha primeiro.
-
 ## kubectl exec: entrar no Pod
 
 Assim como `docker exec`, o Kubernetes tem `kubectl exec`. Você entra em qualquer container do Pod:

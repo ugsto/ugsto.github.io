@@ -6,7 +6,7 @@ Não existe acesso direto ao etcd (só o API Server tem). Isso é por design: o 
 
 ## REST
 
-O API Server expõe uma API RESTful. Verbos HTTP padrão:
+O API Server expõe uma API RESTful com Verbos HTTP padrão:
 
 ```
 GET    /api/v1/pods                         lista todos os pods

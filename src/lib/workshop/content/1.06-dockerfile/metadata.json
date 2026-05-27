@@ -5,6 +5,6 @@
   "readTimeMinutes": 7,
   "handsOnMinutes": 10,
   "commands": [],
-  "nextSlug": "1.08-docker-compose",
-  "prevSlug": "1.06-docker"
+  "nextSlug": "1.07-docker-compose",
+  "prevSlug": "1.05-docker"
 }

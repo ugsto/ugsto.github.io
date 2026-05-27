@@ -67,21 +67,3 @@ porta 10259 (HTTPS)
 ```
 
 Só o leader toma decisões. Outros em standby (HA).
-
-```cheatsheet
-Ver scheduling de um pod (evento Scheduled)
-kubectl describe pod <name> | grep -A10 Events
-
-Criar pod burlando scheduler
-kubectl run bypass --image=nginx --restart=Never --overrides='{"spec":{"nodeName":"ip-172-31-34-6"}}'
-
-Criar pod com node affinity
-kubectl label node ip-172-31-34-6 disktype=ssd
-# Depois usar requiredDuringScheduling com key: disktype, values: [ssd]
-
-Ver labels dos nós
-kubectl get nodes --show-labels
-
-Ver taints
-kubectl describe nodes | grep -A3 Taints
-```

@@ -45,20 +45,4 @@ Control plane tem taint `NoSchedule` pra proteger recursos críticos.
 5. Scheduler → atribui nó
 6. kubelet → containerd → container executando
 
-Cada componente faz uma coisa só. Ninguém chama ninguém diretamente. Todo mundo lê/escreve via API Server. Separação de responsabilidades.
-
-```cheatsheet
-Ver componentes do control plane
-kubectl get pods -n kube-system
-ls /etc/kubernetes/manifests/
-
-Ver nós e taints
-kubectl get nodes -o wide
-kubectl describe node ip-172-31-45-35 | grep Taints
-
-Portas importantes
-API Server: 6443
-etcd client: 2379
-etcd peer:   2380
-kubelet:     10250
-```
+Cada componente faz uma coisa só. Ninguém chama ninguém diretamente. Todo mundo lê/escreve via API Server.

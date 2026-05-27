@@ -343,13 +343,3 @@ s3cr3tP@ss!
 ```
 
 Montagem como volume com `readOnly: true` é a prática recomendada. A aplicação lê o arquivo do disco, sem expor o valor no `/proc/<pid>/environ` (que qualquer processo no mesmo PID namespace pode ler).
-
-## Resumo do capítulo
-
-- ConfigMaps: dados de configuração não sensíveis. Crie com `--from-literal` ou `--from-file`. Monte como env vars (`envFrom.configMapRef`) ou como volume.
-- Secrets: dados sensíveis (senhas, tokens). Mesma API, mas armazenado em tmpfs e com encoding base64. Crie com `--from-literal` ou `--from-file`.
-- `kubectl get cm/secret -o yaml` mostra o conteúdo. `kubectl get secret -o jsonpath="{.data.KEY}" | base64 -d` decodifica.
-- Volumes com ConfigMap/Secret são atualizados automaticamente pelo kubelet (symlink atômico). Env vars não atualizam.
-- Secret como volume com `readOnly: true` é mais seguro que env var: não aparece no `/proc/<pid>/environ`.
-
-No próximo capítulo: health checks. Liveness, readiness e startup probes.

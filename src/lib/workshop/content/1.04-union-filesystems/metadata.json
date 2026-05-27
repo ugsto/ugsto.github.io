@@ -5,6 +5,6 @@
   "readTimeMinutes": 7,
   "handsOnMinutes": 10,
   "commands": [],
-  "nextSlug": "1.05-container-manual",
+  "nextSlug": "1.05-docker",
   "prevSlug": "1.03-cgroups"
 }

@@ -125,25 +125,6 @@ Visitas: 2
 
 Dois comandos e tudo está executando: Flask na porta 5000, Redis isolado, volume persistente pra não perder dados, rede interna entre os containers.
 
-## O que aconteceu
-
-- services: cada serviço vira um container
-- build: usa o Dockerfile local (em vez de imagem pronta)
-- ports: mapeia porta do host pra porta do container
-- environment: injeta variáveis de ambiente
-- depends_on: garante ordem de inicialização (não espera readiness; Redis sobe antes do Flask)
-- volumes: dados persistem fora do container (se o Redis morrer, o contador sobrevive)
-- rede: Compose cria uma rede interna; containers se comunicam pelo nome do serviço (`redis` vira hostname)
-
-```cheatsheet
-docker compose up --build | Subir todos os serviços (reconstruindo)
-docker compose up -d | Subir em background
-docker compose down | Parar e remover tudo
-docker compose logs -f | Ver logs de todos os serviços
-docker compose ps | Listar containers do Compose
-docker compose exec web sh | Executar shell no serviço "web"
-```
-
 ---
 
 Parte 1 concluída. Você entendeu o que é um container da syscall até o Docker Compose. Na Parte 2: o problema de escala e como o Kubernetes resolve.

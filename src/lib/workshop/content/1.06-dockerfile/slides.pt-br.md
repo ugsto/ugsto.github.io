@@ -47,9 +47,3 @@ Imagem final: só binário + Alpine. 900 MB → 10 MB.
 - `.dockerignore` (não copia lixo)
 - Alpine/slim (imagens menores)
 - Tags fixas: `3.13-alpine`, não `latest`
-
-```cheatsheet
-docker build -t app . | Buildar
-docker build --target builder -t build-only . | Buildar um stage
-.dockerignore | Evitar node_modules, .git, build/
-```

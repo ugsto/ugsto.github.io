@@ -50,23 +50,23 @@ Os 4 componentes do control plane estão lá. Os outros pods (cilium, coredns) s
 
 ### Componente por componente
 
-**etcd**: banco de dados distribuído. Armazena tudo: pods, services, configmaps, secrets, nós. Tudo que existe no cluster está no etcd. Usa o algoritmo de consenso Raft. Capítulo 2.2.
+etcd: banco de dados distribuído. Armazena tudo: pods, services, configmaps, secrets, nós. Tudo que existe no cluster está no etcd. Usa o algoritmo de consenso Raft. Capítulo 2.2.
 
-**API Server**: a porta de entrada. Toda comunicação com o cluster passa por ele. `kubectl`, controllers, scheduler, kubelet: todo mundo fala com o API Server. REST, autenticação, autorização (RBAC), validação. Capítulo 2.3.
+API Server: a porta de entrada. Toda comunicação com o cluster passa por ele. `kubectl`, controllers, scheduler, kubelet: todo mundo fala com o API Server. REST, autenticação, autorização (RBAC), validação. Capítulo 2.3.
 
-**Scheduler**: decide onde cada pod executa. Quando você cria um pod, ele nasce "Pending". O scheduler olha os nós disponíveis, aplica filtros (predicates) e ranqueia (priorities). Escolhe o melhor nó e escreve no etcd. Capítulo 2.4.
+Scheduler: decide onde cada pod executa. Quando você cria um pod, ele nasce "Pending". O scheduler olha os nós disponíveis, aplica filtros (predicates) e ranqueia (priorities). Escolhe o melhor nó e escreve no etcd. Capítulo 2.4.
 
-**Controller Manager**: mantém o estado declarado. Cada controller observa um tipo de recurso e reconcilia o estado atual com o desejado. O Deployment controller garante o número de réplicas. O Node controller monitora saúde dos nós. Capítulo 2.5.
+Controller Manager: mantém o estado declarado. Cada controller observa um tipo de recurso e reconcilia o estado atual com o desejado. O Deployment controller garante o número de réplicas. O Node controller monitora saúde dos nós. Capítulo 2.5.
 
 ## Workers
 
 Cada worker (também chamado de node) tem 3 componentes:
 
-**kubelet**: o agente. Executa em todo nó (inclusive no control plane). Recebe ordens do API Server e gerencia os pods naquele nó. Fala com o container runtime (containerd) pra criar, iniciar, parar containers. Capítulo 2.6.
+kubelet: o agente. Executa em todo nó (inclusive no control plane). Recebe ordens do API Server e gerencia os pods naquele nó. Fala com o container runtime (containerd) pra criar, iniciar, parar containers. Capítulo 2.6.
 
-**container runtime**: o executor, que usa runc pra criar containers Linux (namespaces + cgroups). A interface padrão é o CRI (Container Runtime Interface). Capítulo 2.6.
+container runtime: o executor, que usa runc pra criar containers Linux (namespaces + cgroups). A interface padrão é o CRI (Container Runtime Interface). Capítulo 2.6.
 
-**kube-proxy**: gerencia regras de rede. Nos clusters tradicionais, ele escreve regras iptables pra rotear tráfego dos Services pros pods. O Cilium (eBPF) substitui o kube-proxy, com melhor performance e segurança. Capítulo 2.8.
+kube-proxy: gerencia regras de rede. Nos clusters tradicionais, ele escreve regras iptables pra rotear tráfego dos Services pros pods. O Cilium (eBPF) substitui o kube-proxy, com melhor performance e segurança. Capítulo 2.8.
 
 ## O cluster real
 

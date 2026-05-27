@@ -250,11 +250,3 @@ Events:
   Normal  ScalingReplicaSet  28s               deployment-controller  Scaled up replica set nginx-demo-69c8c84985 from 4 to 5
   Normal  ScalingReplicaSet  7s (x9 over 26s)  deployment-controller  (combined from similar events): Scaled down replica set nginx-demo-69c8c84985 from 1 to 0
 ```
-
-Os Events contam a história completa. Dá para ver a sequência: scale inicial para 3, scale para 5, o rolling update degrau por degrau (sobe o novo, desce o antigo), e o rollback que reverteu tudo. É o seu primeiro lugar para olhar quando algo der errado.
-
-## Resumo do fluxo
-
-Deployment → ReplicaSet → Pod. O Deployment é a camada declarativa: você diz o que quer. O ReplicaSet é a camada operacional: garante o número certo de réplicas. O Pod é a unidade que efetivamente executa o container.
-
-Toda mudança no PodTemplate gera um novo ReplicaSet. Isso permite rollback instantâneo, porque o ReplicaSet antigo continua lá, só com réplicas zeradas. Rollback é basicamente "escala o ReplicaSet antigo e zera o novo".

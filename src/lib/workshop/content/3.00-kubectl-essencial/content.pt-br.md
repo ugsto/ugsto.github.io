@@ -6,7 +6,7 @@ A ideia não é memorizar. É saber o que cada um faz e onde achar a informaçã
 
 ## Cluster de workshop
 
-Nosso cluster tem quatro nós. Um control-plane e um worker:
+Nosso cluster tem quatro nós. Um control-plane e três workers:
 
 ```bash
 kubectl get nodes -o wide
@@ -151,7 +151,7 @@ Events:
   Normal  Started    16m   kubelet            Started container debug-pod
 ```
 
-Os Events contam a história completa do Pod. Scheduled, Pulling, Pulled, Created, Started. Se algo der errado, o erro aparece aqui.
+Os Events descrevem o histórico do Pod. Scheduled, Pulling, Pulled, Created, Started. Se algo der errado, o erro aparece aqui.
 
 Describe funciona com qualquer recurso:
 
@@ -292,7 +292,7 @@ O `apply` também funciona com arquivos:
 ```bash
 kubectl apply -f pod.yaml
 kubectl apply -f deployment.yaml
-kubectl apply -f ./manifests/          # aplica todos os YAMLs do diretório
+kubectl apply -f ./manifests/    # aplica todos os YAMLs do diretório
 ```
 
 A diferença entre `apply` e `create`:

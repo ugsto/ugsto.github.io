@@ -85,15 +85,6 @@ sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}')
 
 5 namespaces isolados. Container = processo com mentiras do kernel.
 
-```cheatsheet
-sudo unshare --pid --fork --mount-proc /bin/sh -c 'echo $$; ps; :' | PID namespace: ver PID 1
-sudo unshare --net /bin/sh -c "ip link show" | Network: só loopback
-sudo unshare --uts /bin/sh -c "hostname X; hostname" | UTS: hostname isolado
-sudo unshare --pid --fork --mount-proc --uts --net --mount --ipc /bin/sh | Todos juntos = container primitivo
-docker run -d --name demo alpine:3.23 sleep infinity | Container de teste
-sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}') | Namespaces do container
-```
-
 ---
 
 Próximo: cgroups. Namespaces isolam o que o processo **vê**, cgroups limitam o que ele **usa**.

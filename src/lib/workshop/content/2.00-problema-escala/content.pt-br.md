@@ -2,9 +2,9 @@
 
 Na Parte 1 você aprendeu a criar containers. Docker, Dockerfile, Compose. Funciona. Mas e quando um container morre?
 
-No Docker puro, ninguém revive. Você mata um `nginx` e ele fica morto. Se o processo crasha, ninguém reinicia. Se você quer 3 réplicas, tem que subir 3 manualmente. Se uma máquina cai, os containers que estavam nela vão junto.
+No Docker puro, ninguém revive, se você mata um `nginx` e ele fica morto. Se o processo crasha, ninguém reinicia. Se você quer 3 réplicas, tem que subir 3 manualmente. Se uma máquina cai, os containers que estavam nela vão junto.
 
-Isso funciona pra desenvolvimento local. Em produção, com dezenas ou centenas de containers, não.
+Isso funciona pra desenvolvimento local, mas em produção, com dezenas ou centenas de containers, não.
 
 ## Docker: matei, morreu
 
@@ -30,7 +30,7 @@ docker ps -a --filter name=doomed --format '{{.Names}}: {{.Status}}'
 doomed: Exited (137) Less than a second ago
 ```
 
-O container fica `Exited`. Ninguém recriou. Esse é o comportamento esperado. O Docker faz exatamente o que você mandou.
+O container fica `Exited` porque ninguém recriou. Esse é o comportamento esperado. O Docker faz exatamente o que você mandou.
 
 ## Kubernetes: matei, reviveu
 
@@ -85,8 +85,6 @@ Isso é o tal do **auto-healing**. Você declara o estado desejado e o Kubernete
 
 ## O que aconteceu nos bastidores
 
-Os eventos do cluster contam a história completa:
-
 ```bash
 kubectl get events --sort-by=.lastTimestamp | grep demo-autoheal
 ```
@@ -101,22 +99,8 @@ kubectl get events --sort-by=.lastTimestamp | grep demo-autoheal
 11m         Normal    Pulled                    pod/demo-autoheal-5f7fd64857-x6j7v     Successfully pulled image "nginx:alpine" in 2.691s
 ```
 
-A sequência de eventos é cristalina:
-
-1. `ScalingReplicaSet`: o Deployment escalou o ReplicaSet para 1 réplica
-2. `SuccessfulCreate`: o ReplicaSet criou um pod novo `x6j7v`
-3. `Scheduled`: o Scheduler atribuiu o pod ao `ip-172-31-38-213`
-4. `Pulling` e `Pulled`: a imagem nginx:alpine foi baixada (2.691s)
-5. `Created` e `Started`: o container subiu
-
-Do `Killing` ao `Started`, tudo aconteceu no mesmo segundo. Esse é o poder de um sistema declarativo com controle contínuo.
-
-## A diferença fundamental
-
-Docker é **imperativo**: você manda executar, ele executa. Se algo sai do estado, você tem que corrigir manualmente.
-
-Kubernetes é **declarativo**: você diz "quero 1 réplica de nginx". O sistema monitora e age pra manter isso verdade. Se o pod morre, ele recria. Se você escala pra 5, ele sobe mais 4. Se você volta pra 2, ele mata 3.
+Equanto o docker é **imperativo** (você manda executar, ele executa), o Kubernetes é **declarativo**: você diz "quero 1 réplica de nginx". O sistema monitora e age pra manter isso verdade. Se o pod morre, ele recria. Se você escala pra 5, ele sobe mais 4. Se você volta pra 2, ele mata 3.
 
 Essa mudança de mentalidade (imperativo para declarativo) é o coração do Kubernetes. O resto é detalhe de implementação.
 
-> ⚠️ O Deployment não "ressuscita" o pod antigo. Ele cria um novo. Nome, IP, identidade: tudo diferente. Trate pods como efêmeros. O estado que importa é o declarado, não o atual.
+> Note: O Deployment não "ressuscita" o pod antigo. Ele cria um novo. Nome, IP, identidade: tudo diferente. Trate pods como efêmeros. O estado que importa é o declarado, não o atual.

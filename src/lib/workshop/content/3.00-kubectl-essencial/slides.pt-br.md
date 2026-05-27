@@ -28,7 +28,7 @@ kubectl describe node <nome>        # Capacidade, allocatable, condições
 kubectl describe service <nome>     # Endpoints, ports, selectors
 ```
 
-- Events contam a história: Scheduled → Pulling → Pulled → Created → Started
+- Events: Scheduled → Pulling → Pulled → Created → Started
 - Primeiro lugar para olhar quando algo falha
 - Mostra condições (Ready, Initialized, PodScheduled), volumes montados, QoS class
 
@@ -66,48 +66,8 @@ kubectl apply -k ./kustomize/       # aplica kustomization
 ## kubectl delete: remover recursos
 
 ```bash
-kubectl delete pod <nome>           # deleta por nome
-kubectl delete -f pod.yaml          # deleta por arquivo
-kubectl delete pods -l app=demo     # deleta por label
+kubectl delete pod <nome>                           # deleta por nome
+kubectl delete -f pod.yaml                          # deleta por arquivo
+kubectl delete pods -l app=demo                     # deleta por label
 kubectl delete pod <nome> --force --grace-period=0  # força (cuidado!)
-```
-
-## Cheatsheet
-
-```cheatsheet
-Listar recursos
-kubectl get pods -o wide
-kubectl get pods -A
-kubectl get pods -l app=demo
-
-Inspecionar recurso
-kubectl describe pod <nome>
-kubectl describe node <nome>
-
-Logs do container
-kubectl logs <pod>
-kubectl logs <pod> -f --tail=100
-kubectl logs <pod> --previous
-
-Executar comando no container
-kubectl exec <pod> -- <comando>
-kubectl exec -it <pod> -- sh
-
-Criar/atualizar recursos
-kubectl apply -f manifest.yaml
-kubectl apply -f ./dir/
-
-Deletar recursos
-kubectl delete pod <nome>
-kubectl delete -f manifest.yaml
-
-Explicar campo de recurso
-kubectl explain pod.spec.containers
-kubectl explain pod.spec.containers.livenessProbe
-
-Editar recurso ao vivo
-kubectl edit deployment <nome>
-
-Listar todos os API resources
-kubectl api-resources
 ```

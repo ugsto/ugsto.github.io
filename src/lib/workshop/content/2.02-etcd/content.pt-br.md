@@ -175,10 +175,10 @@ O preço: etcd é sensível a latência de disco. Toda escrita espera `fsync`. P
 
 O etcd no Kubernetes é protegido por:
 
-- TLS mútuo: o API Server se autentica com certificado de cliente (`apiserver-etcd-client`). Nos comandos acima, usamos `--cert` e `--key` pra nos identificar.
+- TLS mútuo (mTLS): o API Server se autentica com certificado de cliente (`apiserver-etcd-client`). Nos comandos acima, usamos `--cert` e `--key` pra nos identificar.
 - Porta local: etcd só escuta em `127.0.0.1:2379`. Nenhum tráfego externo.
 - Firewall: portas 2379-2380 só abertas entre nós do control plane.
 
 Ninguém além do API Server deve acessar o etcd diretamente. Em produção, o acesso direto é bloqueado por firewall e os certificados são rotacionados automaticamente.
 
-> 🚨 Nunca exponha o etcd pra internet. Se alguém acessar o etcd, acessou o cluster inteiro. Cada secret, cada token de service account, cada ConfigMap com credenciais: tudo em plain text (ou base64, que é equivalente).
+> Note: Nunca exponha o etcd pra internet. Se alguém acessar o etcd, acessou o cluster inteiro. Cada secret, cada token de service account, cada ConfigMap com credenciais: tudo em plain text (ou base64, que é equivalente).

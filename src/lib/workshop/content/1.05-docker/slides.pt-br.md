@@ -9,7 +9,7 @@
 5. Rede: veth pair + bridge docker0
 6. chroot + executa comando
 
-Tudo que fizemos na mão, automatizado.
+Tudo que fizemos na mão, mas automatizado.
 
 ## Inspecionar
 
@@ -46,8 +46,7 @@ Container = processo normal com namespaces próprios.
 
 ```bash
 docker run -d --memory 128m --cpus 0.5 alpine sleep infinity
-CID=$(docker inspect limited --format '{{.Id}}')
-echo $(< /sys/fs/cgroup/system.slice/docker-${CID}.scope/memory.max)
+echo $(< /sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{{.Id}}').scope/memory.max)
 ```
 
 ```
@@ -79,12 +78,3 @@ docker inspect demo --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{
 ```
 
 Veth pair: host ↔ container.
-
-```cheatsheet
-docker run -d --name demo alpine:3.23 sleep infinity | Subir container
-docker inspect demo --format '{{.State.Pid}}' | Ver PID real
-sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}') | Ver namespaces
-docker run -d --memory 128m --cpus 0.5 alpine sleep infinity | Container com limites
-docker image inspect alpine:3.23 --format '{{.RootFS.Layers}}' | Ver camadas
-mount | grep overlay | grep docker | Ver overlays
-```

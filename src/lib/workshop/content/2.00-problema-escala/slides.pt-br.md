@@ -23,15 +23,15 @@ kubectl get pods -l app=demo-autoheal -o wide
 
 2 segundos depois, um pod novo aparece. Nome diferente, IP diferente, mesma aplicação.
 
-## Eventos: a história completa
+## Eventos
 
 ```
-Killing     → pod antigo parou
+Killing          → pod antigo parou
 SuccessfulCreate → ReplicaSet criou pod novo
-Scheduled   → Scheduler atribuiu ao worker
-Pulled      → imagem em cache
-Created     → container criado
-Started     → container executando
+Scheduled        → Scheduler atribuiu ao worker
+Pulled           → imagem em cache
+Created          → container criado
+Started          → container executando
 ```
 
 Tudo no mesmo segundo. Sistema declarativo com controle contínuo.
