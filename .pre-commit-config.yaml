@@ -16,9 +16,11 @@ repos:
     rev: v1.36.4
     hooks:
       - id: djlint-reformat-jinja
-        types: [html]
+        files: '\.html$'
+        types_or: [html, text]
       - id: djlint-jinja
-        types: [html]
+        files: '\.html$'
+        types_or: [html, text]
 
   # Zola Site Build Check (System Binary - 100% NixOS Compatible)
   - repo: local
