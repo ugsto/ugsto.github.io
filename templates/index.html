@@ -1,0 +1,993 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<!-- Preload Crow Sprites -->
+<link rel="preload" as="image" href="/crow/Fly/Right.gif">
+<link rel="preload" as="image" href="/crow/Fly/Left.gif">
+<link rel="preload" as="image" href="/crow/Fly/Up.gif">
+<link rel="preload" as="image" href="/crow/Fly/Down.gif">
+<link rel="preload" as="image" href="/crow/Idle/Down.gif">
+<link rel="preload" as="image" href="/crow/Idle/Left.gif">
+<link rel="preload" as="image" href="/crow/Idle/Right.gif">
+<link rel="preload" as="image" href="/crow/Idle/Up.gif">
+<link rel="preload" as="image" href="/crow/Hurt/Down.gif">
+<link rel="preload" as="image" href="/crow/Hurt/Left.gif">
+<link rel="preload" as="image" href="/crow/Hurt/Right.gif">
+<link rel="preload" as="image" href="/crow/Hurt/Up.gif">
+<link rel="preload" as="image" href="/crow/Die/Down.png">
+<link rel="preload" as="image" href="/crow/Die/Down.gif">
+<link rel="preload" as="image" href="/crow/Die/Left.gif">
+<link rel="preload" as="image" href="/crow/Die/Right.gif">
+<link rel="preload" as="image" href="/crow/Die/Up.gif">
+
+<style>
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    padding: 90px;
+  }
+
+  .window {
+    width: calc(100vw - 180px);
+    height: calc(100vh - 180px);
+    padding: 40px;
+    background-color: var(--bg-window);
+    border: 4px solid var(--border-main);
+    outline: 4px solid var(--outline-color);
+    box-shadow: 0 0 0 8px var(--border-main);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  /* Vertical Menu (Left Column) */
+  .menu-container {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+
+  .menu-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-family: 'VT323', 'Fira Code', monospace;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--text-main);
+    letter-spacing: 1px;
+  }
+
+  .marker {
+    display: inline-block;
+    width: 24px;
+    visibility: hidden;
+    font-size: 18px;
+    margin-right: 8px;
+    color: var(--accent-yellow);
+  }
+
+  .menu-item.active .marker {
+    visibility: visible;
+  }
+
+  .menu-item:hover .marker {
+    visibility: visible;
+  }
+
+  /* Retro Content Panel (Right Column) */
+  .content-panel {
+    flex: 1;
+    background-color: var(--bg-panel);
+    border: 3px solid var(--border-main);
+    box-shadow: 0 0 0 3px var(--outline-color), 0 0 0 5px var(--border-main);
+    padding: 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    font-family: 'Fira Code', monospace;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .section-content {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .section-content.active {
+    display: flex;
+  }
+
+  .section-title {
+    font-family: 'VT323', 'Fira Code', monospace;
+    font-size: 24px;
+    color: var(--accent-yellow);
+    border-bottom: 2px dashed var(--border-main);
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .now-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .now-block h3 {
+    font-family: 'VT323', 'Fira Code', monospace;
+    color: var(--accent-cyan);
+    font-size: 20px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    border-left: none;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .now-block p {
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-cyan);
+    margin-bottom: 8px;
+  }
+
+  .now-block ul {
+    list-style-type: square;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .now-block li {
+    line-height: 1.6;
+  }
+
+  .now-block a {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+  }
+
+  .now-block img {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid var(--border-main);
+    box-shadow: 0 0 0 2px var(--outline-color), 0 0 0 4px var(--border-main);
+    margin: 14px 0;
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* WORKSHOP ACCORDION */
+  .workshop-accordion {
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-main);
+    margin-top: 10px;
+  }
+
+  .workshop-accordion-header {
+    padding: 12px 16px;
+    background-color: var(--bg-accordion-header);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--accent-yellow);
+    transition: background-color 0.2s;
+  }
+
+  .workshop-accordion-header:hover {
+    background-color: var(--bg-accordion-hover);
+  }
+
+  .workshop-accordion.open .workshop-accordion-header {
+    border-bottom: 2px solid var(--border-main);
+  }
+
+  .workshop-accordion-content {
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .workshop-accordion.open .workshop-accordion-content {
+    display: flex;
+  }
+
+  .workshop-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-cyan);
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .workshop-card:hover {
+    background-color: var(--bg-accordion-header);
+  }
+
+  .workshop-card-title a {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: var(--accent-yellow);
+    text-decoration: none;
+  }
+
+  .workshop-card-title a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-link {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+  }
+
+  /* Nest Container */
+  .nest-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+    cursor: pointer;
+    background-color: var(--bg-panel);
+    border: 2px solid var(--border-main);
+    border-radius: 4px;
+    font-family: 'VT323', 'Fira Code', monospace;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    box-shadow: 0 0 0 2px var(--outline-color);
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .nest-container:hover {
+    background-color: var(--bg-window);
+    border-color: var(--accent-yellow);
+  }
+
+  .nest-container.asleep {
+    border-color: var(--accent-cyan);
+  }
+
+  .nest-label {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .nest-zzz {
+    display: none;
+    position: absolute;
+    top: -14px;
+    right: 4px;
+    font-size: 16px;
+    color: var(--accent-cyan);
+    font-family: 'VT323', monospace;
+    animation: floatZzz 1.5s infinite ease-in-out;
+    pointer-events: none;
+  }
+
+  @keyframes floatZzz {
+    0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+    50% { transform: translateY(-6px) scale(1.0); opacity: 1; }
+    100% { transform: translateY(-12px) scale(1.1); opacity: 0; }
+  }
+
+  /* Stupid-Crow Mascot */
+  .crow-mascot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+  }
+
+  .crow-sprite-box {
+    width: 60px;
+    height: 60px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+{% set current_lang = lang | default(value=config.default_language) %}
+<div class="window" id="main-window">
+  <!-- Vertical Menu (Left Column) -->
+  <div class="menu-container">
+    <ul class="menu-vertical" id="menu" role="menu" tabindex="0" aria-label="Menu Principal">
+      <li class="menu-item active" data-index="0" data-target="about" role="menuitem">
+        <span class="marker">▶</span>
+        <span>{{ trans(key="menu_about", lang=current_lang) }}</span>
+      </li>
+      <li class="menu-item" data-index="1" data-target="setup" role="menuitem">
+        <span class="marker">▶</span>
+        <span>{{ trans(key="menu_setup", lang=current_lang) }}</span>
+      </li>
+      <li class="menu-item" data-index="2" data-target="workshops" role="menuitem">
+        <span class="marker">▶</span>
+        <span>{{ trans(key="menu_workshops", lang=current_lang) }}</span>
+      </li>
+      <li class="menu-item" data-index="3" data-target="contact" role="menuitem">
+        <span class="marker">▶</span>
+        <span>{{ trans(key="menu_contact", lang=current_lang) }}</span>
+      </li>
+      <li class="menu-item" data-index="4" data-target="credits" role="menuitem">
+        <span class="marker">▶</span>
+        <span>{{ trans(key="menu_credits", lang=current_lang) }}</span>
+      </li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Custom Retro Dropdown Menu with CIF Flag Icons -->
+      <div class="retro-dropdown" id="lang-dropdown">
+        <button class="retro-dropdown-btn" type="button" onclick="toggleLangDropdown(event)">
+          <span class="flag-icon">
+            {% if current_lang == "en" %}
+            <svg width="18" height="18" viewBox="0 0 512 512"><path fill="#b22234" d="M0 0h512v512H0z"/><path fill="#fff" d="M0 73h512v39H0zm0 79h512v39H0zm0 78h512v39H0zm0 79h512v39H0zm0 78h512v39H0z"/><path fill="#3c3b6e" d="M0 0h240v273H0z"/><circle cx="40" cy="40" r="10" fill="#fff"/><circle cx="120" cy="40" r="10" fill="#fff"/><circle cx="200" cy="40" r="10" fill="#fff"/><circle cx="68" cy="68" r="8" fill="#fff"/><circle cx="136" cy="68" r="8" fill="#fff"/><circle cx="40" cy="102" r="10" fill="#fff"/><circle cx="120" cy="102" r="10" fill="#fff"/><circle cx="200" cy="102" r="10" fill="#fff"/><circle cx="68" cy="136" r="8" fill="#fff"/><circle cx="136" cy="136" r="8" fill="#fff"/><circle cx="40" cy="170" r="10" fill="#fff"/><circle cx="120" cy="170" r="10" fill="#fff"/><circle cx="200" cy="170" r="10" fill="#fff"/></svg>
+            {% else %}
+            <svg width="18" height="18" viewBox="0 0 512 512"><path fill="#009b3a" d="M0 0h512v512H0z"/><path fill="#fedf00" d="M256 70l210 186L256 442 46 256z"/><circle cx="256" cy="256" r="90" fill="#002776"/><path fill="#fff" d="M170 240a110 110 0 0 0 172 0 115 115 0 0 1-172 0z"/></svg>
+            {% endif %}
+          </span>
+          <span style="flex: 1; text-align: left;">{% if current_lang == "en" %}EN-US{% else %}PT-BR{% endif %}</span>
+          <span style="font-size: 11px;">▼</span>
+        </button>
+
+        <div class="retro-dropdown-menu" id="lang-menu">
+          <a href="/" class="retro-dropdown-item {% if current_lang == 'pt' %}active{% endif %}">
+            <svg width="18" height="18" viewBox="0 0 512 512"><path fill="#009b3a" d="M0 0h512v512H0z"/><path fill="#fedf00" d="M256 70l210 186L256 442 46 256z"/><circle cx="256" cy="256" r="90" fill="#002776"/><path fill="#fff" d="M170 240a110 110 0 0 0 172 0 115 115 0 0 1-172 0z"/></svg>
+            <span>PT-BR (PORTUGUÊS)</span>
+          </a>
+          <a href="/en/" class="retro-dropdown-item {% if current_lang == 'en' %}active{% endif %}">
+            <svg width="18" height="18" viewBox="0 0 512 512"><path fill="#b22234" d="M0 0h512v512H0z"/><path fill="#fff" d="M0 73h512v39H0zm0 79h512v39H0zm0 78h512v39H0zm0 79h512v39H0zm0 78h512v39H0z"/><path fill="#3c3b6e" d="M0 0h240v273H0z"/><circle cx="40" cy="40" r="10" fill="#fff"/><circle cx="120" cy="40" r="10" fill="#fff"/><circle cx="200" cy="40" r="10" fill="#fff"/><circle cx="68" cy="68" r="8" fill="#fff"/><circle cx="136" cy="68" r="8" fill="#fff"/><circle cx="40" cy="102" r="10" fill="#fff"/><circle cx="120" cy="102" r="10" fill="#fff"/><circle cx="200" cy="102" r="10" fill="#fff"/><circle cx="68" cy="136" r="8" fill="#fff"/><circle cx="136" cy="136" r="8" fill="#fff"/><circle cx="40" cy="170" r="10" fill="#fff"/><circle cx="120" cy="170" r="10" fill="#fff"/><circle cx="200" cy="170" r="10" fill="#fff"/></svg>
+            <span>EN-US (ENGLISH)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Light / Dark Mode Toggle Button -->
+      <button class="theme-toggle-btn" type="button">
+        {{ trans(key="theme_dark", lang=current_lang) }}
+      </button>
+    </div>
+
+    <!-- Retro Motto Tagline -->
+    <div class="retro-motto">
+      "{{ trans(key="site_motto", lang=current_lang) }}"
+    </div>
+  </div>
+
+  <!-- Content Panel (Right Column) -->
+  <div class="content-panel" id="content-panel">
+    
+    <!-- ABOUT (/NOW) Section -->
+    <div class="section-content active" id="sec-about">
+      {% if current_lang == "en" %}
+        {% set about_page = get_page(path="about.en.md") %}
+      {% else %}
+        {% set about_page = get_page(path="about.md") %}
+      {% endif %}
+      <h2 class="section-title">★ {{ about_page.title | upper }} ★</h2>
+      <div class="now-block">
+        {{ about_page.content | safe }}
+      </div>
+    </div>
+
+    <!-- SETUP / DOTFILES Section -->
+    <div class="section-content" id="sec-setup">
+      {% if current_lang == "en" %}
+        {% set setup_page = get_page(path="setup.en.md") %}
+      {% else %}
+        {% set setup_page = get_page(path="setup.md") %}
+      {% endif %}
+      <h2 class="section-title">★ {{ setup_page.title | upper }} ★</h2>
+      <div class="now-block">
+        {{ setup_page.content | safe }}
+      </div>
+    </div>
+
+    <!-- WORKSHOPS / BLOG Section -->
+    <div class="section-content" id="sec-workshops">
+      <h2 class="section-title">★ {{ trans(key="menu_workshops", lang=current_lang) }} ★</h2>
+      <div class="now-block">
+        {% if current_lang == "en" %}
+          {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.en.md") %}
+        {% else %}
+          {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.md") %}
+        {% endif %}
+        
+        <!-- Collapsible Accordion Card for Kubernetes IFSummit 2026 -->
+        <div class="workshop-accordion" id="accordion-k8s">
+          <div class="workshop-accordion-header" onclick="toggleAccordion('accordion-k8s')">
+            <span class="accordion-icon">▶</span>
+            <span>KUBERNETES IFSUMMIT 2026 ({{ ws.pages | length }} {{ trans(key="lessons", lang=current_lang) }})</span>
+          </div>
+          
+          <div class="workshop-accordion-content">
+            <p style="color: var(--accent-cyan); border-left: none; padding-left: 0; margin-bottom: 8px;">{{ ws.description }}</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              {% for page in ws.pages %}
+              <div class="workshop-card">
+                <div class="workshop-card-title">
+                  <a href="{{ page.permalink }}">{{ page.title }}</a>
+                </div>
+                {% if page.extra.read_time_minutes %}
+                <div style="font-size: 11px; color: var(--accent-cyan); display: flex; align-items: center; gap: 4px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>{{ trans(key="read_time", lang=current_lang) }}: {{ page.extra.read_time_minutes }} min</span>
+                </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONTACT Section -->
+    <div class="section-content" id="sec-contact">
+      {% if current_lang == "en" %}
+        {% set contact_page = get_page(path="contact.en.md") %}
+      {% else %}
+        {% set contact_page = get_page(path="contact.md") %}
+      {% endif %}
+      <h2 class="section-title">★ {{ contact_page.title | upper }} ★</h2>
+      <div class="now-block">
+        {{ contact_page.content | safe }}
+      </div>
+    </div>
+
+    <!-- CREDITS Section -->
+    <div class="section-content" id="sec-credits">
+      {% if current_lang == "en" %}
+        {% set credits_page = get_page(path="credits.en.md") %}
+      {% else %}
+        {% set credits_page = get_page(path="credits.md") %}
+      {% endif %}
+      <h2 class="section-title">★ {{ credits_page.title | upper }} ★</h2>
+      <div class="now-block">
+        {{ credits_page.content | safe }}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Crow Nest -->
+<div id="nest" class="nest-container" title="{{ trans(key="nest_title", lang=current_lang) }}">
+  <span class="nest-label">NEST</span>
+  <span id="nest-zzz" class="nest-zzz">Zzz...</span>
+</div>
+
+<!-- Mascot Stupid-Crow -->
+<div id="crow" class="crow-mascot">
+  <div id="crow-sprite" class="crow-sprite-box"></div>
+</div>
+{% endblock content %}
+
+{% block body_extra %}
+<script>
+  // Preload Sprites
+  const crowSpritesToPreload = [
+    '/crow/Fly/Left.gif',
+    '/crow/Fly/Right.gif',
+    '/crow/Fly/Up.gif',
+    '/crow/Fly/Down.gif',
+    '/crow/Idle/Left.gif',
+    '/crow/Idle/Right.gif',
+    '/crow/Idle/Up.gif',
+    '/crow/Idle/Down.gif',
+    '/crow/Hurt/Left.gif',
+    '/crow/Hurt/Right.gif',
+    '/crow/Hurt/Up.gif',
+    '/crow/Hurt/Down.gif',
+    '/crow/Die/Left.gif',
+    '/crow/Die/Right.gif',
+    '/crow/Die/Up.gif',
+    '/crow/Die/Down.gif',
+    '/crow/Die/Down.png'
+  ];
+
+  crowSpritesToPreload.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  // Accordion Toggle
+  function toggleAccordion(accordionId) {
+    const accordion = document.getElementById(accordionId);
+    if (!accordion) return;
+    const icon = accordion.querySelector('.accordion-icon');
+    accordion.classList.toggle('open');
+    if (accordion.classList.contains('open')) {
+      if (icon) icon.innerText = '▼';
+    } else {
+      if (icon) icon.innerText = '▶';
+    }
+  }
+
+  // Navigation & Section Switcher
+  const items = document.querySelectorAll('.menu-item');
+  const sections = {
+    'about': document.getElementById('sec-about'),
+    'setup': document.getElementById('sec-setup'),
+    'workshops': document.getElementById('sec-workshops'),
+    'contact': document.getElementById('sec-contact'),
+    'credits': document.getElementById('sec-credits')
+  };
+
+  let currentIndex = 0;
+
+  function updateSelection(index) {
+    items.forEach((item, i) => {
+      const target = item.getAttribute('data-target');
+      if (i === index) {
+        item.classList.add('active');
+        if (sections[target]) sections[target].classList.add('active');
+      } else {
+        item.classList.remove('active');
+        if (sections[target]) sections[target].classList.remove('active');
+      }
+    });
+    currentIndex = index;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % items.length;
+      updateSelection(nextIndex);
+    } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + items.length) % items.length;
+      updateSelection(prevIndex);
+    }
+  });
+
+  items.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+      updateSelection(index);
+    });
+    item.addEventListener('click', () => {
+      updateSelection(index);
+    });
+  });
+
+  // 2D PID Controller implementation for Crow physics & movement
+  class PIDController2D {
+    constructor(Kp, Ki, Kd, maxIntegral = 25) {
+      this.Kp = Kp;
+      this.Ki = Ki;
+      this.Kd = Kd;
+      this.maxIntegral = maxIntegral;
+      this.integralX = 0;
+      this.integralY = 0;
+      this.lastErrorX = 0;
+      this.lastErrorY = 0;
+    }
+
+    reset() {
+      this.integralX = 0;
+      this.integralY = 0;
+      this.lastErrorX = 0;
+      this.lastErrorY = 0;
+    }
+
+    calculate(currentX, currentY, targetX, targetY, dt) {
+      const errorX = targetX - currentX;
+      const errorY = targetY - currentY;
+
+      this.integralX = Math.max(-this.maxIntegral, Math.min(this.maxIntegral, this.integralX + errorX * dt));
+      this.integralY = Math.max(-this.maxIntegral, Math.min(this.maxIntegral, this.integralY + errorY * dt));
+
+      const derivativeX = dt > 0 ? (errorX - this.lastErrorX) / dt : 0;
+      const derivativeY = dt > 0 ? (errorY - this.lastErrorY) / dt : 0;
+
+      this.lastErrorX = errorX;
+      this.lastErrorY = errorY;
+
+      const forceX = this.Kp * errorX + this.Ki * this.integralX + this.Kd * derivativeX;
+      const forceY = this.Kp * errorY + this.Ki * this.integralY + this.Kd * derivativeY;
+
+      return { forceX, forceY, errorX, errorY };
+    }
+  }
+
+  const STATE = {
+    FLYING: 'FLYING',
+    PERCHED: 'PERCHED',
+    FALLING: 'FALLING',
+    RETURNING_TO_NEST: 'RETURNING_TO_NEST',
+    SLEEPING: 'SLEEPING'
+  };
+
+  const nestElem = document.getElementById('nest');
+  const nestZzz = document.getElementById('nest-zzz');
+  const contentPanelElem = document.getElementById('content-panel');
+  const crowElem = document.getElementById('crow');
+  const crowSprite = document.getElementById('crow-sprite');
+
+  // Crow State Persistence (asleep / awake)
+  const savedCrowState = localStorage.getItem('crowState') || 'awake';
+  let currentState = (savedCrowState === 'asleep') ? STATE.SLEEPING : STATE.FLYING;
+
+  let crowX = window.innerWidth / 2;
+  let crowY = window.innerHeight / 2;
+  let velX = 0;
+  let velY = 0;
+
+  let mouseX = crowX;
+  let mouseY = crowY;
+  let lastMouseX = mouseX;
+  let lastMouseY = mouseY;
+  let isMouseStationary = false;
+  let mouseStationaryTimer = null;
+  let fallStartTime = 0;
+
+  let lastCategory = '';
+  let lastDir = '';
+  let isSleepingAnimActive = false;
+  let sleepAnimationTimer = null;
+  let sleepFrame = 0;
+
+  const CURSOR_TARGET_OFFSET_Y = 26;
+  const pid = new PIDController2D(2.0, 0.08, 0.5);
+
+  if (savedCrowState === 'asleep') {
+    if (nestZzz) nestZzz.style.display = 'block';
+    if (nestElem) nestElem.classList.add('asleep');
+    const nestRect = nestElem.getBoundingClientRect();
+    crowX = nestRect.left + nestRect.width / 2;
+    crowY = nestRect.top - 10;
+  }
+
+  function isMouseOverTextPanel() {
+    if (!contentPanelElem) return false;
+    const rect = contentPanelElem.getBoundingClientRect();
+    return (
+      mouseX >= rect.left &&
+      mouseX <= rect.right &&
+      mouseY >= rect.top &&
+      mouseY <= rect.bottom
+    );
+  }
+
+  function getFacingDirection(dx, dy) {
+    if (Math.abs(dx) > Math.abs(dy)) {
+      return dx >= 0 ? 'Right' : 'Left';
+    } else {
+      return dy >= 0 ? 'Down' : 'Up';
+    }
+  }
+
+  function stopSleepAnimation() {
+    if (sleepAnimationTimer) {
+      clearInterval(sleepAnimationTimer);
+      sleepAnimationTimer = null;
+    }
+    isSleepingAnimActive = false;
+  }
+
+  function renderSleepFrame() {
+    crowSprite.style.backgroundImage = "url('/crow/Die/Down.png')";
+    crowSprite.style.backgroundSize = "300px 60px";
+    crowSprite.style.backgroundPosition = `-${sleepFrame * 60}px 0px`;
+  }
+
+  function startSleepAnimation() {
+    if (isSleepingAnimActive) return;
+    stopSleepAnimation();
+    isSleepingAnimActive = true;
+    lastCategory = 'Sleep';
+    lastDir = 'Down';
+    sleepFrame = 0;
+    renderSleepFrame();
+
+    sleepAnimationTimer = setInterval(() => {
+      if (sleepFrame < 4) {
+        sleepFrame++;
+        renderSleepFrame();
+      } else {
+        clearInterval(sleepAnimationTimer);
+        sleepAnimationTimer = null;
+      }
+    }, 200);
+  }
+
+  function setCrowSprite(category, direction) {
+    if (category === 'Die' || category === 'Sleep') {
+      startSleepAnimation();
+      return;
+    }
+
+    stopSleepAnimation();
+    if (lastCategory === category && lastDir === direction) return;
+    lastCategory = category;
+    lastDir = direction;
+    crowSprite.style.backgroundImage = `url('/crow/${category}/${direction}.gif')`;
+    crowSprite.style.backgroundSize = `contain`;
+    crowSprite.style.backgroundPosition = `center`;
+  }
+
+  // Initial sprite
+  if (savedCrowState === 'asleep') {
+    setCrowSprite('Sleep', 'Down');
+  } else {
+    setCrowSprite('Fly', 'Right');
+  }
+
+  function resetTabFocusState(e) {
+    lastTime = performance.now();
+    pid.reset();
+    velX = 0;
+    velY = 0;
+    if (e && e.clientX !== undefined) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }
+  }
+
+  window.addEventListener('focus', resetTabFocusState);
+  window.addEventListener('blur', resetTabFocusState);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      resetTabFocusState();
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (currentState === STATE.PERCHED) {
+      const distMoved = Math.hypot(mouseX - lastMouseX, mouseY - lastMouseY);
+      if (distMoved > 8) {
+        triggerFall();
+      }
+    }
+
+    isMouseStationary = false;
+    clearTimeout(mouseStationaryTimer);
+    mouseStationaryTimer = setTimeout(() => {
+      isMouseStationary = true;
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    }, 450);
+  });
+
+  function triggerFall() {
+    currentState = STATE.FALLING;
+    velY = 2.2;
+    velX = (Math.random() - 0.5) * 4;
+    fallStartTime = Date.now();
+    setCrowSprite('Hurt', 'Down');
+    pid.reset();
+  }
+
+  // Click on Nest
+  nestElem.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentState === STATE.SLEEPING) {
+      currentState = STATE.FLYING;
+      nestZzz.style.display = 'none';
+      nestElem.classList.remove('asleep');
+      localStorage.setItem('crowState', 'awake');
+      pid.reset();
+    } else {
+      currentState = STATE.RETURNING_TO_NEST;
+      localStorage.setItem('crowState', 'asleep');
+      pid.reset();
+    }
+  });
+
+  let lastTime = performance.now();
+
+  function updateFSM(now) {
+    if (!now) now = performance.now();
+
+    let dt = (now - lastTime) / 1000;
+    if (dt > 0.05 || dt <= 0) {
+      dt = 0.016;
+    }
+    lastTime = now;
+
+    const nestRect = nestElem.getBoundingClientRect();
+    const nestTargetX = nestRect.left + nestRect.width / 2;
+    const nestTargetY = nestRect.top - 10;
+
+    if (currentState === STATE.FLYING) {
+      const isReadingText = isMouseOverTextPanel();
+
+      let targetX, targetY;
+
+      if (isReadingText) {
+        const panelRect = contentPanelElem.getBoundingClientRect();
+        targetX = panelRect.left + panelRect.width / 2;
+        targetY = panelRect.top - 14;
+      } else {
+        targetX = mouseX;
+        targetY = mouseY - CURSOR_TARGET_OFFSET_Y;
+      }
+
+      const dist = Math.hypot(targetX - crowX, targetY - crowY);
+
+      if (isReadingText) {
+        if (dist < 18) {
+          crowX = targetX;
+          crowY = targetY;
+          velX = 0;
+          velY = 0;
+          setCrowSprite('Idle', 'Down');
+        } else {
+          const { forceX, forceY } = pid.calculate(crowX, crowY, targetX, targetY, dt);
+          velX = (velX + forceX * dt) * 0.70;
+          velY = (velY + forceY * dt) * 0.70;
+
+          const currentSpeed = Math.hypot(velX, velY);
+          const MAX_SPEED = 5.5;
+          if (currentSpeed > MAX_SPEED) {
+            velX = (velX / currentSpeed) * MAX_SPEED;
+            velY = (velY / currentSpeed) * MAX_SPEED;
+          }
+
+          crowX += velX;
+          crowY += velY;
+
+          setCrowSprite('Fly', getFacingDirection(targetX - crowX, targetY - crowY));
+        }
+      } else {
+        if (dist < 18 && isMouseStationary) {
+          currentState = STATE.PERCHED;
+          setCrowSprite('Sleep', 'Down');
+          velX = 0;
+          velY = 0;
+          lastMouseX = mouseX;
+          lastMouseY = mouseY;
+        } else {
+          const { forceX, forceY } = pid.calculate(crowX, crowY, targetX, targetY, dt);
+
+          velX = (velX + forceX * dt) * 0.70;
+          velY = (velY + forceY * dt) * 0.70;
+
+          const currentSpeed = Math.hypot(velX, velY);
+          const MAX_SPEED = 5.5;
+          if (currentSpeed > MAX_SPEED) {
+            velX = (velX / currentSpeed) * MAX_SPEED;
+            velY = (velY / currentSpeed) * MAX_SPEED;
+          }
+
+          crowX += velX;
+          crowY += velY;
+
+          if (Math.hypot(velX, velY) > 0.4) {
+            setCrowSprite('Fly', getFacingDirection(targetX - crowX, targetY - crowY));
+          } else {
+            setCrowSprite('Idle', 'Down');
+          }
+        }
+      }
+    }
+    else if (currentState === STATE.PERCHED) {
+      if (isMouseOverTextPanel()) {
+        currentState = STATE.FLYING;
+      } else {
+        crowX = mouseX;
+        crowY = mouseY - CURSOR_TARGET_OFFSET_Y;
+        velX = 0;
+        velY = 0;
+        setCrowSprite('Sleep', 'Down');
+      }
+    }
+    else if (currentState === STATE.FALLING) {
+      velY += 14 * dt;
+      crowY += velY;
+      crowX += velX;
+      setCrowSprite('Hurt', 'Down');
+
+      if (Date.now() - fallStartTime > 650 || crowY > window.innerHeight - 35) {
+        currentState = STATE.FLYING;
+        pid.reset();
+      }
+    }
+    else if (currentState === STATE.RETURNING_TO_NEST) {
+      const dist = Math.hypot(nestTargetX - crowX, nestTargetY - crowY);
+
+      if (dist < 12) {
+        currentState = STATE.SLEEPING;
+        crowX = nestTargetX;
+        crowY = nestTargetY;
+        velX = 0;
+        velY = 0;
+        setCrowSprite('Sleep', 'Down');
+        nestZzz.style.display = 'block';
+        nestElem.classList.add('asleep');
+        localStorage.setItem('crowState', 'asleep');
+      } else {
+        const { forceX, forceY } = pid.calculate(crowX, crowY, nestTargetX, nestTargetY, dt);
+        velX = (velX + forceX * dt) * 0.70;
+        velY = (velY + forceY * dt) * 0.70;
+
+        const currentSpeed = Math.hypot(velX, velY);
+        const MAX_SPEED = 6.0;
+        if (currentSpeed > MAX_SPEED) {
+          velX = (velX / currentSpeed) * MAX_SPEED;
+          velY = (velY / currentSpeed) * MAX_SPEED;
+        }
+
+        crowX += velX;
+        crowY += velY;
+
+        setCrowSprite('Fly', getFacingDirection(nestTargetX - crowX, nestTargetY - crowY));
+      }
+    }
+    else if (currentState === STATE.SLEEPING) {
+      crowX = nestTargetX;
+      crowY = nestTargetY;
+      velX = 0;
+      velY = 0;
+      setCrowSprite('Sleep', 'Down');
+    }
+
+    // Snap coordinates to discrete 4px pixel steps for retro pixel rendering
+    const snapX = Math.round(crowX / 4) * 4;
+    const snapY = Math.round(crowY / 4) * 4;
+    crowElem.style.transform = `translate3d(${snapX - 30}px, ${snapY - 30}px, 0)`;
+
+    requestAnimationFrame(updateFSM);
+  }
+
+  requestAnimationFrame(updateFSM);
+</script>
+{% endblock body_extra %}

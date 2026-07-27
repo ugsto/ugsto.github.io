@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+
+{% block head_extra %}
+<!-- Marked.js to render original backup slides -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+  }
+  .window {
+    max-width: 920px;
+    width: 100%;
+    padding: 40px;
+    background-color: var(--bg-window);
+    border: 4px solid var(--border-main);
+    outline: 4px solid var(--outline-color);
+    box-shadow: 0 0 0 8px var(--border-main);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 2px dashed var(--border-main);
+    padding-bottom: 16px;
+  }
+  .nav-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    border-color: #718096;
+    color: #718096;
+  }
+  .slide-toggle-btn {
+    background-color: var(--bg-panel);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+  }
+  .slide-toggle-btn:hover {
+    background-color: var(--accent-cyan);
+    color: var(--bg-body);
+  }
+  h1 {
+    font-family: 'VT323', monospace;
+    font-size: 32px;
+    color: var(--accent-yellow);
+    line-height: 1.3;
+  }
+  .meta {
+    font-size: 11px;
+    color: var(--accent-cyan);
+    margin-top: -12px;
+  }
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    color: var(--text-muted);
+  }
+  .post-content h2, .post-content h3 {
+    font-family: 'VT323', monospace;
+    color: var(--accent-cyan);
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .post-content h2 { font-size: 26px; border-bottom: 1px dashed var(--accent-cyan); padding-bottom: 4px; }
+  .post-content h3 { font-size: 22px; }
+  .post-content p { line-height: 1.8; }
+  .post-content ul, .post-content ol { padding-left: 24px; display: flex; flex-direction: column; gap: 8px; }
+  .post-content code {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-cyan);
+    padding: 2px 6px;
+    color: var(--accent-yellow);
+    font-size: 13px;
+  }
+  .post-content pre {
+    background-color: var(--code-bg);
+    border: 2px solid var(--border-main);
+    padding: 16px;
+    overflow-x: auto;
+    margin: 10px 0;
+    color: var(--code-text);
+  }
+  .post-content pre code {
+    border: none;
+    padding: 0;
+    background: none;
+    color: inherit;
+  }
+  .post-content a { color: var(--accent-yellow); text-decoration: underline; }
+
+  /* FULLSCREEN SLIDES OVERLAY MODE */
+  .slides-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-body);
+    z-index: 10000;
+    padding: 30px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+  .slides-overlay.active {
+    display: flex;
+  }
+  .slides-container {
+    max-width: 1100px;
+    width: 100%;
+    max-height: calc(100vh - 130px);
+    height: auto;
+    background-color: var(--bg-window);
+    border: 4px solid var(--border-main);
+    box-shadow: 0 0 0 8px var(--border-main);
+    padding: 36px 48px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .slides-container h2 {
+    font-family: 'VT323', monospace;
+    color: var(--accent-yellow);
+    font-size: 34px;
+    border-bottom: 2px dashed var(--accent-yellow);
+    padding-bottom: 8px;
+  }
+  .slides-container h3 {
+    font-family: 'VT323', monospace;
+    color: var(--accent-cyan);
+    font-size: 26px;
+    margin-top: 12px;
+  }
+  .slides-container ul, .slides-container ol {
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* CODE BLOCKS */
+  .slides-container pre {
+    background-color: var(--code-bg);
+    border: 2px solid var(--accent-cyan);
+    box-shadow: 0 0 0 2px var(--outline-color), 0 0 0 4px var(--accent-cyan);
+    padding: 20px 24px;
+    overflow-x: auto;
+    overflow-y: visible;
+    margin: 16px 0;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--code-text);
+    white-space: pre;
+    height: auto;
+    max-height: none;
+    flex-shrink: 0;
+  }
+  .slides-container pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    box-shadow: none;
+  }
+  .slides-container code:not(pre code) {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-yellow);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .slides-header {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slides-title {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--accent-cyan);
+  }
+  .slides-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .slides-counter {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: var(--accent-yellow);
+  }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+<div class="window">
+  <!-- Top Navigation Bar -->
+  <div class="nav-bar">
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <a href="/" class="nav-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>{{ trans(key="btn_main_menu") }}</span>
+      </a>
+      <button class="theme-toggle-btn" type="button">[ TEMA ]</button>
+    </div>
+    
+    <button id="slide-mode-btn" class="nav-btn slide-toggle-btn" type="button">
+      <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      <span>{{ trans(key="btn_slides") }}</span>
+    </button>
+
+    <div style="display: flex; gap: 8px;">
+      {% if page.lower %}
+      <a href="{{ page.lower.permalink }}" class="nav-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>{{ trans(key="btn_prev") }}</span>
+      </a>
+      {% else %}
+      <span class="nav-btn disabled">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>{{ trans(key="btn_prev") }}</span>
+      </span>
+      {% endif %}
+
+      {% if page.higher %}
+      <a href="{{ page.higher.permalink }}" class="nav-btn">
+        <span>{{ trans(key="btn_next") }}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      {% else %}
+      <span class="nav-btn disabled">
+        <span>{{ trans(key="btn_next") }}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </span>
+      {% endif %}
+    </div>
+  </div>
+
+  <h1>{{ page.title }}</h1>
+  {% if page.extra.read_time_minutes %}
+  <div class="meta">⏱ {{ trans(key="read_time") }}: {{ page.extra.read_time_minutes }} min</div>
+  {% endif %}
+
+  <div class="post-content" id="article-body">
+    {{ page.content | safe }}
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <div class="nav-bar" style="margin-top: 20px; border-top: 2px dashed var(--border-main); border-bottom: none; padding-top: 16px; padding-bottom: 0;">
+    {% if page.lower %}
+    <a href="{{ page.lower.permalink }}" class="nav-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>{{ trans(key="btn_prev") }}</span>
+    </a>
+    {% else %}
+    <span class="nav-btn disabled">
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>{{ trans(key="btn_prev") }}</span>
+    </span>
+    {% endif %}
+
+    <a href="/" class="nav-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span>{{ trans(key="btn_main_menu") }}</span>
+    </a>
+
+    {% if page.higher %}
+    <a href="{{ page.higher.permalink }}" class="nav-btn">
+      <span>{{ trans(key="btn_next") }}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
+    {% else %}
+    <span class="nav-btn disabled">
+      <span>{{ trans(key="btn_next") }}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </span>
+    {% endif %}
+  </div>
+</div>
+
+<!-- SLIDES MODE OVERLAY -->
+<div id="slides-overlay" class="slides-overlay">
+  <div class="slides-header">
+    <div class="slides-title">SLIDES // {{ page.title | upper }}</div>
+    <div class="slides-controls">
+      <span id="slide-counter" class="slides-counter">Slide 1 / 1</span>
+      <button id="slide-prev" class="nav-btn" type="button">◀ {{ trans(key="btn_prev") }}</button>
+      <button id="slide-next" class="nav-btn" type="button">{{ trans(key="btn_next") }} ▶</button>
+      <button id="slide-exit" class="nav-btn" type="button" style="background-color: #2b1a1a; border-color: #ff5555; color: #ff5555;">{{ trans(key="btn_exit") }}</button>
+    </div>
+  </div>
+
+  <div id="slide-content-box" class="slides-container">
+    <!-- Dynamic slide content -->
+  </div>
+</div>
+{% endblock content %}
+
+{% block body_extra %}
+<script>
+  const slideModeBtn = document.getElementById('slide-mode-btn');
+  const slidesOverlay = document.getElementById('slides-overlay');
+  const slideExitBtn = document.getElementById('slide-exit');
+  const slidePrevBtn = document.getElementById('slide-prev');
+  const slideNextBtn = document.getElementById('slide-next');
+  const slideContentBox = document.getElementById('slide-content-box');
+  const slideCounter = document.getElementById('slide-counter');
+
+  const pageSlug = "{{ page.slug }}";
+
+  let slides = [];
+  let currentSlideIdx = 0;
+
+  async function loadOriginalBackupSlides() {
+    try {
+      const response = await fetch('/slides/' + pageSlug + '.md');
+      if (response.ok) {
+        const markdownText = await response.text();
+        parseSlideMarkdown(markdownText);
+      } else {
+        console.warn('Slide file not found for', pageSlug);
+      }
+    } catch (err) {
+      console.error('Error loading slide file', err);
+    }
+  }
+
+  function parseSlideMarkdown(markdownText) {
+    const htmlContent = marked.parse(markdownText);
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+
+    const children = Array.from(tempDiv.children);
+    slides = [];
+    let currentSlide = [];
+
+    children.forEach((child) => {
+      if (child.tagName === 'H2' || child.tagName === 'HR') {
+        if (currentSlide.length > 0) {
+          slides.push(currentSlide);
+        }
+        if (child.tagName === 'H2') {
+          currentSlide = [child.cloneNode(true)];
+        } else {
+          currentSlide = [];
+        }
+      } else {
+        currentSlide.push(child.cloneNode(true));
+      }
+    });
+
+    if (currentSlide.length > 0) {
+      slides.push(currentSlide);
+    }
+  }
+
+  function renderSlide(idx) {
+    if (slides.length === 0) return;
+    if (idx < 0) idx = 0;
+    if (idx >= slides.length) idx = slides.length - 1;
+    currentSlideIdx = idx;
+
+    slideContentBox.innerHTML = '';
+    slides[currentSlideIdx].forEach(el => {
+      slideContentBox.appendChild(el);
+    });
+
+    slideCounter.innerText = `Slide ${currentSlideIdx + 1} / ${slides.length}`;
+    slidePrevBtn.classList.toggle('disabled', currentSlideIdx === 0);
+    slideNextBtn.classList.toggle('disabled', currentSlideIdx === slides.length - 1);
+  }
+
+  async function openSlides() {
+    if (slides.length === 0) {
+      await loadOriginalBackupSlides();
+    }
+    currentSlideIdx = 0;
+    renderSlide(0);
+    slidesOverlay.classList.add('active');
+  }
+
+  function closeSlides() {
+    slidesOverlay.classList.remove('active');
+  }
+
+  if (slideModeBtn) slideModeBtn.addEventListener('click', openSlides);
+  if (slideExitBtn) slideExitBtn.addEventListener('click', closeSlides);
+  if (slidePrevBtn) slidePrevBtn.addEventListener('click', () => renderSlide(currentSlideIdx - 1));
+  if (slideNextBtn) slideNextBtn.addEventListener('click', () => renderSlide(currentSlideIdx + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (!slidesOverlay.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      closeSlides();
+    } else if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      renderSlide(currentSlideIdx + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      renderSlide(currentSlideIdx - 1);
+    }
+  });
+</script>
+{% endblock body_extra %}

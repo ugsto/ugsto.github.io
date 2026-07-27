@@ -1,8 +1,12 @@
-name: Deploy to GitHub Pages
+name: CI/CD Pipeline & GitHub Pages Deploy
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,46 +15,58 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  build_site:
-    runs-on: ubuntu-latest
+  lint-and-check:
+    name: 🔍 Pre-commit Linters & Zola Check
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Zola (Latest Stable)
+        uses: taiki-e/install-action@v2
         with:
-          bun-version: latest
+          tool: zola
 
-      - name: Install dependencies
-        run: bun install
-
-      - name: Build
-        env:
-          BASE_PATH: "/${{ github.event.repository.name }}"
-        run: |
-          bun run build
-
-      - name: Prepare for Deployment
-        run: |
-          touch build/.nojekyll
-
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          path: "build/"
+          python-version: '3.12'
 
-  deploy:
-    needs: build_site
-    runs-on: ubuntu-latest
+      - name: Run Pre-commit Hooks (Markdown, HTML & Syntax Linters)
+        uses: pre-commit/action@v3.0.1
+
+      - name: Check Zola Site Links & Configuration
+        run: zola check
+
+  build-and-deploy:
+    name: 🚀 Build & Deploy to GitHub Pages
+    needs: lint-and-check
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Zola (Latest Stable)
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola
+
+      - name: Build Production Site with Zola
+        run: zola build
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

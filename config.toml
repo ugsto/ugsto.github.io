@@ -1,0 +1,53 @@
+base_url = "https://ugsto.github.io"
+title = "bortoli.phd"
+description = "Na sintaxe do universo, cada bit ressoa."
+default_language = "pt"
+build_search_index = false
+
+[languages.pt.translations]
+menu_about = "SOBRE MIM"
+menu_setup = "CONFIGURAÇÕES / DOTFILES"
+menu_workshops = "WORKSHOPS / BLOG"
+menu_contact = "CONTATO"
+menu_credits = "CRÉDITOS"
+theme_dark = "[ TEMA: DARK ]"
+theme_light = "[ TEMA: LIGHT ]"
+btn_main_menu = "◀ MENU PRINCIPAL"
+btn_slides = "[ SLIDES ]"
+btn_prev = "◀ ANTERIOR"
+btn_next = "PRÓXIMO ▶"
+btn_exit = "[ SAIR ]"
+read_time = "Tempo estimado de leitura"
+lessons = "AULAS"
+lang_toggle = "[ LANG: PT ]"
+nest_title = "Ninho do Stupid-Crow (Clique para dormir/acordar)"
+site_motto = "Na sintaxe do universo, cada bit ressoa."
+
+[languages.en]
+title = "bortoli.phd"
+description = "In the syntax of the universe, every bit resonates."
+
+[languages.en.translations]
+menu_about = "ABOUT ME"
+menu_setup = "SETUP / DOTFILES"
+menu_workshops = "WORKSHOPS / BLOG"
+menu_contact = "CONTACT"
+menu_credits = "CREDITS"
+theme_dark = "[ THEME: DARK ]"
+theme_light = "[ THEME: LIGHT ]"
+btn_main_menu = "◀ MAIN MENU"
+btn_slides = "[ SLIDES ]"
+btn_prev = "◀ PREVIOUS"
+btn_next = "NEXT ▶"
+btn_exit = "[ EXIT ]"
+read_time = "Estimated reading time"
+lessons = "LESSONS"
+lang_toggle = "[ LANG: EN ]"
+nest_title = "Stupid-Crow Nest (Click to sleep/wake)"
+site_motto = "In the syntax of the universe, every bit resonates."
+
+[link_checker]
+skip_prefixes = [
+  "https://linkedin.com",
+  "https://www.linkedin.com"
+]

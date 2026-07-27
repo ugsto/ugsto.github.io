@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Bun development environment";
+  description = "A Nix-flake-based Zola development environment";
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
@@ -26,7 +26,7 @@
         { pkgs }:
         {
           default = pkgs.mkShell {
-            packages = with pkgs; [ bun ];
+            packages = with pkgs; [ zola ];
           };
         }
       );
