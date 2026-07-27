@@ -1,240 +1,255 @@
 <!DOCTYPE html>
-<html lang="{{ lang | default(value="pt") }}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
+<html lang="{{ lang | default(value='pt') }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title %}
+        {{ config.title }}
+      {% endblock title %}
+    </title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=VT323&display=swap"
+          rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-body: #0b0e14;
-      --bg-window: #1a2638;
-      --bg-panel: #0f1826;
-      --bg-card: #162235;
-      --bg-accordion-header: #1f2f47;
-      --bg-accordion-hover: #2c4161;
-      --text-main: #ffffff;
-      --text-muted: #d1d5db;
-      --border-main: #ffffff;
-      --accent-yellow: #ffff55;
-      --accent-cyan: #55ffff;
-      --outline-color: #0b0e14;
-      --code-bg: #080d16;
-      --code-text: #a6e3a1;
-    }
+    <style>
+        :root {
+            --bg-body: #0b0e14;
+            --bg-window: #1a2638;
+            --bg-panel: #0f1826;
+            --bg-card: #162235;
+            --bg-accordion-header: #1f2f47;
+            --bg-accordion-hover: #2c4161;
+            --text-main: #ffffff;
+            --text-muted: #d1d5db;
+            --border-main: #ffffff;
+            --accent-yellow: #ffff55;
+            --accent-cyan: #55ffff;
+            --outline-color: #0b0e14;
+            --code-bg: #080d16;
+            --code-text: #a6e3a1;
+        }
 
-    [data-theme="light"] {
-      --bg-body: #cbd5e1;
-      --bg-window: #e2e8f0;
-      --bg-panel: #ffffff;
-      --bg-card: #f1f5f9;
-      --bg-accordion-header: #e2e8f0;
-      --bg-accordion-hover: #cbd5e1;
-      --text-main: #0f172a;
-      --text-muted: #334155;
-      --border-main: #0f172a;
-      --accent-yellow: #92400e;
-      --accent-cyan: #0284c7;
-      --outline-color: #cbd5e1;
-      --code-bg: #1e293b;
-      --code-text: #f8fafc;
-    }
+        [data-theme="light"] {
+            --bg-body: #cbd5e1;
+            --bg-window: #e2e8f0;
+            --bg-panel: #ffffff;
+            --bg-card: #f1f5f9;
+            --bg-accordion-header: #e2e8f0;
+            --bg-accordion-hover: #cbd5e1;
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --border-main: #0f172a;
+            --accent-yellow: #92400e;
+            --accent-cyan: #0284c7;
+            --outline-color: #cbd5e1;
+            --code-bg: #1e293b;
+            --code-text: #f8fafc;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      transition: background-color 0.2s, color 0.2s;
-    }
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.2s, color 0.2s;
+        }
 
-    .nav-btn {
-      font-family: 'VT323', monospace;
-      font-size: 19px;
-      color: var(--accent-yellow);
-      background-color: var(--bg-panel);
-      border: 2px solid var(--border-main);
-      padding: 6px 14px;
-      text-decoration: none;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background-color 0.2s, color 0.2s;
-    }
+        .nav-btn {
+            font-family: 'VT323', monospace;
+            font-size: 19px;
+            color: var(--accent-yellow);
+            background-color: var(--bg-panel);
+            border: 2px solid var(--border-main);
+            padding: 6px 14px;
+            text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
 
-    .nav-btn:hover {
-      background-color: var(--accent-yellow);
-      color: var(--bg-body);
-    }
+        .nav-btn:hover {
+            background-color: var(--accent-yellow);
+            color: var(--bg-body);
+        }
 
-    .nav-btn svg {
-      stroke: currentColor;
-      fill: none;
-      flex-shrink: 0;
-    }
+        .nav-btn svg {
+            stroke: currentColor;
+            fill: none;
+            flex-shrink: 0;
+        }
 
-    /* Standardized Buttons & Controls */
-    .theme-toggle-btn, .retro-dropdown-btn {
-      font-family: 'VT323', monospace;
-      font-size: 19px;
-      color: var(--accent-yellow);
-      background-color: var(--bg-panel);
-      border: 2px solid var(--border-main);
-      padding: 6px 14px;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 10px;
-      width: 220px;
-      height: 40px;
-      transition: background-color 0.2s, color 0.2s;
-    }
+        /* Standardized Buttons & Controls */
+        .theme-toggle-btn,
+        .retro-dropdown-btn {
+            font-family: 'VT323', monospace;
+            font-size: 19px;
+            color: var(--accent-yellow);
+            background-color: var(--bg-panel);
+            border: 2px solid var(--border-main);
+            padding: 6px 14px;
+            cursor: pointer;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            width: 220px;
+            height: 40px;
+            transition: background-color 0.2s, color 0.2s;
+        }
 
-    .theme-toggle-btn:hover, .retro-dropdown-btn:hover {
-      background-color: var(--accent-yellow);
-      color: var(--bg-body);
-    }
+        .theme-toggle-btn:hover,
+        .retro-dropdown-btn:hover {
+            background-color: var(--accent-yellow);
+            color: var(--bg-body);
+        }
 
-    .theme-toggle-btn svg {
-      stroke: currentColor;
-      fill: none;
-      flex-shrink: 0;
-    }
+        .theme-toggle-btn svg {
+            stroke: currentColor;
+            fill: none;
+            flex-shrink: 0;
+        }
 
-    /* Custom Retro Dropdown Component */
-    .retro-dropdown {
-      position: relative;
-      display: inline-block;
-      width: 220px;
-    }
+        /* Custom Retro Dropdown Component */
+        .retro-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 220px;
+        }
 
-    .retro-dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 6px;
-      background-color: var(--bg-panel);
-      border: 2px solid var(--border-main);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-      width: 220px;
-      z-index: 1000;
-      flex-direction: column;
-    }
+        .retro-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 6px;
+            background-color: var(--bg-panel);
+            border: 2px solid var(--border-main);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+            width: 220px;
+            z-index: 1000;
+            flex-direction: column;
+        }
 
-    .retro-dropdown-menu.open {
-      display: flex;
-    }
+        .retro-dropdown-menu.open {
+            display: flex;
+        }
 
-    .retro-dropdown-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      font-family: 'VT323', monospace;
-      font-size: 18px;
-      color: var(--text-main);
-      text-decoration: none;
-      transition: background-color 0.15s, color 0.15s;
-    }
+        .retro-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: background-color 0.15s, color 0.15s;
+        }
 
-    .retro-dropdown-item:hover, .retro-dropdown-item.active {
-      background-color: var(--accent-yellow);
-      color: var(--bg-body);
-    }
+        .retro-dropdown-item:hover,
+        .retro-dropdown-item.active {
+            background-color: var(--accent-yellow);
+            color: var(--bg-body);
+        }
 
-    .flag-icon {
-      width: 18px;
-      height: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+        .flag-icon {
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-    /* Retro Motto Tagline */
-    .retro-motto {
-      font-family: 'VT323', monospace;
-      font-size: 16px;
-      color: var(--accent-cyan);
-      opacity: 0.9;
-      line-height: 1.35;
-      letter-spacing: 0.5px;
-      border-left: 3px solid var(--accent-cyan);
-      padding-left: 10px;
-      margin-top: auto;
-    }
-  </style>
+        /* Retro Motto Tagline */
+        .retro-motto {
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            color: var(--accent-cyan);
+            opacity: 0.9;
+            line-height: 1.35;
+            letter-spacing: 0.5px;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            margin-top: auto;
+        }
+    </style>
 
-  {% block head_extra %}{% endblock head_extra %}
-</head>
-<body>
+    {% block head_extra %}
+    {% endblock head_extra %}
+  </head>
+  <body>
 
-  {% block content %}{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 
-  <script>
-    function applyTheme(theme) {
-      const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
-      const isEnglish = "{{ lang }}" === "en";
+    <script>
+        function applyTheme(theme) {
+            const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+            const isEnglish = "{{ lang }}" === "en";
 
-      const iconSvg = theme === 'light'
-        ? '<svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>'
-        : '<svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+            const iconSvg = theme === 'light' ?
+                '<svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>' :
+                '<svg width="15" height="15" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
 
-      const labelText = theme === 'light'
-        ? (isEnglish ? 'THEME: LIGHT' : 'TEMA: LIGHT')
-        : (isEnglish ? 'THEME: DARK' : 'TEMA: DARK');
+            const labelText = theme === 'light' ?
+                (isEnglish ? 'THEME: LIGHT' : 'TEMA: LIGHT') :
+                (isEnglish ? 'THEME: DARK' : 'TEMA: DARK');
 
-      if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
 
-      themeToggleBtns.forEach(btn => {
-        btn.innerHTML = `${iconSvg} <span>[ ${labelText} ]</span>`;
-      });
+            themeToggleBtns.forEach(btn => {
+                btn.innerHTML = `${iconSvg} <span>[ ${labelText} ]</span>`;
+            });
 
-      localStorage.setItem('theme', theme);
-    }
+            localStorage.setItem('theme', theme);
+        }
 
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    applyTheme(savedTheme);
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
 
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.theme-toggle-btn');
-      if (btn) {
-        const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-        applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-      }
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.theme-toggle-btn');
+            if (btn) {
+                const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            }
 
-      const dropdown = document.getElementById('lang-dropdown');
-      const menu = document.getElementById('lang-menu');
-      if (dropdown && menu && !dropdown.contains(e.target)) {
-        menu.classList.remove('open');
-      }
-    });
+            const dropdown = document.getElementById('lang-dropdown');
+            const menu = document.getElementById('lang-menu');
+            if (dropdown && menu && !dropdown.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
 
-    function toggleLangDropdown(event) {
-      if (event) event.stopPropagation();
-      const menu = document.getElementById('lang-menu');
-      if (menu) menu.classList.toggle('open');
-    }
-  </script>
+        function toggleLangDropdown(event) {
+            if (event) event.stopPropagation();
+            const menu = document.getElementById('lang-menu');
+            if (menu) menu.classList.toggle('open');
+        }
+    </script>
 
-  {% block body_extra %}{% endblock body_extra %}
-</body>
+    {% block body_extra %}
+    {% endblock body_extra %}
+  </body>
 </html>
