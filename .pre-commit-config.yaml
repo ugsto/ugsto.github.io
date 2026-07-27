@@ -1,5 +1,5 @@
 repos:
-  # Standard Pre-Commit Checks
+  # Standard Pre-Commit Checks (Pure Python - 100% NixOS Compatible)
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -11,21 +11,7 @@ repos:
         args: ['--maxkb=5000']
       - id: check-merge-conflict
 
-  # Prettier - Markdown, JSON, YAML Formatting
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        types_or: [markdown, json, yaml]
-
-  # Markdown Linting
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.17.2
-    hooks:
-      - id: markdownlint-cli2
-        args: ['--config', '.markdownlint.json']
-
-  # HTML & Zola / Tera Template Linter & Formatter (djLint)
+  # HTML & Zola / Tera Template Linter (Pure Python - 100% NixOS Compatible)
   - repo: https://github.com/djlint/djLint
     rev: v1.36.4
     hooks:
@@ -34,7 +20,7 @@ repos:
       - id: djlint-jinja
         types: [html]
 
-  # Zola Site Build Check
+  # Zola Site Build Check (System Binary - 100% NixOS Compatible)
   - repo: local
     hooks:
       - id: zola-check
