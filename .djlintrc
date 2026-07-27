@@ -3,8 +3,8 @@
   "indent": 2,
   "max_line_length": 120,
   "blank_line_after_tag": false,
-  "format_css": true,
-  "format_js": true,
+  "format_css": false,
+  "format_js": false,
   "preserve_blank_lines": true,
   "ignore": "H006,H021,H025,H030,H031,J018"
 }

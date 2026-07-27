@@ -265,6 +265,46 @@
           font-size: 20px;
           color: var(--accent-yellow);
       }
+
+      @media (max-width: 768px) {
+          body {
+              padding: 16px 10px;
+          }
+
+          .window {
+              padding: 20px 14px;
+          }
+
+          .nav-bar {
+              flex-direction: column;
+              align-items: stretch;
+              gap: 10px;
+          }
+
+          h1 {
+              font-size: 26px;
+          }
+
+          .slides-overlay {
+              padding: 12px;
+          }
+
+          .slides-header {
+              flex-direction: column;
+              align-items: stretch;
+              gap: 10px;
+          }
+
+          .slides-controls {
+              flex-wrap: wrap;
+              justify-content: center;
+          }
+
+          .slides-container {
+              padding: 20px 16px;
+              font-size: 14px;
+          }
+      }
   </style>
 {% endblock head_extra %}
 
@@ -272,7 +312,7 @@
   <div class="window">
     <!-- Top Navigation Bar -->
     <div class="nav-bar">
-      <div style="display: flex; gap: 8px; align-items: center;">
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
         <a href="/" class="nav-btn">
           <svg width="15"
                height="15"
@@ -283,9 +323,9 @@
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
           </svg>
-          <span>{{ trans(key="btn_main_menu") }}</span>
+          <span>{{ trans(key="btn_main_menu", lang=lang) }}</span>
         </a>
-        <button class="theme-toggle-btn" type="button">[ TEMA ]</button>
+        <button class="theme-toggle-btn" type="button">{{ trans(key="theme_dark", lang=lang) }}</button>
       </div>
 
       <button id="slide-mode-btn" class="nav-btn slide-toggle-btn" type="button">
@@ -297,7 +337,7 @@
              stroke-linejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line>
         </svg>
-        <span>{{ trans(key="btn_slides") }}</span>
+        <span>{{ trans(key="btn_slides", lang=lang) }}</span>
       </button>
 
       <div style="display: flex; gap: 8px;">
@@ -311,7 +351,7 @@
                  stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>{{ trans(key="btn_prev") }}</span>
+            <span>{{ trans(key="btn_prev", lang=lang) }}</span>
           </a>
         {% else %}
           <span class="nav-btn disabled">
@@ -323,13 +363,13 @@
                  stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>{{ trans(key="btn_prev") }}</span>
+            <span>{{ trans(key="btn_prev", lang=lang) }}</span>
           </span>
         {% endif %}
 
         {% if page.higher %}
           <a href="{{ page.higher.permalink }}" class="nav-btn">
-            <span>{{ trans(key="btn_next") }}</span>
+            <span>{{ trans(key="btn_next", lang=lang) }}</span>
             <svg width="14"
                  height="14"
                  viewBox="0 0 24 24"
@@ -341,7 +381,7 @@
           </a>
         {% else %}
           <span class="nav-btn disabled">
-            <span>{{ trans(key="btn_next") }}</span>
+            <span>{{ trans(key="btn_next", lang=lang) }}</span>
             <svg width="14"
                  height="14"
                  viewBox="0 0 24 24"
@@ -357,7 +397,7 @@
 
     <h1>{{ page.title }}</h1>
     {% if page.extra.read_time_minutes %}
-      <div class="meta">⏱ {{ trans(key="read_time") }}: {{ page.extra.read_time_minutes }} min</div>
+      <div class="meta">⏱ {{ trans(key="read_time", lang=lang) }}: {{ page.extra.read_time_minutes }} min</div>
     {% endif %}
 
     <div class="post-content" id="article-body">{{ page.content | safe }}</div>
@@ -379,7 +419,7 @@
                stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-          <span>{{ trans(key="btn_prev") }}</span>
+          <span>{{ trans(key="btn_prev", lang=lang) }}</span>
         </a>
       {% else %}
         <span class="nav-btn disabled">
@@ -391,7 +431,7 @@
                stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-          <span>{{ trans(key="btn_prev") }}</span>
+          <span>{{ trans(key="btn_prev", lang=lang) }}</span>
         </span>
       {% endif %}
 
@@ -405,12 +445,12 @@
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
           <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
-        <span>{{ trans(key="btn_main_menu") }}</span>
+        <span>{{ trans(key="btn_main_menu", lang=lang) }}</span>
       </a>
 
       {% if page.higher %}
         <a href="{{ page.higher.permalink }}" class="nav-btn">
-          <span>{{ trans(key="btn_next") }}</span>
+          <span>{{ trans(key="btn_next", lang=lang) }}</span>
           <svg width="14"
                height="14"
                viewBox="0 0 24 24"
@@ -422,7 +462,7 @@
         </a>
       {% else %}
         <span class="nav-btn disabled">
-          <span>{{ trans(key="btn_next") }}</span>
+          <span>{{ trans(key="btn_next", lang=lang) }}</span>
           <svg width="14"
                height="14"
                viewBox="0 0 24 24"
@@ -442,14 +482,14 @@
       <div class="slides-title">SLIDES // {{ page.title | upper }}</div>
       <div class="slides-controls">
         <span id="slide-counter" class="slides-counter">Slide 1 / 1</span>
-        <button id="slide-prev" class="nav-btn" type="button">◀ {{ trans(key="btn_prev") }}</button>
-        <button id="slide-next" class="nav-btn" type="button">{{ trans(key="btn_next") }} ▶</button>
+        <button id="slide-prev" class="nav-btn" type="button">◀ {{ trans(key="btn_prev", lang=lang) }}</button>
+        <button id="slide-next" class="nav-btn" type="button">{{ trans(key="btn_next", lang=lang) }} ▶</button>
         <button id="slide-exit"
                 class="nav-btn"
                 type="button"
                 style="background-color: #2b1a1a;
                        border-color: #ff5555;
-                       color: #ff5555">{{ trans(key="btn_exit") }}</button>
+                       color: #ff5555">{{ trans(key="btn_exit", lang=lang) }}</button>
       </div>
     </div>
 

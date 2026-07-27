@@ -347,6 +347,88 @@
           background-position: center;
           background-repeat: no-repeat;
       }
+
+      /* RESPONSIVE DESIGN FOR TABLETS & MOBILES */
+      @media (max-width: 868px) {
+          body {
+              padding: 16px;
+              height: auto;
+              min-height: 100vh;
+              overflow-y: auto;
+              align-items: flex-start;
+          }
+
+          .window {
+              width: 100%;
+              height: auto;
+              min-height: calc(100vh - 32px);
+              padding: 20px;
+              flex-direction: column;
+              gap: 24px;
+          }
+
+          .menu-container {
+              flex: 0 0 auto;
+              width: 100%;
+              gap: 16px;
+          }
+
+          .menu-vertical {
+              flex-direction: row;
+              flex-wrap: wrap;
+              gap: 10px 16px;
+          }
+
+          .menu-item {
+              font-size: 19px;
+          }
+
+          .marker {
+              width: 16px;
+              font-size: 15px;
+              margin-right: 4px;
+          }
+
+          .content-panel {
+              flex: 1;
+              padding: 18px;
+              min-height: 350px;
+              overflow-y: visible;
+          }
+
+          .nest-container {
+              bottom: 12px;
+              right: 12px;
+          }
+      }
+
+      @media (max-width: 480px) {
+          body {
+              padding: 10px;
+          }
+
+          .window {
+              padding: 14px;
+              gap: 18px;
+          }
+
+          .menu-vertical {
+              flex-direction: column;
+              gap: 10px;
+          }
+
+          .section-title {
+              font-size: 20px;
+          }
+
+          .now-block {
+              font-size: 12px;
+          }
+
+          .workshop-accordion-header {
+              font-size: 18px;
+          }
+      }
   </style>
 {% endblock head_extra %}
 
