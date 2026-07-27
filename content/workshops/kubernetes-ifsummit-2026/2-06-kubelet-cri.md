@@ -139,7 +139,6 @@ POD ID              CREATED             STATE    NAME                           
 39eadf938588e       23 minutes ago      Ready    coredns-668d6bf9bc-7bzm7                    kube-system
 96f1e89d276d9       24 minutes ago      Ready    cilium-envoy-crvht                          kube-system
 944911272b50e       24 minutes ago      Ready    cilium-7sst8                                kube-system
-```
 8dda0fc772dd6  25 minutes ago   Ready  svc-demo-5f5b47b456-5hrtv  default
 487811c2a7a5a  25 minutes ago   Ready  svc-demo-5f5b47b456-z5nmr  default
 ed4ebe5691d1f  31 minutes ago   Ready  cilium-envoy-lhzfn         kube-system

@@ -265,3 +265,4 @@ helm rollback <nome> <rev> -n <ns> | Voltar para revisão anterior
 helm history <nome> -n <ns> | Ver histórico de revisões
 helm get values <nome> -n <ns> | Ver valores usados na instalação
 helm template <nome> <chart> --debug | Renderizar templates sem instalar (útil para debug)
+```
