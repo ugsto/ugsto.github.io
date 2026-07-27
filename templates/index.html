@@ -408,7 +408,7 @@
 
   <!-- Content Panel (Right Column) -->
   <div class="content-panel" id="content-panel">
-    
+
     <!-- ABOUT (/NOW) Section -->
     <div class="section-content active" id="sec-about">
       {% if current_lang == "en" %}
@@ -444,17 +444,17 @@
         {% else %}
           {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.md") %}
         {% endif %}
-        
+
         <!-- Collapsible Accordion Card for Kubernetes IFSummit 2026 -->
         <div class="workshop-accordion" id="accordion-k8s">
           <div class="workshop-accordion-header" onclick="toggleAccordion('accordion-k8s')">
             <span class="accordion-icon">▶</span>
             <span>KUBERNETES IFSUMMIT 2026 ({{ ws.pages | length }} {{ trans(key="lessons", lang=current_lang) }})</span>
           </div>
-          
+
           <div class="workshop-accordion-content">
             <p style="color: var(--accent-cyan); border-left: none; padding-left: 0; margin-bottom: 8px;">{{ ws.description }}</p>
-            
+
             <div style="display: flex; flex-direction: column; gap: 8px;">
               {% for page in ws.pages %}
               <div class="workshop-card">

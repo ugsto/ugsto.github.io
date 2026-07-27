@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   lint-and-check:
-    name: 🔍 Pre-commit Linters & Zola Check
+    name: Pre-commit Linters & Zola Check
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
@@ -43,7 +43,7 @@ jobs:
         run: zola check
 
   build-and-deploy:
-    name: 🚀 Build & Deploy to GitHub Pages
+    name: Build & Deploy to GitHub Pages
     needs: lint-and-check
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04

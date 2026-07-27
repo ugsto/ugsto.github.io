@@ -3,11 +3,11 @@ title = "Credits & Acknowledgments"
 +++
 
 ### MASCOT (CROW / STUPID-CROW)
-Original pixel art sprite by **aske4** on Itch.io.  
+Original pixel art sprite by **aske4** on Itch.io.
 Sprite pack: [aske4.itch.io/free-dark-crow](https://aske4.itch.io/free-dark-crow)
 
 ### ICONS & FLAGS (CIF / ICONIFY)
-- **Circle Flags (CIF)** by Iconify: Circular vector flag icons for Brazil and the United States.  
+- **Circle Flags (CIF)** by Iconify: Circular vector flag icons for Brazil and the United States.
   Catalog: [icon-sets.iconify.design/cif](https://icon-sets.iconify.design/cif)
 
 ### TYPOGRAPHY & FONTS

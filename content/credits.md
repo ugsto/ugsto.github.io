@@ -4,11 +4,11 @@ path = "credits"
 +++
 
 ### MASCOTE (CORVO / STUPID-CROW)
-Arte original em pixel art por **aske4** no Itch.io.  
+Arte original em pixel art por **aske4** no Itch.io.
 Pack de sprites: [aske4.itch.io/free-dark-crow](https://aske4.itch.io/free-dark-crow)
 
 ### ÍCONES & BANDEIRAS (CIF / ICONIFY)
-- **Circle Flags (CIF)** por Iconify: Ícones vetoriais circulares das bandeiras do Brasil e Estados Unidos.  
+- **Circle Flags (CIF)** por Iconify: Ícones vetoriais circulares das bandeiras do Brasil e Estados Unidos.
   Catálogo: [icon-sets.iconify.design/cif](https://icon-sets.iconify.design/cif)
 
 ### TIPOGRAFIA & FONTES
