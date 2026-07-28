@@ -396,9 +396,9 @@
               overflow-y: visible;
           }
 
-          .nest-container {
-              bottom: 12px;
-              right: 12px;
+          .nest-container,
+          .crow-mascot {
+              display: none !important;
           }
       }
 
@@ -986,6 +986,10 @@
       let lastTime = performance.now();
 
       function updateFSM(now) {
+          if (window.innerWidth <= 868) {
+              requestAnimationFrame(updateFSM);
+              return;
+          }
           if (!now) now = performance.now();
 
           let dt = (now - lastTime) / 1000;
