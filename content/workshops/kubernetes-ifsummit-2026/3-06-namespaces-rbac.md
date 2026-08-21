@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Namespaces e RBAC: isolamento e controle de acesso"
 weight = 306
-path = "26"
 [extra]
 part = 3
 section = 6

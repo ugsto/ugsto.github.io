@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "O que o scheduler faz"
 weight = 204
-path = "13"
 [extra]
 part = 2
 section = 4

@@ -26,7 +26,10 @@
         { pkgs }:
         {
           default = pkgs.mkShell {
-            packages = with pkgs; [ zola ];
+            packages = with pkgs; [
+              zola
+              envsubst
+            ];
           };
         }
       );

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ trans(key="login_title") }} | {{ config.title }}
+{% endblock title %}
+
+{% block head_extra %}
+  <style>
+      body {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 40px 20px;
+      }
+
+      .window {
+          max-width: 680px;
+          width: 100%;
+          padding: 40px;
+          background-color: var(--bg-window);
+          border: 4px solid var(--border-main);
+          outline: 4px solid var(--outline-color);
+          box-shadow: 0 0 0 8px var(--border-main);
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+      }
+
+      .section-title {
+          font-family: 'VT323', monospace;
+          font-size: 28px;
+          color: var(--accent-yellow);
+          border-bottom: 2px dashed var(--border-main);
+          padding-bottom: 8px;
+          letter-spacing: 1px;
+      }
+
+      .intro {
+          color: var(--text-muted);
+          font-size: 15px;
+      }
+
+      .method-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 12px;
+      }
+
+      .method-link {
+          min-height: 62px;
+          padding: 12px 16px;
+          color: var(--accent-cyan);
+          background-color: var(--bg-panel);
+          border: 2px solid var(--border-main);
+          font-family: 'VT323', monospace;
+          font-size: 21px;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          transition: background-color 0.2s, color 0.2s;
+      }
+
+      .method-link:hover {
+          background-color: var(--accent-yellow);
+          color: var(--bg-body);
+      }
+
+      .back-link {
+          align-self: flex-start;
+      }
+  </style>
+{% endblock head_extra %}
+
+{% block content %}
+  {% set current_lang = lang | default(value=config.default_language) %}
+  {% set login_prefix = "/" %}
+  {% if current_lang == "en" %}
+    {% set login_prefix = "/en/" %}
+  {% endif %}
+  <div class="window">
+    <h1 class="section-title">★ {{ trans(key="login_methods_title", lang=current_lang) }} ★</h1>
+    <p class="intro">{{ trans(key="login_choose_method", lang=current_lang) }}</p>
+    <nav class="method-list"
+         aria-label="{{ trans(key='login_methods_title', lang=current_lang) }}">
+      <a class="method-link" href="{{ login_prefix }}seminc2026-login/plain/">▶ {{ trans(key="login_method_plain", lang=current_lang) }}</a>
+      <a class="method-link"
+         href="{{ login_prefix }}seminc2026-login/enc-sym/">▶ {{ trans(key="login_method_enc_sym", lang=current_lang) }}</a>
+      <a class="method-link" href="{{ login_prefix }}seminc2026-login/md5/">▶ {{ trans(key="login_method_md5", lang=current_lang) }}</a>
+      <a class="method-link"
+         href="{{ login_prefix }}seminc2026-login/md5-salt/">▶ {{ trans(key="login_method_md5_salt", lang=current_lang) }}</a>
+      <a class="method-link"
+         href="{{ login_prefix }}seminc2026-login/argon2id/">▶ {{ trans(key="login_method_argon2id", lang=current_lang) }}</a>
+    </nav>
+    <a class="nav-btn back-link" href="{{ login_prefix }}">◀ {{ trans(key="login_back", lang=current_lang) }}</a>
+  </div>
+{% endblock content %}

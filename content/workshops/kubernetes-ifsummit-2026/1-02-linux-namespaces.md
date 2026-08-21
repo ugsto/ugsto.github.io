@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Linux Namespaces: o isolamento que faz containers funcionarem"
 weight = 102
-path = "3"
 [extra]
 part = 1
 section = 2
@@ -112,10 +111,12 @@ A diferença entre esse `unshare` e um `docker run` é que o Docker cria um cgro
 
 Sobe um container e olha os namespaces dele:
 
+{% raw %}
 ```bash
 docker run -d --name demo alpine:3.23 sleep infinity
 sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}')
 ```
+{% endraw %}
 
 ```text
         NS TYPE   NPROCS   PID USER COMMAND

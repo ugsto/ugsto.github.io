@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Conclusão e próximos passos"
 weight = 404
-path = "32"
 [extra]
 part = 4
 section = 4

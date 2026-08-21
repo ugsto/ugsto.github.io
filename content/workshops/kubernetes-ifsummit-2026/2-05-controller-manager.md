@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "O coração do Kubernetes"
 weight = 205
-path = "14"
 [extra]
 part = 2
 section = 5

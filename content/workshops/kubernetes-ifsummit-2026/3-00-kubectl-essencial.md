@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "kubectl essencial: o canivete suíço do Kubernetes"
 weight = 300
-path = "20"
 [extra]
 part = 3
 section = 0

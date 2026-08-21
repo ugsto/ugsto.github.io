@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "A arquitetura"
 weight = 201
-path = "10"
 [extra]
 part = 2
 section = 1

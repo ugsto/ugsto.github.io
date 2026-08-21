@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "cgroups: limitando recursos no kernel"
 weight = 103
-path = "4"
 [extra]
 part = 1
 section = 3
@@ -102,10 +101,12 @@ O `stress` tentou alocar 100 MB, mas o kernel aplicou o teto de 50 MB. Você pod
 
 Quando você passa `--memory 128m` no `docker run`, o Docker escreve `134217728` (128 * 1024 * 1024) no arquivo `memory.max` do cgroup do container. Você pode verificar:
 
+{% raw %}
 ```bash
 docker run -d --name limited --memory 128m alpine:3.23 sleep infinity
 echo $(</sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{{.Id}}').scope/memory.max)
 ```
+{% endraw %}
 
 ```text
 134217728

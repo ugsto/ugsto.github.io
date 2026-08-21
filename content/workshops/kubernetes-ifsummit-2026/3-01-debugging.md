@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Debugging no Kubernetes: o que fazer quando algo quebra"
 weight = 301
-path = "21"
 [extra]
 part = 3
 section = 1

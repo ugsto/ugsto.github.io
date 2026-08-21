@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "ClusterIP: comunicação interna"
 weight = 208
-path = "17"
 [extra]
 part = 2
 section = 8

@@ -510,22 +510,29 @@
       const slideCounter = document.getElementById('slide-counter');
 
       const pageSlug = "{{ page.slug }}";
+      const pageLang = "{{ lang }}";
 
       let slides = [];
       let currentSlideIdx = 0;
 
       async function loadOriginalBackupSlides() {
-          try {
-              const response = await fetch('/slides/' + pageSlug + '.md');
-              if (response.ok) {
-                  const markdownText = await response.text();
-                  parseSlideMarkdown(markdownText);
-              } else {
-                  console.warn('Slide file not found for', pageSlug);
+          const candidatePaths = pageLang && pageLang !== "pt"
+              ? ['/slides/' + pageSlug + '.' + pageLang + '.md', '/slides/' + pageSlug + '.md']
+              : ['/slides/' + pageSlug + '.md'];
+
+          for (const path of candidatePaths) {
+              try {
+                  const response = await fetch(path);
+                  if (response.ok) {
+                      const markdownText = await response.text();
+                      parseSlideMarkdown(markdownText);
+                      return;
+                  }
+              } catch (err) {
+                  console.error('Error loading slide file', path, err);
               }
-          } catch (err) {
-              console.error('Error loading slide file', err);
           }
+          console.warn('Slide file not found for', pageSlug, '(lang:', pageLang + ')');
       }
 
       function parseSlideMarkdown(markdownText) {

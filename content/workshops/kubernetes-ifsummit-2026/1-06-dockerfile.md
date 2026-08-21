@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Dockerfile: construindo imagens"
 weight = 106
-path = "7"
 [extra]
 part = 1
 section = 7

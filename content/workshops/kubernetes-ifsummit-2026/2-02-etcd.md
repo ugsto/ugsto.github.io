@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "O banco do cluster"
 weight = 202
-path = "11"
 [extra]
 part = 2
 section = 2

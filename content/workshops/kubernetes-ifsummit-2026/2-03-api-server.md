@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "A porta de entrada"
 weight = 203
-path = "12"
 [extra]
 part = 2
 section = 3

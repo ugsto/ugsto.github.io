@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Docker: a camada de conveniência"
 weight = 105
-path = "6"
 [extra]
 part = 1
 section = 6
@@ -45,9 +44,11 @@ docker run -d --name demo alpine:3.23 sleep infinity
 
 Qual o PID real do container no host?
 
+{% raw %}
 ```bash
 docker inspect demo --format '{{.State.Pid}}'
 ```
+{% endraw %}
 
 ```text
 61566
@@ -55,9 +56,11 @@ docker inspect demo --format '{{.State.Pid}}'
 
 Quais namespaces ele está usando?
 
+{% raw %}
 ```bash
 sudo lsns -p $(docker inspect demo --format '{{.State.Pid}}')
 ```
+{% endraw %}
 
 ```text
         NS TYPE   NPROCS   PID USER COMMAND
@@ -81,9 +84,11 @@ docker run -d --name limited --memory 128m --cpus 0.5 alpine:3.23 sleep infinity
 
 O Docker converteu `--memory 128m` em cgroup. Confere:
 
+{% raw %}
 ```bash
 echo $(< /sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{{.Id}}').scope/memory.max)
 ```
+{% endraw %}
 
 ```text
 134217728
@@ -93,9 +98,11 @@ echo $(< /sys/fs/cgroup/system.slice/docker-$(docker inspect limited --format '{
 
 ### Camadas da imagem
 
+{% raw %}
 ```bash
 docker image inspect alpine:3.23 --format '{{.RootFS.Layers}}'
 ```
+{% endraw %}
 
 ```text
 [sha256:29df493baa13de438d6d2ece3a8333032e0b7b9b9d8cce4ee82194da255f61e1]
@@ -105,10 +112,12 @@ Cada hash é uma camada. O Docker monta todas como lowerdir do overlay.
 
 ### Rede
 
+{% raw %}
 ```bash
 docker run -d --name web nginx:alpine
 docker inspect web --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
+{% endraw %}
 
 ```text
 172.17.0.5

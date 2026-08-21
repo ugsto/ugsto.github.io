@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Prometheus & Grafana: observabilidade no cluster"
 weight = 401
-path = "29"
 [extra]
 part = 4
 section = 1

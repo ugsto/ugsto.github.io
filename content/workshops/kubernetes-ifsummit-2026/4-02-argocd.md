@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "ArgoCD: GitOps no Kubernetes"
 weight = 402
-path = "30"
 [extra]
 part = 4
 section = 2

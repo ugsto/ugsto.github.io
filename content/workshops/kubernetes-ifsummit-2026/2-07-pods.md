@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "O Pod: a menor unidade do Kubernetes"
 weight = 207
-path = "16"
 [extra]
 part = 2
 section = 7

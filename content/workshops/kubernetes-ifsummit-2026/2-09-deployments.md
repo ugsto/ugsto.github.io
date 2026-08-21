@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Deployments: estado desejado, controlador que reconcilia"
 weight = 209
-path = "18"
 [extra]
 part = 2
 section = 9

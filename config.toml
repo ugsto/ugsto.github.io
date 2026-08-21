@@ -22,6 +22,26 @@ lessons = "AULAS"
 lang_toggle = "[ LANG: PT ]"
 nest_title = "Ninho do Stupid-Crow (Clique para dormir/acordar)"
 site_motto = "Na sintaxe do universo, cada bit ressoa."
+login_title = "LOGIN"
+login_user = "USUÁRIO"
+login_pass = "SENHA"
+login_enter = "ENTRAR"
+login_back = "VOLTAR"
+login_ok = "ACESSO CONCEDIDO"
+login_fail = "ACESSO NEGADO"
+login_methods_title = "MÉTODOS DE LOGIN"
+login_choose_method = "Escolha uma implementação para testar:"
+login_method_plain = "TEXTO SIMPLES"
+login_method_enc_sym = "AES-256-ECB"
+login_method_md5 = "MD5"
+login_method_md5_salt = "MD5 COM SALT"
+login_method_argon2id = "ARGON2ID"
+login_message_pin = "NOVA MENSAGEM"
+login_message_title = "MENSAGEM INTERNA"
+login_message_from = "DE"
+login_message_key = "CHAVE AES-256-ECB"
+login_message_close = "FECHAR"
+login_message_text = "Eu odeio este fluxo de login. Quem chamou uma chave AES-256-ECB fixa de segurança deveria depurá-lo às 3 da manhã."
 
 [languages.en]
 title = "bortoli.phd"
@@ -45,9 +65,36 @@ lessons = "LESSONS"
 lang_toggle = "[ LANG: EN ]"
 nest_title = "Stupid-Crow Nest (Click to sleep/wake)"
 site_motto = "In the syntax of the universe, every bit resonates."
+login_title = "LOGIN"
+login_user = "USER"
+login_pass = "PASSWORD"
+login_enter = "ENTER"
+login_back = "BACK"
+login_ok = "ACCESS GRANTED"
+login_fail = "ACCESS DENIED"
+login_methods_title = "LOGIN METHODS"
+login_choose_method = "Choose an implementation to test:"
+login_method_plain = "PLAINTEXT"
+login_method_enc_sym = "AES-256-ECB"
+login_method_md5 = "MD5"
+login_method_md5_salt = "MD5 WITH SALT"
+login_method_argon2id = "ARGON2ID"
+login_message_pin = "NEW MESSAGE"
+login_message_title = "INTERNAL MESSAGE"
+login_message_from = "FROM"
+login_message_key = "AES-256-ECB KEY"
+login_message_close = "CLOSE"
+login_message_text = "I hate this login flow. Whoever called a hard-coded AES-256-ECB key security should debug it at 3 a.m."
 
 [link_checker]
 skip_prefixes = [
   "https://linkedin.com",
-  "https://www.linkedin.com"
+  "https://www.linkedin.com",
+  "http://seminc2026-pingpong.bortoli.phd",
+  "https://seminc2026-ctf.bortoli.phd",
+  "https://seminc2026-hmac.bortoli.phd",
+  "https://seminc2026-keycloak.bortoli.phd",
+  "https://seminc2026-login.bortoli.phd",
+  "https://seminc2026-rainbowtable.bortoli.phd",
+  "https://seminc2026-vault.bortoli.phd",
 ]

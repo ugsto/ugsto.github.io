@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Ingress: roteamento HTTP inteligente"
 weight = 307
-path = "27"
 [extra]
 part = 3
 section = 7

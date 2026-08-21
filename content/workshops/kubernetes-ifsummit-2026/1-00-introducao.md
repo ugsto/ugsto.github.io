@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Introdução: o que vamos construir"
 weight = 100
-path = "1"
 [extra]
 part = 1
 section = 0

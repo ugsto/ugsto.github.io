@@ -1,0 +1,459 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ page.title }} | {{ config.title }}
+{% endblock title %}
+
+{% block head_extra %}
+  <style>
+      body {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 40px 20px;
+      }
+
+      .window {
+          max-width: 520px;
+          width: 100%;
+          padding: 40px;
+          background-color: var(--bg-window);
+          border: 4px solid var(--border-main);
+          outline: 4px solid var(--outline-color);
+          box-shadow: 0 0 0 8px var(--border-main);
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+      }
+
+      .section-title {
+          font-family: 'VT323', monospace;
+          font-size: 28px;
+          color: var(--accent-yellow);
+          border-bottom: 2px dashed var(--border-main);
+          padding-bottom: 8px;
+          letter-spacing: 1px;
+      }
+
+      .login-form {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          font-family: 'Fira Code', monospace;
+      }
+
+      .login-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+      }
+
+      .login-field label {
+          font-family: 'VT323', monospace;
+          font-size: 20px;
+          color: var(--accent-cyan);
+          letter-spacing: 1px;
+      }
+
+      .login-field input {
+          font-family: 'Fira Code', monospace;
+          font-size: 14px;
+          color: var(--text-main);
+          background-color: var(--bg-panel);
+          border: 2px solid var(--border-main);
+          padding: 8px 12px;
+          transition: outline-color 0.15s;
+      }
+
+      .login-field input:focus {
+          outline: 2px solid var(--accent-yellow);
+          outline-offset: 0;
+      }
+
+      .btn-row {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 4px;
+      }
+
+      .msg {
+          font-family: 'VT323', monospace;
+          font-size: 18px;
+          min-height: 22px;
+          letter-spacing: 1px;
+      }
+
+      .msg.ok {
+          color: var(--accent-cyan);
+      }
+
+      .msg.err {
+          color: #ff5555;
+      }
+
+      .debug-panel {
+          background-color: #000;
+          border: 2px dashed #444;
+          padding: 12px;
+          font-family: 'Fira Code', monospace;
+          font-size: 12px;
+          color: #0f0;
+          overflow-x: auto;
+          display: none;
+          margin-top: 10px;
+      }
+
+      .debug-title {
+          color: #fff;
+          border-bottom: 1px solid #444;
+          padding-bottom: 4px;
+          margin-bottom: 10px;
+          font-weight: bold;
+      }
+
+      .debug-block {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          margin-bottom: 10px;
+      }
+
+      .debug-error {
+          color: #ff5555;
+      }
+
+      .method-nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          padding-bottom: 4px;
+          border-bottom: 2px dashed var(--border-main);
+      }
+
+      .method-nav a {
+          color: var(--accent-cyan);
+          font-family: 'VT323', monospace;
+          font-size: 17px;
+          text-decoration: none;
+          padding: 4px 8px;
+          border: 1px solid transparent;
+      }
+
+      .method-nav a:hover,
+      .method-nav a.active {
+          color: var(--bg-body);
+          background-color: var(--accent-yellow);
+          border-color: var(--border-main);
+      }
+
+      .message-pin {
+          position: fixed;
+          left: 24px;
+          bottom: 24px;
+          z-index: 1000;
+          opacity: 0;
+          transform: translateY(12px);
+          pointer-events: none;
+          transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .message-pin.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+      }
+
+      .message-pin button {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--accent-yellow);
+          background-color: var(--bg-panel);
+          border: 2px solid var(--border-main);
+          box-shadow: 0 0 0 3px var(--outline-color);
+          padding: 8px 12px;
+          font-family: 'VT323', monospace;
+          font-size: 19px;
+          cursor: pointer;
+      }
+
+      .message-pin button:hover {
+          color: var(--bg-body);
+          background-color: var(--accent-yellow);
+      }
+
+      .message-popup {
+          position: fixed;
+          left: 24px;
+          bottom: 82px;
+          z-index: 1001;
+          width: min(430px, calc(100vw - 48px));
+          padding: 18px;
+          color: var(--text-main);
+          background-color: var(--bg-window);
+          border: 3px solid var(--border-main);
+          box-shadow: 0 0 0 4px var(--outline-color), 0 0 0 6px var(--border-main);
+          font-family: 'Fira Code', monospace;
+      }
+
+      .message-popup.is-open {
+          display: block;
+      }
+
+      .message-popup-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          color: var(--accent-yellow);
+          font-family: 'VT323', monospace;
+          font-size: 22px;
+          border-bottom: 1px dashed var(--border-main);
+          padding-bottom: 8px;
+          margin-bottom: 12px;
+      }
+
+      .message-popup-close {
+          color: var(--text-main);
+          background: transparent;
+          border: 1px solid var(--border-main);
+          padding: 1px 7px;
+          font-family: 'VT323', monospace;
+          font-size: 18px;
+          cursor: pointer;
+      }
+
+      .message-popup-close:hover {
+          color: var(--bg-body);
+          background-color: var(--accent-yellow);
+      }
+
+      .message-popup-from {
+          color: var(--accent-cyan);
+          font-size: 12px;
+          margin-bottom: 12px;
+      }
+
+      .message-popup-text {
+          color: var(--text-muted);
+          line-height: 1.55;
+          margin-bottom: 16px;
+      }
+
+      .message-popup-key {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          color: var(--accent-yellow);
+          font-size: 12px;
+      }
+
+      .message-popup-key code {
+          display: block;
+          color: var(--code-text);
+          background-color: var(--code-bg);
+          border: 1px solid var(--accent-cyan);
+          padding: 8px;
+          overflow-wrap: anywhere;
+      }
+
+      [hidden] {
+          display: none !important;
+      }
+
+      @media (max-width: 600px) {
+          .window {
+              padding: 28px 20px;
+          }
+
+          .message-pin {
+              left: 16px;
+              bottom: 16px;
+          }
+
+          .message-popup {
+              left: 16px;
+              bottom: 74px;
+              width: calc(100vw - 32px);
+          }
+      }
+  </style>
+{% endblock head_extra %}
+
+{% block content %}
+  {% set current_lang = lang | default(value=config.default_language) %}
+  {% set login_prefix = "/" %}
+  {% if current_lang == "en" %}
+    {% set login_prefix = "/en/" %}
+  {% endif %}
+  <div class="window">
+    <h1 class="section-title">★ {{ page.title }} ★</h1>
+    <nav class="method-nav"
+         aria-label="{{ trans(key='login_methods_title', lang=current_lang) }}">
+      <a class="{% if page.extra.login_method == "plain" %}active{% endif %}"
+         href="{{ login_prefix }}seminc2026-login/plain/">{{ trans(key="login_method_plain", lang=current_lang) }}</a>
+      <a class="{% if page.extra.login_method == "enc-sym" %}active{% endif %}"
+         href="{{ login_prefix }}seminc2026-login/enc-sym/">{{ trans(key="login_method_enc_sym", lang=current_lang) }}</a>
+      <a class="{% if page.extra.login_method == "md5" %}active{% endif %}"
+         href="{{ login_prefix }}seminc2026-login/md5/">{{ trans(key="login_method_md5", lang=current_lang) }}</a>
+      <a class="{% if page.extra.login_method == "md5-salt" %}active{% endif %}"
+         href="{{ login_prefix }}seminc2026-login/md5-salt/">{{ trans(key="login_method_md5_salt", lang=current_lang) }}</a>
+      <a class="{% if page.extra.login_method == "argon2id" %}active{% endif %}"
+         href="{{ login_prefix }}seminc2026-login/argon2id/">{{ trans(key="login_method_argon2id", lang=current_lang) }}</a>
+    </nav>
+    <form id="login-form" class="login-form" autocomplete="off">
+      <div class="login-field">
+        <label for="login-user">▶ {{ trans(key="login_user", lang=current_lang) }}</label>
+        <input id="login-user" name="user" type="text" required autofocus>
+      </div>
+      <div class="login-field">
+        <label for="login-pass">▶ {{ trans(key="login_pass", lang=current_lang) }}</label>
+        <input id="login-pass" name="pass" type="password" required>
+      </div>
+      <div class="btn-row">
+        <button type="submit" class="nav-btn">▶ {{ trans(key="login_enter", lang=current_lang) }}</button>
+        <a class="nav-btn" href="{{ login_prefix }}login/">◀ {{ trans(key="login_back", lang=current_lang) }}</a>
+      </div>
+      <div id="msg" class="msg"></div>
+
+      <div id="debug-panel" class="debug-panel">
+        <div class="debug-title">SYSTEM DEBUG LOG</div>
+        <div id="debug-query" class="debug-block"></div>
+        <div id="debug-result" class="debug-block"></div>
+      </div>
+    </form>
+  </div>
+  {% if page.extra.login_method == "enc-sym" %}
+    <div id="message-pin" class="message-pin" hidden>
+      <button type="button" aria-controls="message-popup" aria-expanded="false">
+        <span aria-hidden="true">✉</span>
+        <span>{{ trans(key="login_message_pin", lang=current_lang) }}</span>
+      </button>
+    </div>
+    <aside id="message-popup"
+           class="message-popup"
+           role="dialog"
+           aria-labelledby="message-popup-title"
+           hidden>
+      <div class="message-popup-header">
+        <span id="message-popup-title">{{ trans(key="login_message_title", lang=current_lang) }}</span>
+        <button id="message-popup-close"
+                class="message-popup-close"
+                type="button"
+                aria-label="{{ trans(key='login_message_close', lang=current_lang) }}">×</button>
+      </div>
+      <div class="message-popup-from">
+        {{ trans(key="login_message_from", lang=current_lang) }}: anonymous unsatisfied employee
+      </div>
+      <p class="message-popup-text">{{ trans(key="login_message_text", lang=current_lang) }}</p>
+      <div class="message-popup-key">
+        <span>{{ trans(key="login_message_key", lang=current_lang) }}</span>
+        <code>0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</code>
+      </div>
+    </aside>
+  {% endif %}
+{% endblock content %}
+
+{% block body_extra %}
+  {% set current_lang = lang | default(value=config.default_language) %}
+  <script>
+      const API = "https://seminc2026-login.bortoli.phd";
+      const LOGIN_ROUTE = {{ page.extra.login_endpoint | json_encode | safe }};
+      const OK = {{ trans(key="login_ok", lang=current_lang) | json_encode | safe }};
+      const FAIL = {{ trans(key="login_fail", lang=current_lang) | json_encode | safe }};
+
+      const parseLoginResponse = async (response) => {
+          const body = await response.text();
+
+          try {
+              return JSON.parse(body);
+          } catch (parseError) {
+              throw new Error('Login API returned ' + response.status + ' ' + response.statusText + ': ' + body.slice(0, 160));
+          }
+      };
+
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const m = document.getElementById('msg');
+
+          const debugPanel = document.getElementById('debug-panel');
+          const debugQuery = document.getElementById('debug-query');
+          const debugResult = document.getElementById('debug-result');
+
+          try {
+              const r = await fetch(API + LOGIN_ROUTE, { method: 'POST', body: new FormData(e.target) });
+              const j = await parseLoginResponse(r);
+
+              debugPanel.style.display = 'block';
+
+              if (j.status === 'success') {
+                  const isOk = j.records_found > 0;
+                  m.textContent = isOk ? OK : FAIL;
+                  m.className = 'msg ' + (isOk ? 'ok' : 'err');
+
+                  debugQuery.textContent = "> EXECUTED QUERY:\n" + j.query_executed;
+                  debugQuery.className = "debug-block";
+
+                  debugResult.textContent = "> EXTRACTED DATA (" + j.records_found + " rows):\n" + JSON.stringify(j.data, null, 2);
+                  debugResult.className = "debug-block";
+
+              } else if (j.status === 'error') {
+                  m.textContent = FAIL;
+                  m.className = 'msg err';
+
+                  debugQuery.textContent = "> EXECUTED QUERY:\n" + j.query_executed;
+                  debugQuery.className = "debug-block";
+
+                  debugResult.textContent = "> DATABASE ERROR:\n" + j.database_error;
+                  debugResult.className = "debug-block debug-error";
+
+              } else {
+                  // Fallback just in case it receives the old API format {"ok": true}
+                  m.textContent = j.ok ? OK : FAIL;
+                  m.className = 'msg ' + (j.ok ? 'ok' : 'err');
+                  debugPanel.style.display = 'none';
+              }
+          } catch (err) {
+              m.textContent = err;
+              m.className = 'msg err';
+              debugPanel.style.display = 'none';
+          }
+      });
+
+      {% if page.extra.login_method == "enc-sym" %}
+        const messagePin = document.getElementById('message-pin');
+        const messagePinButton = messagePin.querySelector('button');
+        const messagePopup = document.getElementById('message-popup');
+        const messagePopupClose = document.getElementById('message-popup-close');
+        let messageTimer = null;
+
+        const showMessagePin = () => {
+            if (messageTimer !== null) return;
+
+            messageTimer = window.setTimeout(() => {
+                messagePin.hidden = false;
+                window.requestAnimationFrame(() => messagePin.classList.add('is-visible'));
+            }, 10000);
+        };
+
+        const closeMessagePopup = () => {
+            messagePopup.classList.remove('is-open');
+            messagePopup.hidden = true;
+            messagePinButton.setAttribute('aria-expanded', 'false');
+        };
+
+        messagePinButton.addEventListener('click', () => {
+            messagePopup.hidden = false;
+            messagePopup.classList.add('is-open');
+            messagePinButton.setAttribute('aria-expanded', 'true');
+        });
+        messagePopupClose.addEventListener('click', closeMessagePopup);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeMessagePopup();
+        });
+        document.addEventListener('pointerdown', showMessagePin, { once: true });
+        document.addEventListener('keydown', showMessagePin, { once: true });
+      {% endif %}
+  </script>
+{% endblock body_extra %}

@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "ConfigMaps e Secrets: configurando aplicações sem recompilar"
 weight = 302
-path = "22"
 [extra]
 part = 3
 section = 2

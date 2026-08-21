@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Vault: gestão de secrets"
 weight = 403
-path = "31"
 [extra]
 part = 4
 section = 3

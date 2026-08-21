@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "O que é o kubelet"
 weight = 206
-path = "15"
 [extra]
 part = 2
 section = 6

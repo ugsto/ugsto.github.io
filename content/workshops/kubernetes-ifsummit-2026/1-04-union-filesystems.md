@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Union Filesystems: como o overlay empilha camadas"
 weight = 104
-path = "5"
 [extra]
 part = 1
 section = 4

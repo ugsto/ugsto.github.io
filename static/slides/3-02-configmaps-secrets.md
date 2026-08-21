@@ -1,7 +1,7 @@
 ## ConfigMaps: configuração desacoplada
 
 - Separam configuração da imagem. Muda a config sem recompilar.
-- Dados em texto puro. Chave=valor ou arquivo completo.
+- Dados em texto simples. Chave=valor ou arquivo completo.
 - Monta como env vars (`envFrom.configMapRef`) ou volume (`volumes[].configMap`).
 - Update de volume é atômico (symlink `..data`). Env vars não atualizam sem restart.
 

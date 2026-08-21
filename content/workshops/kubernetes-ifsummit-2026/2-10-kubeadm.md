@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "kubeadm: bootstrap de cluster na prática"
 weight = 210
-path = "19"
 [extra]
 part = 2
 section = 10

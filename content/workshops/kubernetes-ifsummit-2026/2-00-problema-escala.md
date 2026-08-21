@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Docker: matei, morreu"
 weight = 200
-path = "9"
 [extra]
 part = 2
 section = 0
@@ -36,9 +35,11 @@ docker run -d --name doomed nginx:alpine
 docker kill doomed
 ```
 
+{% raw %}
 ```bash
 docker ps -a --filter name=doomed --format '{{.Names}}: {{.Status}}'
 ```
+{% endraw %}
 
 ```text
 doomed: Exited (137) Less than a second ago

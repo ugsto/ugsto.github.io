@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "VM vs Container: por que containers não são 'VMs leves'"
 weight = 101
-path = "2"
 [extra]
 part = 1
 section = 1

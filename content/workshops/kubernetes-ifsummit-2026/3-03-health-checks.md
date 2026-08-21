@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Health Checks: provas de vida, prontidão e inicialização"
 weight = 303
-path = "23"
 [extra]
 part = 3
 section = 3

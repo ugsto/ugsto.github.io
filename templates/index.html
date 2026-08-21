@@ -546,22 +546,14 @@
 
       <!-- ABOUT (/NOW) Section -->
       <div class="section-content active" id="sec-about">
-        {% if current_lang == "en" %}
-          {% set about_page = get_page(path="about.en.md") %}
-        {% else %}
-          {% set about_page = get_page(path="about.md") %}
-        {% endif %}
+        {% set about_page = get_page(path="about.md", lang=config.default_language) %}
         <h2 class="section-title">★ {{ about_page.title | upper }} ★</h2>
         <div class="now-block">{{ about_page.content | safe }}</div>
       </div>
 
       <!-- SETUP / DOTFILES Section -->
       <div class="section-content" id="sec-setup">
-        {% if current_lang == "en" %}
-          {% set setup_page = get_page(path="setup.en.md") %}
-        {% else %}
-          {% set setup_page = get_page(path="setup.md") %}
-        {% endif %}
+        {% set setup_page = get_page(path="setup.md", lang=config.default_language) %}
         <h2 class="section-title">★ {{ setup_page.title | upper }} ★</h2>
         <div class="now-block">{{ setup_page.content | safe }}</div>
       </div>
@@ -570,12 +562,53 @@
       <div class="section-content" id="sec-workshops">
         <h2 class="section-title">★ {{ trans(key="menu_workshops", lang=current_lang) }} ★</h2>
         <div class="now-block">
-          {% if current_lang == "en" %}
-            {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.en.md") %}
-          {% else %}
-            {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.md") %}
-          {% endif %}
+          {% set ws_crypto = get_section(path="workshops/crypto-seminc-2026/_index.md", lang=config.default_language) %}
+          {% set ws = get_section(path="workshops/kubernetes-ifsummit-2026/_index.md", lang=config.default_language) %}
 
+          <!-- Collapsible Accordion Card for Hide, Seek & Crack SEMINC 2026 -->
+          <div class="workshop-accordion" id="accordion-crypto">
+            <div class="workshop-accordion-header"
+                 onclick="toggleAccordion('accordion-crypto')">
+              <span class="accordion-icon">▶</span>
+              <span>HIDE, SEEK & CRACK - SEMINC 2026 ({{ ws_crypto.pages | length }} {{ trans(key="lessons", lang=current_lang) }})</span>
+            </div>
+
+            <div class="workshop-accordion-content">
+              <p style="color: var(--accent-cyan);
+                        border-left: none;
+                        padding-left: 0;
+                        margin-bottom: 8px">{{ ws_crypto.description }}</p>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                {% for page in ws_crypto.pages %}
+                  <div class="workshop-card">
+                    <div class="workshop-card-title">
+                      <a href="{{ page.permalink }}">{{ page.title }}</a>
+                    </div>
+                    {% if page.extra.read_time_minutes %}
+                      <div style="font-size: 11px;
+                                  color: var(--accent-cyan);
+                                  display: flex;
+                                  align-items: center;
+                                  gap: 4px">
+                        <svg width="13"
+                             height="13"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>{{ trans(key="read_time", lang=current_lang) }}: {{ page.extra.read_time_minutes }} min</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
           <!-- Collapsible Accordion Card for Kubernetes IFSummit 2026 -->
           <div class="workshop-accordion" id="accordion-k8s">
             <div class="workshop-accordion-header"
@@ -626,22 +659,14 @@
 
       <!-- CONTACT Section -->
       <div class="section-content" id="sec-contact">
-        {% if current_lang == "en" %}
-          {% set contact_page = get_page(path="contact.en.md") %}
-        {% else %}
-          {% set contact_page = get_page(path="contact.md") %}
-        {% endif %}
+        {% set contact_page = get_page(path="contact.md", lang=config.default_language) %}
         <h2 class="section-title">★ {{ contact_page.title | upper }} ★</h2>
         <div class="now-block">{{ contact_page.content | safe }}</div>
       </div>
 
       <!-- CREDITS Section -->
       <div class="section-content" id="sec-credits">
-        {% if current_lang == "en" %}
-          {% set credits_page = get_page(path="credits.en.md") %}
-        {% else %}
-          {% set credits_page = get_page(path="credits.md") %}
-        {% endif %}
+        {% set credits_page = get_page(path="credits.md", lang=config.default_language) %}
         <h2 class="section-title">★ {{ credits_page.title | upper }} ★</h2>
         <div class="now-block">{{ credits_page.content | safe }}</div>
       </div>

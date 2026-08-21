@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Docker Compose: múltiplos containers"
 weight = 107
-path = "8"
 [extra]
 part = 1
 section = 8

@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Helm: o package manager do Kubernetes"
 weight = 400
-path = "28"
 [extra]
 part = 4
 section = 0
@@ -63,6 +62,7 @@ meu-chart/
 
 A mágica está nos placeholders. Olha um pedaço de um `deployment.yaml` dentro de `templates/`:
 
+{% raw %}
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -78,6 +78,7 @@ spec:
 ```
 
 Repare nos `{{ .Values.xxx }}`. Esses são placeholders que o Helm substitui na hora de instalar. O `values.yaml` define os defaults:
+{% endraw %}
 
 ```yaml
 replicaCount: 1

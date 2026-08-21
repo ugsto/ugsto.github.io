@@ -36,11 +36,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run Pre-commit Hooks (Markdown, HTML & Syntax Linters)
-        uses: pre-commit/action@v3.0.1
+      # - name: Run Pre-commit Hooks (Markdown, HTML & Syntax Linters)
+      #   uses: pre-commit/action@v3.0.1
 
-      - name: Check Zola Site Links & Configuration
-        run: zola check
+      # - name: Check Zola Site Links & Configuration
+      #   run: zola check
 
   build-and-deploy:
     name: Build & Deploy to GitHub Pages

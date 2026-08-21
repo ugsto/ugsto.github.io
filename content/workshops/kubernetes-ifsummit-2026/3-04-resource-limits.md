@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Resource Limits: quanto de CPU e memória cada Pod pode usar"
 weight = 304
-path = "24"
 [extra]
 part = 3
 section = 4

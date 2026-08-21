@@ -2,7 +2,6 @@
 date = 2026-01-01
 title = "Volumes: compartilhando dados entre containers e persistindo além do Pod"
 weight = 305
-path = "25"
 [extra]
 part = 3
 section = 5
